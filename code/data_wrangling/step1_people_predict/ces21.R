@@ -1,8 +1,9 @@
 # Load packages ----------------------------------------------------------------
-
+library(tidyverse)
+library(sondr)
 
 # Load raw data -----------------------------------------------------------
-Raw <- sondr::read_survey("_SharedFolder_article_pot-growth/data/lake/ces2021/ces2021.csv")
+Raw <- sondr::read_any_csv("_SharedFolder_article_pot-growth/data/lake/ces2021/ces2021.csv")
 
 # Create empty clean dataframe --------------------------------------------
 Clean <- data.frame(id = 1:nrow(Raw), # id of the respondent
@@ -15,8 +16,10 @@ Clean <- data.frame(id = 1:nrow(Raw), # id of the respondent
 ## riding ------------------------------------------------------------------
 
 ## indicator of political sophistication ------------------------------------------------------------------
+#### cps21_interest_gen_1
+table(Raw$cps21_interest_gen_1)
 Clean$pol_sophis <- NA
-
+Clean$issSpendEnviro21[as.numeric(CES21$cps21_spend_env) == 1] <- 1
 
 ## riding prediction ---------------------------------------------------------------------
 Clean$people_pred <- NA
