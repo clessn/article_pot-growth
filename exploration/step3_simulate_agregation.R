@@ -169,5 +169,15 @@ agg_party <- agg_riding %>%
   group_by(sim, party) %>% 
   summarise(n = sum(seat))
 
+
+table(agg_party$party, agg_party$n)
+
 ggplot(agg_party, aes(x = n, y = party)) +
-  ggridges::geom_density_ridges(scale = 0.95)
+  ggridges::geom_density_ridges(scale = 0.95) +
+  xlab("Nombre de sièges") +
+  ggtitle("Sur 500 simulations") +
+  ylab("Parti")
+
+
+c <- ecdf(agg_party$n[agg_party$party == "Z"])
+c(5)
