@@ -19,7 +19,11 @@ Clean <- data.frame(id = 1:nrow(Raw), # id of the respondent
 #### cps21_interest_gen_1
 table(Raw$cps21_interest_gen_1)
 Clean$pol_sophis <- NA
-Clean$issSpendEnviro21[as.numeric(CES21$cps21_spend_env) == 1] <- 1
+Clean$pol_sophis<- as.numeric(Raw$cps21_interest_gen_1)
+Clean$pol_sophis[as.numeric(Raw$cps21_interest_gen_1) == -99] <- NA
+Clean$pol_sophis <- Clean$pol_sophis / 10
+table(Clean$pol_sophis)
+
 
 ## riding prediction ---------------------------------------------------------------------
 Clean$people_pred <- NA
