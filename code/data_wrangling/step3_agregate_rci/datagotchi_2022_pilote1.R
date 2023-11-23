@@ -20,20 +20,20 @@ Clean <- data.frame(id = 1:nrow(Raw), # id of the respondent
 # Clean variables ---------------------------------------------------------
 
 ## gender ------------------------------------------------------------------
-table(Raw$male)
+table(Raw$SEXE)
 Clean$male <- NA
-Clean$male[as.numeric(Raw$male) == 1] <- 1
-Clean$male[as.numeric(Raw$male) == 0] <- 0
+Clean$male[as.numeric(Raw$SEXE) %in% c(1, 3)] <- 1
+Clean$male[!(as.numeric(Raw$SEXE) %in% c(1, 3))] <- 0
 table(Clean$male)
 
-table(Raw$female)
+table(Raw$SEXE)
 Clean$female <- NA
-Clean$female[as.numeric(Raw$female) == 1] <- 1
-Clean$female[as.numeric(Raw$female) == 0] <- 0
+Clean$female[as.numeric(Raw$SEXE) %in% c(2, 4)] <- 1
+Clean$female[!(as.numeric(Raw$SEXE) %in% c(2, 4))] <- 0
 table(Clean$female)
 
 ## age ------------------------------------------------------------------
-table(Raw$age)
+table(Raw$QAGE)
 
 ## language ------------------------------------------------------------------
 
