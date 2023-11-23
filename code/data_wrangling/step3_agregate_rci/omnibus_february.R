@@ -1,12 +1,12 @@
 # Load packages ----------------------------------------------------------------
-library(dplyr)
+
 
 # Load raw data -----------------------------------------------------------
-Raw <- haven::read_sav("_SharedFolder_article_pot-growth/data/lake/omnibus/january/january.Sav")
+Raw <- haven::read_sav("_SharedFolder_article_pot-growth/data/lake/omnibus/february/february.Sav")
 
 # Create empty clean dataframe --------------------------------------------
 Clean <- data.frame(id = 1:nrow(Raw), # id of the respondent
-                    source_id = "omnibus_january", # id of the survey
+                    source_id = "omnibus_february", # id of the survey
                     year = 2022, # year of the survey
                     level = "prov_qc") # fed_can or prov_qc
 
@@ -22,8 +22,8 @@ Clean <- data.frame(id = 1:nrow(Raw), # id of the respondent
 
 #### Load data from article_riding_volatility to get riding
 riding_volatility_df <- readRDS("_SharedFolder_article_pot-growth/data/lake/riding_volatility_data.rds") %>% 
-  # filter for january only
-  filter(source_id == "january")
+  # filter for february only
+  filter(source_id == "february")
 table(riding_volatility_df$riding_id)
 
 ## Create riding_id column in Clean
@@ -36,9 +36,10 @@ riding_names_df <- readRDS("_SharedFolder_article_pot-growth/data/warehouse/dime
 ### Join riding_name on riding_id
 Clean <- left_join(Clean, riding_names_df, by = "riding_id")
 
+
 ## RCI ---------------------------------------------------------------------
 
 
 # Save Clean to a rds dataset ---------------------------------------------
 
-saveRDS(Clean, "_SharedFolder_article_pot-growth/data/warehouse/step3_agregate_rci/separated_prov/omnibus_january.rds")
+saveRDS(Clean, "_SharedFolder_article_pot-growth/data/warehouse/step3_agregate_rci/separated_prov/omnibus_february.rds")
