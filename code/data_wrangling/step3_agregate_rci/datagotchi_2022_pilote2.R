@@ -18,6 +18,18 @@ Clean <- data.frame(id = 1:nrow(Raw), # id of the respondent
 # Clean variables ---------------------------------------------------------
 
 ## gender ------------------------------------------------------------------
+table(Raw$gender)
+Clean$male <- NA
+Clean$male[as.numeric(Raw$gender) %in% c(1,3)] <- 1
+Clean$male[as.numeric(Raw$gender) %in% c(2,4,5,6,7,8)] <- 0
+table(Clean$male)
+
+table(Raw$gender)
+Clean$female <- NA
+Clean$female[as.numeric(Raw$gender) %in% c(2,4)] <- 1
+Clean$female[as.numeric(Raw$gender) %in% c(1,3,5,6,7,8)] <- 0
+table(Clean$female)
+
 
 ## age ------------------------------------------------------------------
 
