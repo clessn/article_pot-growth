@@ -29,7 +29,23 @@ table(Clean$female)
 ## age ------------------------------------------------------------------
 
 ## language ------------------------------------------------------------------
+table(Raw$LANGUE)
+Clean$anglais <- NA
+Clean$anglais[as.numeric(Raw$LANGUE) == 2] <- 1
+Clean$anglais[as.numeric(Raw$LANGUE) %in% c(1,3)] <- 0
+table(Clean$anglais)
 
+table(Raw$LANGUE)
+Clean$francais <- NA
+Clean$francais[as.numeric(Raw$LANGUE) == 1] <- 1
+Clean$francais[as.numeric(Raw$LANGUE) %in% c(2,3)] <- 0
+table(Clean$francais)
+
+table(Raw$LANGUE)
+Clean$langautre <- NA
+Clean$langautre[as.numeric(Raw$LANGUE) == 3] <- 1
+Clean$langautre[as.numeric(Raw$LANGUE) %in% c(1,2)] <- 0
+table(Clean$langautre)
 ## riding ------------------------------------------------------------------
 
 #### Load data from article_riding_volatility to get riding
