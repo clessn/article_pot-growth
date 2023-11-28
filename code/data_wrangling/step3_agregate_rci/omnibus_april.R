@@ -27,7 +27,23 @@ Clean$female[as.numeric(Raw$SEXE) == 2] <- 1
 Clean$female[as.numeric(Raw$SEXE) == 1] <- 0
 table(Clean$female)
 ## age ------------------------------------------------------------------
+table(Raw$AGE)
+Clean$age34m <- NA
+Clean$age34m[as.numeric(Raw$AGE) %in% c(2,3)] <- 1
+Clean$age34m[as.numeric(Raw$AGE) %in% c(4,5,6,7,8)] <- 0
+table(Clean$age34m)
 
+table(Raw$AGE)
+Clean$age3554 <- NA
+Clean$age3554[as.numeric(Raw$AGE) %in% c(4,5)] <- 1
+Clean$age3554[as.numeric(Raw$AGE) %in% c(2,3,6,7,8)] <- 0
+table(Clean$age3554)
+
+table(Raw$AGE)
+Clean$age55p <- NA
+Clean$age55p[as.numeric(Raw$AGE) %in% c(6,7,8)] <- 1
+Clean$age55p[as.numeric(Raw$AGE) %in% c(2,3,4,5)] <- 0
+table(Clean$age55p)
 ## language ------------------------------------------------------------------
 table(Raw$LANGUE)
 Clean$anglais <- NA
