@@ -1,5 +1,6 @@
 # Load packages ----------------------------------------------------------------
-
+library(tidyverse)
+library(sondr)
 
 # Load raw data -----------------------------------------------------------
 Raw <- haven::read_sav("_SharedFolder_article_pot-growth/data/lake/omnibus/february/february.Sav")
@@ -12,7 +13,18 @@ Clean <- data.frame(id = 1:nrow(Raw), # id of the respondent
 
 # Clean variables ---------------------------------------------------------
 
-## gender ------------------------------------------------------------------
+## gender ---------------------------------------------------------------
+table(Raw$SEXE)
+Clean$male <- NA
+Clean$male[as.numeric(Raw$SEXE) == 1] <- 1
+Clean$male[as.numeric(Raw$SEXE) == 2] <- 0
+table(Clean$male)
+
+table(Raw$SEXE)
+Clean$female <- NA
+Clean$female[as.numeric(Raw$SEXE) == 2] <- 1
+Clean$female[as.numeric(Raw$SEXE) == 1] <- 0
+table(Clean$female)
 
 ## age ------------------------------------------------------------------
 
