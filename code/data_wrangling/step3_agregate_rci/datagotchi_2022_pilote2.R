@@ -1,5 +1,7 @@
 # Load packages ----------------------------------------------------------------
 library(dplyr)
+library(tidyverse)
+library(sondr)
 
 # Load raw data -----------------------------------------------------------
 
@@ -33,8 +35,38 @@ table(Clean$female)
 
 ## age ------------------------------------------------------------------
 table(Raw$age)
+annee_sondage <- 2022
+Clean$age <- annee_sondage - as.numeric(Raw$age)
+Clean$age34m <- ifelse(Clean$age <= 34, 1, 0)
+table(Clean$age34m)
+
+Clean$age3554 <- ifelse(Clean$age >= 35 & Clean$age <= 54, 1, 0)
+table(Clean$age3554)
+
+Clean$age55p <- ifelse(Clean$age >= 55, 1, 0)
+table(Clean$age55p)
 
 ## language ------------------------------------------------------------------
+table(Raw$language)
+Clean$anglais <- NA
+Clean$anglais[as.numeric(Raw$language) == 1] <- 1
+Clean$anglais[as.numeric(Raw$language) == 2] <- 0
+Clean$anglais[as.numeric(Raw$language) == 3] <- 0
+table(Clean$anglais)
+
+Clean$francais <- NA
+Clean$francais[as.numeric(Raw$language) == 2] <- 1
+Clean$francais[as.numeric(Raw$language) == 1] <- 0
+Clean$francais[as.numeric(Raw$language) == 3] <- 0
+table(Clean$francais)
+
+table(Raw$language)
+Clean$langautre <- NA
+Clean$langautre[as.numeric(Raw$language) == 3] <- 1
+Clean$langautre[as.numeric(Raw$language) == 1] <- 0
+Clean$langautre[as.numeric(Raw$language) == 2] <- 0
+table(Clean$langautre)
+
 
 ## riding ------------------------------------------------------------------
 
@@ -60,3 +92,4 @@ Clean <- left_join(Clean, riding_names_df, by = "riding_id")
 # Save Clean to a rds dataset ---------------------------------------------
 
 saveRDS(Clean, "_SharedFolder_article_pot-growth/data/warehouse/step3_agregate_rci/separated_prov/datagotchi_2022_pilote2.rds")
+
