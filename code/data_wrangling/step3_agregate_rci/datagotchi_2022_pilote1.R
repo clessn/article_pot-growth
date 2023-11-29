@@ -83,6 +83,8 @@ Clean <- left_join(Clean, riding_names_df, by = "riding_id")
 ## RCI ---------------------------------------------------------------------
 
 
+
+
 # Save Clean to a rds dataset ---------------------------------------------
 
 saveRDS(Clean, "_SharedFolder_article_pot-growth/data/warehouse/step3_agregate_rci/separated_prov/datagotchi_2022_pilote1.rds")

@@ -28,23 +28,18 @@ Clean$female[as.numeric(Raw$SEXE) == 1] <- 0
 table(Clean$female)
 
 ## age ------------------------------------------------------------------
-table(Raw$AGE)
-Clean$age34m <- NA
-Clean$age34m[as.numeric(Raw$AGE) %in% c(2,3)] <- 1
-Clean$age34m[as.numeric(Raw$AGE) %in% c(4,5,6,7,8)] <- 0
-table(Clean$age34m)
 
-table(Raw$AGE)
-Clean$age3554 <- NA
-Clean$age3554[as.numeric(Raw$AGE) %in% c(4,5)] <- 1
-Clean$age3554[as.numeric(Raw$AGE) %in% c(2,3,6,7,8)] <- 0
-table(Clean$age3554)
+Clean$age <- case_when(
+  Raw$AGE %in% c(2, 3) ~ "34m", # if AGE est l'un de 2 ou 3, mettre 34m
+  Raw$AGE %in% c(4, 5) ~ "3554", # if AGE est l'un de 4 ou 5, mettre 3554
+  Raw$AGE %in% c(6, 7, 8) ~ "55p" # if AGE est l'un de 6, 7 ou 8, mettre 55p
+)
+table(Clean$age)
 
-table(Raw$AGE)
-Clean$age55p <- NA
-Clean$age55p[as.numeric(Raw$AGE) %in% c(6,7,8)] <- 1
-Clean$age55p[as.numeric(Raw$AGE) %in% c(2,3,4,5)] <- 0
-table(Clean$age55p)
+# factorize (donc mettre en catégories)
+Clean$age <- factor(Clean$age, levels = c("34m", "3554", "55p")) # levels permet d'ordonner la variable catégorielle
+
+
 ## language ------------------------------------------------------------------
 table(Raw$LANGUE)
 Clean$anglais <- NA
