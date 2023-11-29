@@ -58,6 +58,7 @@ Clean$langautre <- NA
 Clean$langautre[as.numeric(Raw$LANGUE) == 3] <- 1
 Clean$langautre[as.numeric(Raw$LANGUE) %in% c(1,2)] <- 0
 table(Clean$langautre)
+
 ## riding ------------------------------------------------------------------
 
 #### Load data from article_riding_volatility to get riding
