@@ -44,6 +44,7 @@ Clean$age55p <- NA
 Clean$age55p[as.numeric(Raw$AGE) %in% c(6,7,8)] <- 1
 Clean$age55p[as.numeric(Raw$AGE) %in% c(2,3,4,5)] <- 0
 table(Clean$age55p)
+
 ## language ------------------------------------------------------------------
 table(Raw$LANGUE)
 Clean$anglais <- NA
@@ -82,6 +83,59 @@ Clean <- left_join(Clean, riding_names_df, by = "riding_id")
 
 ## RCI ---------------------------------------------------------------------
 
+rcis <- Raw %>%
+  select(
+    C3_A1,
+    C3_A2,
+    C3_A3,
+    C3_A4,
+    C3_A5
+  ) %>%
+  rename(
+    op_potentialG_CAQ = C3_A1,
+    op_potentialG_PLQ = C3_A2,
+    op_potentialG_PQ =  C3_A3,
+    op_potentialG_QS =  C3_A4,
+    op_potentialG_PCQ = C3_A5
+  ) %>% 
+  mutate(id = 1:nrow(.),
+         op_potentialG_CAQ = op_potentialG_CAQ / 10,
+         op_potentialG_PLQ = op_potentialG_PLQ / 10,
+         op_potentialG_PQ = op_potentialG_PQ / 10,
+         op_potentialG_QS = op_potentialG_QS / 10,
+         op_potentialG_PCQ = op_potentialG_PCQ / 10) %>%
+  pivot_longer(
+    .,
+    cols = starts_with("op_potentialG"),
+    names_to = "party",
+    values_to = "potgrowth",
+    names_prefix = "op_potentialG_"
+  ) %>%
+  group_by(id) %>%
+  mutate(
+    max_potgrowth = max(potgrowth),
+    leader = ifelse(potgrowth == max_potgrowth, 1, 0),
+    trailer = ifelse(potgrowth != max_potgrowth, 1, 0),
+    n_leaders = sum(leader),
+    potgrowth_trailers = ifelse(trailer == 1, potgrowth, NA),
+    second_potgrowth = case_when(
+      n_leaders == 1 ~ max(potgrowth_trailers, na.rm = TRUE),
+      n_leaders >= 2 ~ max_potgrowth
+    ),
+    rci = case_when(
+      leader == 1 ~ potgrowth - second_potgrowth,
+      trailer == 1 ~ potgrowth - max_potgrowth
+    )
+  ) %>% 
+  select(id, party, rci) %>% 
+  pivot_wider(., id_cols = "id",
+              values_from = "rci",
+              names_from = "party",
+              names_prefix = "rci_") %>% 
+  ungroup() %>% 
+  select(-id)
+
+Clean <- cbind(Clean, rcis)
 
 # Save Clean to a rds dataset ---------------------------------------------
 
