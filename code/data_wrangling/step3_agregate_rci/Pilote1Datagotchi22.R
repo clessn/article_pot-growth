@@ -1,16 +1,15 @@
 # Load packages ----------------------------------------------------------------
 library(tidyverse)
-library (sondr)
+library(sondr)
 
 # Load raw data -----------------------------------------------------------
-Raw <- readRDS("_SharedFolder_article_pot-growth/data/lake/datagotchi_2021_pilote1/CleanData-Lifestyle.rds")
+Raw <- sondr::read_any_csv("_SharedFolder_article_pot-growth/data/lake/datagotchi_2022_pilote1/Pilote1-donnees-geo.csv")
 
 # Create empty clean dataframe --------------------------------------------
 Clean <- data.frame(id = 1:nrow(Raw), # id of the respondent
-                    source_id = "datagotchi_2021_pilote1", # id of the survey
-                    year = 2021, # year of the survey
-                    level = "fed_can") # fed_can or prov_qc
-
+                    source_id = "pilote1datagotchi22", # id of the survey
+                    year = 2022, # year of the survey
+                    level = "prov_qc") # fed_can or prov_qc
 # Clean variables ---------------------------------------------------------
 
 ## gender ------------------------------------------------------------------
@@ -68,20 +67,8 @@ table(Clean$langautre)
 
 ## RCI ---------------------------------------------------------------------
 
-rcis <- Raw %>% 
-  select(op_potentialG_Lib, op_potentialG_Cons,
-         op_potentialG_Ndp, op_potentialG_BQ, op_potentialG_PV) %>% 
-  mutate(id = 1:nrow(.)) %>% 
-  pivot_longer(., cols = starts_with("op_potentialG"),
-               names_to = "party",
-               values_to = "potgrowth",
-               names_prefix = "op_potentialG_") %>% 
-  group_by(id) %>% 
-  mutate(max_potgrowth = max(potgrowth)) %>% 
-  ungroup() %>% 
-  mutate(rci)
-  
 
 # Save Clean to a rds dataset ---------------------------------------------
 
-saveRDS(Clean, "_SharedFolder_article_pot-growth/data/warehouse/step3_agregate_rci/separated/")
+saveRDS(Clean, "_SharedFolder_article_pot-growth/data/warehouse/step3_agregate_rci/separated/omnibus_january.rds")
+
