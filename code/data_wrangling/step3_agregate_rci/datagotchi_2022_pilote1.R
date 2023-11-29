@@ -82,8 +82,59 @@ Clean <- left_join(Clean, riding_names_df, by = "riding_id")
 
 ## RCI ---------------------------------------------------------------------
 
+rcis <- Raw %>%
+  select(
+    Q61_A1,
+    Q61_A2,
+    Q61_A3,
+    Q61_A4,
+    Q61_A5
+  ) %>%
+  rename(
+    op_potentialG_CAQ = Q61_A1,
+    op_potentialG_PLQ = Q61_A2,
+    op_potentialG_PQ = Q61_A3,
+    op_potentialG_QS = Q61_A4,
+    op_potentialG_PCQ = Q61_A5
+  ) %>% 
+  mutate(id = 1:nrow(.),
+         op_potentialG_CAQ = op_potentialG_CAQ/10,
+         op_potentialG_PLQ = op_potentialG_PLQ/10,
+         op_potentialG_PQ = op_potentialG_PQ/10,
+         op_potentialG_QS = op_potentialG_QS/10,
+         op_potentialG_PCQ = op_potentialG_PCQ/10) %>%
+  pivot_longer(
+    .,
+    cols = starts_with("op_potentialG"),
+    names_to = "party",
+    values_to = "potgrowth",
+    names_prefix = "op_potentialG_"
+  ) %>%
+  group_by(id) %>%
+  mutate(
+    max_potgrowth = max(potgrowth),
+    leader = ifelse(potgrowth == max_potgrowth, 1, 0),
+    trailer = ifelse(potgrowth != max_potgrowth, 1, 0),
+    n_leaders = sum(leader),
+    potgrowth_trailers = ifelse(trailer == 1, potgrowth, NA),
+    second_potgrowth = case_when(
+      n_leaders == 1 ~ max(potgrowth_trailers, na.rm = TRUE),
+      n_leaders >= 2 ~ max_potgrowth
+    ),
+    rci = case_when(
+      leader == 1 ~ potgrowth - second_potgrowth,
+      trailer == 1 ~ potgrowth - max_potgrowth
+    )
+  ) %>% 
+  select(id, party, rci) %>% 
+  pivot_wider(., id_cols = "id",
+              values_from = "rci",
+              names_from = "party",
+              names_prefix = "rci_") %>% 
+  ungroup() %>% 
+  select(-id)
 
-
+Clean <- cbind(Clean, rcis)
 
 # Save Clean to a rds dataset ---------------------------------------------
 
