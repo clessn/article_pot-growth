@@ -34,8 +34,33 @@ table(Clean$female)
 
 ## age ------------------------------------------------------------------
 table(Raw$QAGE)
+class(Raw$QAGE)
+
+# clean variable
+Clean$age <- case_when(
+  Raw$QAGE %in% 18:34 ~ "34m", # if QAGE est entre 18 et 34, mettre 34m
+  Raw$QAGE %in% 35:54 ~ "3554", # if QAGE est entre 35 et 54, mettre 3554
+  Raw$QAGE %in% 55:100 ~ "55p" # if QAGE est entre 55 et 100, mettre 55p
+)
+table(Clean$age)
+
+# factorize (donc mettre en catégories)
+Clean$age <- factor(Clean$age, levels = c("34m", "3554", "55p")) # levels permet d'ordonner la variable catégorielle
 
 ## language ------------------------------------------------------------------
+
+table(Raw$LANGU)
+
+Clean$langue <- case_when(
+  Raw$LANGU == 1 ~ "english", # if LANGU est 1, mettre english
+  Raw$LANGU == 2 ~ "french", # if QAGE est 2, mettre french
+  Raw$LANGU == 3 ~ "other" # if QAGE est 3, mettre other
+)
+
+table(Clean$langue)
+
+# factorize (mais sans ordonner la variable cette fois)
+Clean$langue <- factor(Clean$langue)
 
 ## riding ------------------------------------------------------------------
 
