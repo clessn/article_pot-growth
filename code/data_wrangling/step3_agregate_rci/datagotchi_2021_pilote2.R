@@ -9,7 +9,7 @@ Raw <- sondr::read_any_csv("_SharedFolder_article_pot-growth/data/lake/datagotch
 Clean <- data.frame(id = 1:nrow(Raw), # id of the respondent
                     source_id = "datagotchi_2021_pilote2", # id of the survey
                     year = 2021, # year of the survey
-                    level = "prov_qc") # fed_can or prov_qc
+                    level = "fed_can") # fed_can or prov_qc
 
 # Clean variables ---------------------------------------------------------
 
@@ -67,7 +67,56 @@ table(Clean$langautre)
 
 ## RCI ---------------------------------------------------------------------
 
+rcis <- Raw %>%
+  select(
+    op_potentialG_Lib,
+    op_potentialG_Cons,
+    op_potentialG_Ndp,
+    op_potentialG_BQ,
+    op_potentialG_PV
+  ) %>%
+  mutate(id = 1:nrow(.)) %>%
+  pivot_longer(
+    .,
+    cols = starts_with("op_potentialG"),
+    names_to = "party",
+    values_to = "potgrowth",
+    names_prefix = "op_potentialG_"
+  ) %>%
+  group_by(id) %>%
+  mutate(
+    max_potgrowth = max(potgrowth),
+    leader = ifelse(potgrowth == max_potgrowth, 1, 0),
+    trailer = ifelse(potgrowth != max_potgrowth, 1, 0),
+    n_leaders = sum(leader),
+    potgrowth_trailers = ifelse(trailer == 1, potgrowth, NA),
+    second_potgrowth = case_when(
+      n_leaders == 1 ~ max(potgrowth_trailers, na.rm = TRUE),
+      n_leaders >= 2 ~ max_potgrowth
+    ),
+    rci = case_when(
+      leader == 1 ~ potgrowth - second_potgrowth,
+      trailer == 1 ~ potgrowth - max_potgrowth
+    ),
+    party = case_when(
+      party == "Lib" ~ "PLC",
+      party == "Cons" ~ "PCC",
+      party == "Ndp" ~ "NPD",
+      party == "BQ" ~ "BQ",
+      party == "PV" ~ "PVC"
+    )
+  ) %>% 
+  select(id, party, rci) %>% 
+  pivot_wider(., id_cols = "id",
+              values_from = "rci",
+              names_from = "party",
+              names_prefix = "rci_") %>% 
+  ungroup() %>% 
+  select(-id)
+
+Clean <- cbind(Clean, rcis)
+
 
 # Save Clean to a rds dataset ---------------------------------------------
 
-saveRDS(Clean, "_SharedFolder_article_pot-growth/data/warehouse/step3_agregate_rci/separated/omnibus_january.rds")
+saveRDS(Clean, "_SharedFolder_article_pot-growth/data/warehouse/step3_agregate_rci/separated_fed/datagotchi_2021_pilote2.rds")
