@@ -103,17 +103,65 @@ Clean <- left_join(Clean, riding_names_df, by = "riding_id")
 
 ## RCI ---------------------------------------------------------------------
 
-
 #### we need to take the rci data from all_respondents_df, I think.
 
 ### Replace NAs with 0.5
-Raw <- Raw %>% 
+raw_rcis <- raw1 %>% 
   tidyr::replace_na(list(potGrowthCAQ=0.5,
                          potGrowthPLQ=0.5,
                          potGrowthQS=0.5,
                          potGrowthPQ=0.5,
-                         potGrowthPCQ=0.5))
+                         potGrowthPCQ=0.5)) %>% 
+  slice(-respondents_to_remove)
 
+rcis <- raw_rcis %>%
+  select(
+    potGrowthCAQ,
+    potGrowthPLQ,
+    potGrowthQS,
+    potGrowthPQ,
+    potGrowthPCQ
+  ) %>%
+  rename(
+    op_potentialG_CAQ = potGrowthCAQ,
+    op_potentialG_PLQ = potGrowthPLQ,
+    op_potentialG_PQ =  potGrowthPQ,
+    op_potentialG_QS =  potGrowthQS,
+    op_potentialG_PCQ = potGrowthPCQ
+  ) %>% 
+  mutate(id = 1:nrow(.)) %>%
+  pivot_longer(
+    .,
+    cols = starts_with("op_potentialG"),
+    names_to = "party",
+    values_to = "potgrowth",
+    names_prefix = "op_potentialG_"
+  ) %>%
+  group_by(id) %>%
+  mutate(
+    max_potgrowth = max(potgrowth),
+    leader = ifelse(potgrowth == max_potgrowth, 1, 0),
+    trailer = ifelse(potgrowth != max_potgrowth, 1, 0),
+    n_leaders = sum(leader),
+    potgrowth_trailers = ifelse(trailer == 1, potgrowth, NA),
+    second_potgrowth = case_when(
+      n_leaders == 1 ~ max(potgrowth_trailers, na.rm = TRUE),
+      n_leaders >= 2 ~ max_potgrowth
+    ),
+    rci = case_when(
+      leader == 1 ~ potgrowth - second_potgrowth,
+      trailer == 1 ~ potgrowth - max_potgrowth
+    )
+  ) %>% 
+  select(id, party, rci) %>% 
+  pivot_wider(., id_cols = "id",
+              values_from = "rci",
+              names_from = "party",
+              names_prefix = "rci_") %>% 
+  ungroup() %>% 
+  select(-id)
+
+Clean <- cbind(Clean, rcis)
 
 # Save Clean to a rds dataset ---------------------------------------------
 
