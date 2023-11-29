@@ -3,11 +3,26 @@ library(dplyr)
 
 # Load raw data -----------------------------------------------------------
 
-## in this survey, some respondents were removed in the cleaning. We need to remove them from Raw.
-clean_survey <- sondr::read_any_csv("_SharedFolder_article_pot-growth/data/lake/datagotchi_2022_pilote1/Pilote1_clean.csv")
-clean_survey_ix <- clean_survey$id ## vector containing the rows to keep
+### Remove respondents who didnt answer RCI ---------------------------------
 
-Raw <- sondr::read_any_csv("_SharedFolder_article_pot-growth/data/lake/datagotchi_2022_pilote2/datagotchi_pilot2_2022.csv")
+all_respondents_df <- sondr::read_any_csv("_SharedFolder_article_pot-growth/data/lake/datagotchi_2022_pilote2/datagotchi_pilot2_2022.csv")
+## this df contains all 1970 respondents of this survey, but with the RCI cleaned.
+
+#### for the RCI
+####### if the respondent has answered NA to 4 or less parties,
+######### this means that the NAs should become 0.5, the default position of the slider in Qualtrics
+######### (programming error in Qualtrics)
+raw1 <- readRDS("_SharedFolder_article_pot-growth/data/lake/datagotchi_2022_pilote2/Pilote2.rds")
+raw1$nas <- rowSums(is.na(raw1 %>% select(starts_with("potGrowth"))))
+table(raw1$nas)
+# 0 means the respondent answered for the 5 parties (nothing to do)
+# 1,2,3 or 4 means the respondent answered the question but skipped some parties
+##### (which means the respondent didnt change the party from the default 5 position in Qualtrics)
+# 5 means the respondent didnt answer the question
+
+### Remove respondents who didnt answer potGrowth question
+respondents_to_remove <- which(raw1$nas==5)
+Raw <- all_respondents_df[-respondents_to_remove,]
 
 # Create empty clean dataframe --------------------------------------------
 Clean <- data.frame(id = 1:nrow(Raw), # id of the respondent
@@ -40,7 +55,7 @@ table(Raw$age)
 
 #### Load data from article_riding_volatility to get riding
 riding_volatility_df <- readRDS("_SharedFolder_article_pot-growth/data/lake/riding_volatility_data.rds") %>% 
-  # filter for datagotchi_2022_pilote1 only
+  # filter for datagotchi_2022_pilote2 only
   filter(source_id == "pilote2")
 table(riding_volatility_df$riding_id)
 
@@ -55,6 +70,17 @@ riding_names_df <- readRDS("_SharedFolder_article_pot-growth/data/warehouse/dime
 Clean <- left_join(Clean, riding_names_df, by = "riding_id")
 
 ## RCI ---------------------------------------------------------------------
+
+
+#### we need to take the rci data from all_respondents_df, I think.
+
+### Replace NAs with 0.5
+Raw <- Raw %>% 
+  tidyr::replace_na(list(potGrowthCAQ=0.5,
+                         potGrowthPLQ=0.5,
+                         potGrowthQS=0.5,
+                         potGrowthPQ=0.5,
+                         potGrowthPCQ=0.5))
 
 
 # Save Clean to a rds dataset ---------------------------------------------
