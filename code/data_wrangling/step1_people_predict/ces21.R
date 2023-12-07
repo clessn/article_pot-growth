@@ -77,4 +77,10 @@ table(Clean$people_pred_PVC)
 
 # Save Clean to a rds dataset ---------------------------------------------
 
-saveRDS(Clean, "_SharedFolder_article_pot-growth/data/warehouse/step1_people_predict/ces21.rds")
+Clean %>%
+  mutate(nas = rowSums(is.na(select(., people_pred_PLC, people_pred_PCC,
+                                    people_pred_NPD, people_pred_BQ,
+                                    people_pred_PVC)), na.rm = FALSE)) %>% 
+  filter(nas != 5) %>% 
+  select(-nas) %>% 
+  saveRDS(., "_SharedFolder_article_pot-growth/data/warehouse/step1_people_predict/ces21.rds")
