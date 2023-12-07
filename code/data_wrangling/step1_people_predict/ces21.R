@@ -15,6 +15,14 @@ Clean <- data.frame(id = 1:nrow(Raw), # id of the respondent
 
 ## riding ------------------------------------------------------------------
 
+table(Raw$feduid)
+table(Raw$fedname)
+
+Clean$riding_id <- Raw$feduid
+Clean$riding_name <- Raw$fedname
+
+Encoding(Clean$riding_name) <- "latin1"
+
 ## indicator of political sophistication ------------------------------------------------------------------
 #### cps21_interest_gen_1
 table(Raw$cps21_interest_gen_1)
@@ -29,43 +37,43 @@ table(Clean$pol_sophis)
 
 ## People predict Libéral
 table(Raw$cps21_win_local_1)
-Clean$people_pred_liberal <- NA
-Clean$people_pred_liberal <- as.numeric(Raw$cps21_win_local_1)
-Clean$people_pred_liberal[as.numeric(Raw$cps21_win_local_1) == -99] <- NA
-Clean$people_pred_liberal <- Clean$people_pred_liberal / 100
-table(Clean$people_pred_liberal)
+Clean$people_pred_PLC <- NA
+Clean$people_pred_PLC <- as.numeric(Raw$cps21_win_local_1)
+Clean$people_pred_PLC[as.numeric(Raw$cps21_win_local_1) == -99] <- NA
+Clean$people_pred_PLC <- Clean$people_pred_PLC / 100
+table(Clean$people_pred_PLC)
 
 ## People predict conservateur
 table(Raw$cps21_win_local_2)
-Clean$people_pred_conservateur <- NA
-Clean$people_pred_conservateur <- as.numeric(Raw$cps21_win_local_2)
-Clean$people_pred_conservateur[as.numeric(Raw$cps21_win_local_2) == -99] <- NA
-Clean$people_pred_conservateur <- Clean$people_pred_conservateur / 100
-table(Clean$people_pred_conservateur)
+Clean$people_pred_PCC <- NA
+Clean$people_pred_PCC <- as.numeric(Raw$cps21_win_local_2)
+Clean$people_pred_PCC[as.numeric(Raw$cps21_win_local_2) == -99] <- NA
+Clean$people_pred_PCC <- Clean$people_pred_PCC / 100
+table(Clean$people_pred_PCC)
 
 ## People predict NPD
 table(Raw$cps21_win_local_3)
-Clean$people_pred_npd <- NA
-Clean$people_pred_npd <- as.numeric(Raw$cps21_win_local_3)
-Clean$people_pred_npd[as.numeric(Raw$cps21_win_local_3) == -99] <- NA
-Clean$people_pred_npd <- Clean$people_pred_npd / 100
-table(Clean$people_pred_npd)
+Clean$people_pred_NPD <- NA
+Clean$people_pred_NPD <- as.numeric(Raw$cps21_win_local_3)
+Clean$people_pred_NPD[as.numeric(Raw$cps21_win_local_3) == -99] <- NA
+Clean$people_pred_NPD <- Clean$people_pred_NPD / 100
+table(Clean$people_pred_NPD)
 
 ## People predict Bloc québécois
 table(Raw$cps21_win_local_4)
-Clean$people_pred_blocqueb <- NA
-Clean$people_pred_blocqueb <- as.numeric(Raw$cps21_win_local_4)
-Clean$people_pred_blocqueb[as.numeric(Raw$cps21_win_local_4) == -99] <- NA
-Clean$people_pred_blocqueb <- Clean$people_pred_blocqueb / 100
-table(Clean$people_pred_blocqueb)
+Clean$people_pred_BQ <- NA
+Clean$people_pred_BQ <- as.numeric(Raw$cps21_win_local_4)
+Clean$people_pred_BQ[as.numeric(Raw$cps21_win_local_4) == -99] <- NA
+Clean$people_pred_BQ <- Clean$people_pred_BQ / 100
+table(Clean$people_pred_BQ)
 
 ## People predict Parti vert
 table(Raw$cps21_win_local_5)
-Clean$people_pred_partivert <- NA
-Clean$people_pred_partivert <- as.numeric(Raw$cps21_win_local_5)
-Clean$people_pred_partivert[as.numeric(Raw$cps21_win_local_5) == -99] <- NA
-Clean$people_pred_partivert <- Clean$people_pred_partivert / 100
-table(Clean$people_pred_partivert)
+Clean$people_pred_PVC <- NA
+Clean$people_pred_PVC <- as.numeric(Raw$cps21_win_local_5)
+Clean$people_pred_PVC[as.numeric(Raw$cps21_win_local_5) == -99] <- NA
+Clean$people_pred_PVC <- Clean$people_pred_PVC / 100
+table(Clean$people_pred_PVC)
 
 # Save Clean to a rds dataset ---------------------------------------------
 
