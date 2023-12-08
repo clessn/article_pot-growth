@@ -35,52 +35,48 @@ Clean <- data.frame(id = 1:nrow(Raw), # id of the respondent
 # Clean variables ---------------------------------------------------------
 
 ## gender ------------------------------------------------------------------
-table(Raw$gender)
+table(Raw$SEXE)
 Clean$male <- NA
-Clean$male[as.numeric(Raw$gender) %in% c(1,3)] <- 1
-Clean$male[as.numeric(Raw$gender) %in% c(2,4,5,6,7,8)] <- 0
+Clean$male[as.numeric(Raw$SEXE) %in% c(1, 3)] <- 1
+Clean$male[!(as.numeric(Raw$SEXE) %in% c(1, 3))] <- 0
 table(Clean$male)
 
-table(Raw$gender)
+table(Raw$SEXE)
 Clean$female <- NA
-Clean$female[as.numeric(Raw$gender) %in% c(2,4)] <- 1
-Clean$female[as.numeric(Raw$gender) %in% c(1,3,5,6,7,8)] <- 0
+Clean$female[as.numeric(Raw$SEXE) %in% c(2, 4)] <- 1
+Clean$female[!(as.numeric(Raw$SEXE) %in% c(2, 4))] <- 0
 table(Clean$female)
 
 
 ## age ------------------------------------------------------------------
-table(Raw$age)
-annee_sondage <- 2022
-Clean$age <- annee_sondage - as.numeric(Raw$age)
-Clean$age34m <- ifelse(Clean$age <= 34, 1, 0)
-table(Clean$age34m)
+table(Raw$QAGE)
+class(Raw$QAGE)
 
-Clean$age3554 <- ifelse(Clean$age >= 35 & Clean$age <= 54, 1, 0)
-table(Clean$age3554)
+# clean variable
+Clean$age <- case_when(
+  Raw$QAGE %in% 18:34 ~ "34m", # if QAGE est entre 18 et 34, mettre 34m
+  Raw$QAGE %in% 35:54 ~ "3554", # if QAGE est entre 35 et 54, mettre 3554
+  Raw$QAGE %in% 55:100 ~ "55p" # if QAGE est entre 55 et 100, mettre 55p
+)
+table(Clean$age)
 
-Clean$age55p <- ifelse(Clean$age >= 55, 1, 0)
-table(Clean$age55p)
+# factorize (donc mettre en catégories)
+Clean$age <- factor(Clean$age, levels = c("34m", "3554", "55p")) # levels permet d'ordonner la variable catégorielle
+
 
 ## language ------------------------------------------------------------------
-table(Raw$language)
-Clean$anglais <- NA
-Clean$anglais[as.numeric(Raw$language) == 1] <- 1
-Clean$anglais[as.numeric(Raw$language) == 2] <- 0
-Clean$anglais[as.numeric(Raw$language) == 3] <- 0
-table(Clean$anglais)
+table(Raw$LANGU)
 
-Clean$francais <- NA
-Clean$francais[as.numeric(Raw$language) == 2] <- 1
-Clean$francais[as.numeric(Raw$language) == 1] <- 0
-Clean$francais[as.numeric(Raw$language) == 3] <- 0
-table(Clean$francais)
+Clean$langue <- case_when(
+  Raw$LANGU == 1 ~ "english", # if LANGU est 1, mettre english
+  Raw$LANGU == 2 ~ "french", # if LANGU est 2, mettre french
+  Raw$LANGU == 3 ~ "other" # if LANGU est 3, mettre other
+)
 
-table(Raw$language)
-Clean$langautre <- NA
-Clean$langautre[as.numeric(Raw$language) == 3] <- 1
-Clean$langautre[as.numeric(Raw$language) == 1] <- 0
-Clean$langautre[as.numeric(Raw$language) == 2] <- 0
-table(Clean$langautre)
+table(Clean$langue)
+
+# factorize (mais sans ordonner la variable cette fois)
+Clean$langue <- factor(Clean$langue)
 
 
 ## riding ------------------------------------------------------------------
