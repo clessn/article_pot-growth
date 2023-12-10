@@ -17,33 +17,30 @@ Clean <- data.frame(id = 1:nrow(Raw), # id of the respondent
 ## gender ------------------------------------------------------------------
 table(Raw$SEXE)
 Clean$male <- NA
-Clean$male[as.numeric(Raw$SEXE) == 1] <- 1
-Clean$male[as.numeric(Raw$SEXE) == 2] <- 0
+Clean$male[as.numeric(Raw$SEXE) %in% c(1)] <- 1
+Clean$male[!(as.numeric(Raw$SEXE) %in% c(2))] <- 0
 table(Clean$male)
 
 table(Raw$SEXE)
 Clean$female <- NA
-Clean$female[as.numeric(Raw$SEXE) == 2] <- 1
-Clean$female[as.numeric(Raw$SEXE) == 1] <- 0
+Clean$female[as.numeric(Raw$SEXE) %in% c(2)] <- 1
+Clean$female[!(as.numeric(Raw$SEXE) %in% c(1))] <- 0
 table(Clean$female)
+
 ## age ------------------------------------------------------------------
 table(Raw$AGE)
-Clean$age34m <- NA
-Clean$age34m[as.numeric(Raw$AGE) %in% c(2,3)] <- 1
-Clean$age34m[as.numeric(Raw$AGE) %in% c(4,5,6,7,8)] <- 0
-table(Clean$age34m)
+class(Raw$AGE)
 
-table(Raw$AGE)
-Clean$age3554 <- NA
-Clean$age3554[as.numeric(Raw$AGE) %in% c(4,5)] <- 1
-Clean$age3554[as.numeric(Raw$AGE) %in% c(2,3,6,7,8)] <- 0
-table(Clean$age3554)
+# clean variable
+Clean$age <- case_when(
+  Raw$AGE %in% 18:34 ~ "34m", # if QAGE est entre 18 et 34, mettre 34m
+  Raw$AGE %in% 35:54 ~ "3554", # if QAGE est entre 35 et 54, mettre 3554
+  Raw$AGE %in% 55:100 ~ "55p" # if QAGE est entre 55 et 100, mettre 55p
+)
+table(Clean$age)
 
-table(Raw$AGE)
-Clean$age55p <- NA
-Clean$age55p[as.numeric(Raw$AGE) %in% c(6,7,8)] <- 1
-Clean$age55p[as.numeric(Raw$AGE) %in% c(2,3,4,5)] <- 0
-table(Clean$age55p)
+# factorize (donc mettre en catégories)
+Clean$age <- factor(Clean$age, levels = c("34m", "3554", "55p")) # levels permet d'ordonner la variable catégorielle
 
 ## language ------------------------------------------------------------------
 table(Raw$LANGUE)
