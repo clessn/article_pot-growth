@@ -17,14 +17,14 @@ Clean <- data.frame(id = 1:nrow(Raw), # id of the respondent
 ## gender ------------------------------------------------------------------
 table(Raw$SEXE)
 Clean$male <- NA
-Clean$male[as.numeric(Raw$SEXE) == 1] <- 1
-Clean$male[as.numeric(Raw$SEXE) == 2] <- 0
+Clean$male[as.numeric(Raw$SEXE) %in% c(1)] <- 1
+Clean$male[!(as.numeric(Raw$SEXE) %in% c(1))] <- 0
 table(Clean$male)
 
 table(Raw$SEXE)
 Clean$female <- NA
-Clean$female[as.numeric(Raw$SEXE) == 2] <- 1
-Clean$female[as.numeric(Raw$SEXE) == 1] <- 0
+Clean$female[as.numeric(Raw$SEXE) %in% c(2)] <- 1
+Clean$female[!(as.numeric(Raw$SEXE) %in% c(2))] <- 0
 table(Clean$female)
 
 ## age ------------------------------------------------------------------
@@ -42,22 +42,17 @@ Clean$age <- factor(Clean$age, levels = c("34m", "3554", "55p")) # levels permet
 
 ## language ------------------------------------------------------------------
 table(Raw$LANGUE)
-Clean$anglais <- NA
-Clean$anglais[as.numeric(Raw$LANGUE) == 2] <- 1
-Clean$anglais[as.numeric(Raw$LANGUE) %in% c(1,3)] <- 0
-table(Clean$anglais)
 
-table(Raw$LANGUE)
-Clean$francais <- NA
-Clean$francais[as.numeric(Raw$LANGUE) == 1] <- 1
-Clean$francais[as.numeric(Raw$LANGUE) %in% c(2,3)] <- 0
-table(Clean$francais)
+Clean$langue <- case_when(
+  Raw$LANGUE == 2 ~ "english", # if LANGUE est 2, mettre english
+  Raw$LANGUE == 1 ~ "french", # if LANGUE est 1, mettre french
+  Raw$LANGUE == 3 ~ "other" # if LANGUE est 3, mettre other
+)
 
-table(Raw$LANGUE)
-Clean$langautre <- NA
-Clean$langautre[as.numeric(Raw$LANGUE) == 3] <- 1
-Clean$langautre[as.numeric(Raw$LANGUE) %in% c(1,2)] <- 0
-table(Clean$langautre)
+table(Clean$langue)
+
+# factorize (mais sans ordonner la variable cette fois)
+Clean$langue <- factor(Clean$langue)
 
 ## riding ------------------------------------------------------------------
 

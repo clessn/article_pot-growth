@@ -18,13 +18,13 @@ Clean <- data.frame(id = 1:nrow(Raw), # id of the respondent
 table(Raw$SEXE)
 Clean$male <- NA
 Clean$male[as.numeric(Raw$SEXE) %in% c(1)] <- 1
-Clean$male[!(as.numeric(Raw$SEXE) %in% c(2))] <- 0
+Clean$male[!(as.numeric(Raw$SEXE) %in% c(1))] <- 0
 table(Clean$male)
 
 table(Raw$SEXE)
 Clean$female <- NA
 Clean$female[as.numeric(Raw$SEXE) %in% c(2)] <- 1
-Clean$female[!(as.numeric(Raw$SEXE) %in% c(1))] <- 0
+Clean$female[!(as.numeric(Raw$SEXE) %in% c(2))] <- 0
 table(Clean$female)
 
 ## age ------------------------------------------------------------------
@@ -33,9 +33,9 @@ class(Raw$AGE)
 
 # clean variable
 Clean$age <- case_when(
-  Raw$AGE %in% 18:34 ~ "34m", # if QAGE est entre 18 et 34, mettre 34m
-  Raw$AGE %in% 35:54 ~ "3554", # if QAGE est entre 35 et 54, mettre 3554
-  Raw$AGE %in% 55:100 ~ "55p" # if QAGE est entre 55 et 100, mettre 55p
+  Raw$AGE %in% c("2","3") ~ "34m", # if QAGE est entre 18 et 34, mettre 34m
+  Raw$AGE %in% c("4","5") ~ "3554", # if QAGE est entre 35 et 54, mettre 3554
+  Raw$AGE %in% c("6","7","8") ~ "55p" # if QAGE est entre 55 et 100, mettre 55p
 )
 table(Clean$age)
 
@@ -43,23 +43,21 @@ table(Clean$age)
 Clean$age <- factor(Clean$age, levels = c("34m", "3554", "55p")) # levels permet d'ordonner la variable catégorielle
 
 ## language ------------------------------------------------------------------
-table(Raw$LANGUE)
-Clean$anglais <- NA
-Clean$anglais[as.numeric(Raw$LANGUE) == 2] <- 1
-Clean$anglais[as.numeric(Raw$LANGUE) %in% c(1,3)] <- 0
-table(Clean$anglais)
 
 table(Raw$LANGUE)
-Clean$francais <- NA
-Clean$francais[as.numeric(Raw$LANGUE) == 1] <- 1
-Clean$francais[as.numeric(Raw$LANGUE) %in% c(2,3)] <- 0
-table(Clean$francais)
 
-table(Raw$LANGUE)
-Clean$langautre <- NA
-Clean$langautre[as.numeric(Raw$LANGUE) == 3] <- 1
-Clean$langautre[as.numeric(Raw$LANGUE) %in% c(1,2)] <- 0
-table(Clean$langautre)
+Clean$langue <- case_when(
+  Raw$LANGUE == 2 ~ "english", # if LANGUE est 2, mettre english
+  Raw$LANGUE == 1 ~ "french", # if LANGUE est 1, mettre french
+  Raw$LANGUE == 3 ~ "other" # if LANGUE est 3, mettre other
+)
+
+table(Clean$langue)
+
+# factorize (mais sans ordonner la variable cette fois)
+Clean$langue <- factor(Clean$langue)
+
+
 ## riding ------------------------------------------------------------------
 
 #### Load data from article_riding_volatility to get riding
