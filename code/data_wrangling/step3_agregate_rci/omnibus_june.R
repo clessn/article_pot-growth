@@ -28,6 +28,8 @@ Clean$female[!(as.numeric(Raw$SEXE) %in% c(2))] <- 0
 table(Clean$female)
 
 ## age ------------------------------------------------------------------
+attributes(Raw$AGE)
+table(Raw$AGE)
 
 Clean$age <- case_when(
   Raw$AGE %in% c(2, 3) ~ "34m", # if AGE est l'un de 2 ou 3, mettre 34m

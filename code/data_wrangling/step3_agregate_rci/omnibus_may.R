@@ -26,7 +26,9 @@ Clean$female <- NA
 Clean$female[as.numeric(Raw$SEXE) %in% c(2)] <- 1
 Clean$female[!(as.numeric(Raw$SEXE) %in% c(2))] <- 0
 table(Clean$female)
+
 ## age ------------------------------------------------------------------
+attributes(Raw$AGE)
 table(Raw$AGE)
 class(Raw$AGE)
 
