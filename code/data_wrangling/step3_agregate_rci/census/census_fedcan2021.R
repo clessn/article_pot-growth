@@ -79,6 +79,7 @@ get_riding_df <- function(riding_id = "24001"){
       get_value(riding_id, "men", 396), # langue english
       get_value(riding_id, "men", 398) # langue other
     ),
+    total_pop = get_value(riding_id, gender = "both", 8),
     total_pop14p = get_value(riding_id, gender = "both", 8) - get_value(riding_id, gender = "both", 9)
   )
   women <- data.frame(
@@ -95,6 +96,7 @@ get_riding_df <- function(riding_id = "24001"){
       get_value(riding_id, "women", 396), # langue english
       get_value(riding_id, "women", 398) # langue other
     ),
+    total_pop = get_value(riding_id, gender = "both", 8),
     total_pop14p = get_value(riding_id, gender = "both", 8) - get_value(riding_id, gender = "both", 9)
   )
   return(rbind(men, women))
