@@ -39,7 +39,7 @@ graph <- left_join(Forecast, ElxnResults,
                    by = c("riding_id", "riding_name", "party"))
 
 ggplot(graph, aes(x = people_pred, y = relative_vote_share)) +
-  geom_point() +
+  geom_point(aes(color = party)) +
   geom_smooth(method = "lm") +
   geom_hline(yintercept = 0, linetype = "dotted") +
   geom_vline(xintercept = 0.5, linetype = "dotted")
