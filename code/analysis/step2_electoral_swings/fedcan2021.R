@@ -3,8 +3,8 @@ library(dplyr)
 library(ggplot2)
 
 # Data --------------------------------------------------------------------
-ElxnResults <- readRDS("_SharedFolder_article_pot-growth/data/warehouse/step2_electoral_swings/results_provqc2022.rds")
-Forecast <- readRDS("_SharedFolder_article_pot-growth/data/marts/predictions_by_riding/provqc2022.rds")
+ElxnResults <- readRDS("_SharedFolder_article_pot-growth/data/warehouse/step2_electoral_swings/results_fedcan2021.rds")
+Forecast <- readRDS("_SharedFolder_article_pot-growth/data/marts/predictions_by_riding/fedcan2021.rds")
 
 ## add column rank of party 
 ElxnResults$rank <- pull(ElxnResults %>%
@@ -36,7 +36,8 @@ ElxnResults$relative_vote_share <- ifelse(ElxnResults$rank == 1,
 # Exploration -------------------------------------------------------------
 
 graph <- left_join(Forecast, ElxnResults,
-                   by = c("riding_id", "riding_name", "party"))
+                   by = c("riding_id", "riding_name", "party")) %>% 
+  tidyr::drop_na()
 
 ggplot(graph, aes(x = people_pred, y = relative_vote_share)) +
   geom_point() +

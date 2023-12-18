@@ -24,7 +24,7 @@ ByRiding <- Long %>%
   summarise(weighted_sum_preds = sum(weight)) %>% 
   group_by(riding_id, riding_name) %>% 
   mutate(total_riding = sum(weighted_sum_preds),
-         prop_forecasted = weighted_sum_preds / total_riding) %>% 
+         people_pred = weighted_sum_preds / total_riding) %>% 
   select(-weighted_sum_preds, -total_riding)
 
 saveRDS(ByRiding, "_SharedFolder_article_pot-growth/data/marts/predictions_by_riding/provqc2022.rds")
