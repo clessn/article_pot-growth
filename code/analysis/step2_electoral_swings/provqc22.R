@@ -50,3 +50,16 @@ ggplot(graph, aes(x = people_pred, y = relative_vote_share)) +
   geom_smooth(method = "lm") +
   geom_hline(yintercept = 0, linetype = "dotted") +
   geom_vline(xintercept = 0.5, linetype = "dotted")
+
+
+model <-  lm(relative_vote_share ~ people_pred, data = graph)
+
+graph$pred <- predict(object = model, newdata = graph)
+
+graph$electoral_swingness <- graph$relative_vote_share - graph$pred
+
+
+provqc2022 <- graph %>% 
+  select(riding_id, riding_name, party, people_pred, prop_vote, relative_vote_share, pred, electoral_swingness)
+
+saveRDS(provqc2022, "_SharedFolder_article_pot-growth/data/marts/electoral_swings/provqc2022.rds")
