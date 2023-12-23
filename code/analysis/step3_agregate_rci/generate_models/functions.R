@@ -63,6 +63,7 @@ save_model_list <- function(
 evaluate_model <- function(model, test_data){
   if (class(model)[1] == "lm"){
     vd <- model[["terms"]][[2]]
+    equation <- deparse(model[["terms"]][[3]])
     predictions <- predict(model, test_data)
     # Calculer R2, MSE, AIC, BIC
     r_squared <- summary(model)$r.squared
@@ -72,6 +73,7 @@ evaluate_model <- function(model, test_data){
     bic <- BIC(model)
   } else if (class(model)[1] == "lmerMod"){
     vd <- model@call[["formula"]][[2]]
+    equation <- deparse(model@call[["formula"]][[3]])
     predictions <- predict(model, test_data)
     # Calculer R2, MSE, AIC, BIC
     r_squared <- unname(performance::r2(model)[[1]])
@@ -83,7 +85,7 @@ evaluate_model <- function(model, test_data){
     aic <- AIC(model)
     bic <- BIC(model)
   }
-  results <- data.frame(r_squared, adj_marginal_r2, mse, aic, bic)
+  results <- data.frame(equation, r_squared, adj_marginal_r2, mse, aic, bic)
   return(results)
 }
 
@@ -96,6 +98,7 @@ evaluate_models_file <- function(path, test_data) {
   results <- data.frame(
     model_name = character(),
     party = character(),
+    equation = character(),
     r_squared = numeric(),
     adj_marginal_r2 = numeric(),
     mse = numeric(),
