@@ -11,34 +11,47 @@ Ridings <- read.csv("_SharedFolder_article_pot-growth/data/warehouse/dimensions/
 
 # Join riding region on Data
 Data <- left_join(Data, Ridings, by = "riding_id") %>% 
-  mutate(riding_id = factor(riding_id))
+  mutate(riding_id = factor(riding_id),
+         large = factor(large),
+         granular = factor(granular),
+         age = factor(age),
+         langue = factor(langue))
 
 parties <- c("CAQ", "PLQ", "QS", "PQ", "PCQ")
 
+# Train/test --------------------------------------------------------------
+
+set.seed(123)
+test_indices <- caret::createDataPartition(Data$id, p = 0.2, list = FALSE, times = 1)
+# Séparer les données en ensembles de test et d'entraînement
+test_data <- Data[test_indices, ]
+train_data <- Data[-test_indices, ]
+
+saveRDS(test_data, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/test_data.rds")
 
 # Models ------------------------------------------------------------------
 
 # Modeles lineaires simples -----------------------------------------------
 
 ## riding id
-save_model_list(data = Data,
-                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/linear",
+save_model_list(data = train_data,
+                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_files/linear",
                 model_name = "simple_ridingid",
                 right_equation = "age + langue + male + riding_id",
                 parties = parties,
                 mix_model = FALSE)
 
 ## granular
-save_model_list(data = Data,
-                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/linear",
+save_model_list(data = train_data,
+                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_files/linear",
                 model_name = "simple_granular",
                 right_equation = "age + langue + male + granular",
                 parties = parties,
                 mix_model = FALSE)
 
 ## large region
-save_model_list(data = Data,
-                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/linear",
+save_model_list(data = train_data,
+                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_files/linear",
                 model_name = "simple_large",
                 right_equation = "age + langue + male + large",
                 parties = parties,
@@ -49,8 +62,8 @@ save_model_list(data = Data,
 # Modele lineaires avec interactions sur age et langue -----------------------------
 
 ## riding id
-save_model_list(data = Data,
-                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/linear",
+save_model_list(data = train_data,
+                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_files/linear",
                 model_name = "someint_ridingid",
                 right_equation = "age * langue + male + riding_id",
                 parties = parties,
@@ -58,16 +71,16 @@ save_model_list(data = Data,
 
 
 ## granular
-save_model_list(data = Data,
-                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/linear",
+save_model_list(data = train_data,
+                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_files/linear",
                 model_name = "someint_granular",
                 right_equation = "age * langue + male + granular",
                 parties = parties,
                 mix_model = FALSE)
 
 ## large
-save_model_list(data = Data,
-                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/linear",
+save_model_list(data = train_data,
+                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_files/linear",
                 model_name = "someint_large",
                 right_equation = "age * langue + male + large",
                 parties = parties,
@@ -78,7 +91,7 @@ save_model_list(data = Data,
 
 ## riding id
 #save_model_list(data = Data,
-#                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/linear",
+#                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_files/linear",
 #                model_name = "intregion_ridingid",
 #                right_equation = "age * langue * riding_id + male",
 #                parties = parties,
@@ -86,16 +99,16 @@ save_model_list(data = Data,
 #
 
 ## granular
-save_model_list(data = Data,
-                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/linear",
+save_model_list(data = train_data,
+                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_files/linear",
                 model_name = "intregion_granular",
                 right_equation = "age * langue * granular + male",
                 parties = parties,
                 mix_model = FALSE)
 
 ## large
-save_model_list(data = Data,
-                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/linear",
+save_model_list(data = train_data,
+                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_files/linear",
                 model_name = "intregion_large",
                 right_equation = "age * langue * large + male",
                 parties = parties,
@@ -105,50 +118,54 @@ save_model_list(data = Data,
 # Modeles mixtes ----------------------------------------------------------
 
 # Modèle Mixte avec Effet de Groupe sur Granulaire
-save_model_list(data = Data,
-                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/mixed",
+save_model_list(data = train_data,
+                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_files/mixed",
                 model_name = "mixed_granular_group",
                 right_equation = "age + langue + male + (1 | granular)",
                 parties = parties,
                 mix_model = TRUE)
 
 # Modèle Mixte avec Interaction Age-Langue et Effet de Groupe sur Granulaire
-save_model_list(data = Data,
-                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/mixed",
+save_model_list(data = train_data,
+                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_files/mixed",
                 model_name = "mixed_ageXlangue_granular_group",
                 right_equation = "age * langue + male + (1 | granular)",
                 parties = parties,
                 mix_model = TRUE)
 
 # Modèle Mixte avec Pentes Variables pour Age et Langue par Granulaire
-save_model_list(data = Data,
-                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/mixed",
+save_model_list(data = train_data,
+                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_files/mixed",
                 model_name = "mixed_age_langue_by_granular",
                 right_equation = "age + langue + male + (age + langue | granular)",
                 parties = parties,
                 mix_model = TRUE)
 
 # Modèle Mixte avec Pentes Variables pour Age et Langue par Large
-save_model_list(data = Data,
-                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/mixed",
+save_model_list(data = train_data,
+                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_files/mixed",
                 model_name = "mixed_age_langue_by_large",
                 right_equation = "age + male + langue + (age + langue | large)",
                 parties = parties,
                 mix_model = TRUE)
 
 # Modèle Mixte avec Pentes Variables pour Age*Langue par Granulaire
-save_model_list(data = Data,
-                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/mixed",
+save_model_list(data = train_data,
+                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_files/mixed",
                 model_name = "mixed_ageXlangue_by_granular",
                 right_equation = "male + (age * langue | granular)",
                 parties = parties,
                 mix_model = TRUE)
 
 # Modèle Mixte avec Pentes Variables pour Age*Langue par Large
-save_model_list(data = Data,
-                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/mixed",
+save_model_list(data = train_data,
+                path = "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_files/mixed",
                 model_name = "mixed_ageXlangue_by_large",
                 right_equation = "male + (age * langue | large)",
                 parties = parties,
                 mix_model = TRUE)
+
+
+# Random forest -----------------------------------------------------------
+
 
