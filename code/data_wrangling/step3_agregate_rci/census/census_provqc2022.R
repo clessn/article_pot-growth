@@ -86,5 +86,120 @@ for (i in 1:length(riding_ids)){
   print(riding_idi)
 }
 
+Clean$n <- as.numeric(Clean$n)
+
 saveRDS(Clean, "_SharedFolder_article_pot-growth/data/warehouse/dimensions/census/provqc2022/census.rds")
 
+# Transform into synthetic poststrat table ------------------------------------------
+
+SurveyData <- readRDS("_SharedFolder_article_pot-growth/data/warehouse/step3_agregate_rci/rcis_prov.rds") %>% 
+  mutate(gender = ifelse(male == 1, "men", "women")) %>% 
+  ## only select indepedent variables
+  select(riding_id, gender, age, langue)
+  
+
+CensusWide <- Clean %>% 
+  mutate(varname = paste0(var, "_", category)) %>% 
+  tidyr::pivot_wider(., id_cols = c("riding_id", "total_pop", "total_pop14p"),
+                     names_from = "varname",
+                     values_from = "n")
+
+for (i in 1:nrow(CensusWide)) {
+  options(dplyr.summarise.inform = FALSE)
+  options(dplyr.left_join.inform = FALSE)
+  riding_idi <- CensusWide$riding_id[i]
+  prop_age14p <- CensusWide$total_pop14p[i]
+  censusGender <- c("men" = CensusWide$gender_men[i],
+                         "women" = CensusWide$gender_women[i])
+  censusPropsGender <- censusGender/sum(censusGender)
+  censusLangue <- c("french" = CensusWide$langue_french[i],
+                    "english" = CensusWide$langue_english[i],
+                    "other"  = CensusWide$langue_other[i])
+  censusPropsLangue <- censusLangue/sum(censusLangue)
+  censusAge <- c("1834" = CensusWide$age_1834[i],
+                 "3554" = CensusWide$age_3554[i],
+                 "55p" = CensusWide$age_55p[i])
+  censusPropsAge <- censusAge/sum(censusAge)
+  FirstStrat <- SurveyData %>%
+    select(gender, age) %>%
+    na.omit() %>%
+    group_by(gender, age) %>%
+    summarise(n = n()) %>%
+    ungroup() %>%
+    mutate(prct = n / sum(n)) %>% 
+    group_by(age) %>% 
+    mutate(prct = sum(prct))
+  FirstStrat$adjustCoef <- censusPropsAge/FirstStrat$prct
+  FirstStrat$newFreq <- FirstStrat$n*FirstStrat$adjustCoef
+  FirstStrat <- FirstStrat %>% 
+    ungroup() %>% 
+    select(gender, age, newFreq) %>%
+    rename(n=newFreq) %>%
+    mutate(prct=n / sum(n))
+  
+  LastStage <- FirstStrat
+  
+  Strat <- SurveyData %>%
+    select(gender, age, langue) %>%
+    na.omit() %>%
+    group_by(gender, age, langue) %>%
+    summarise(n = n()) %>%
+    ungroup() %>%
+    mutate(prct = n / sum(n))
+  vars <- c("gender", "age", "langue")
+  args <- paste0("unique(Strat$", vars, ")", collapse = ", ")
+  
+  AllCombs <-
+    eval(parse(text = paste0("expand.grid(", args, ")")))
+  names(AllCombs) <- vars
+  
+  Strat <- left_join(AllCombs, Strat) %>%
+    replace(is.na(.), 0) %>%
+    group_by(age, langue) %>%
+    mutate(prct2 = sum(prct))
+  
+  Strat$adjustCoef <- censusPropsLangue[as.character(Strat$langue)]/Strat$prct2
+  Strat$adjustCoef <-
+    ifelse(Strat$adjustCoef %in% c(-Inf, Inf), 0, Strat$adjustCoef)
+  Strat$newFreq <- Strat$n * Strat$adjustCoef
+  
+  Strat <- Strat %>%
+    select(all_of(vars), newFreq) %>%
+    rename(n = newFreq) %>%
+    group_by(gender, age) %>%
+    mutate(prct = (n / sum(n)))
+  
+  LastStagej <- LastStage %>%
+    select(-n) %>%
+    rename(prct_ls = prct)
+  
+  Strat2 <- left_join(Strat, LastStagej) %>%
+    mutate(prct = prct * prct_ls)
+  
+  LastStage <- Strat2 %>%
+    select(-prct_ls)
+  
+  if (i == 1) {
+    StratTable <- LastStage %>%
+      mutate(riding_id = riding_idi)
+  }
+  else {
+    TempStrat <- LastStage %>%
+      mutate(riding_id = riding_idi)
+    StratTable <- rbind(StratTable, TempStrat)
+  }
+  print(paste0(round(i / nrow(CensusWide) * 100), "% - ", riding_idi))
+}
+
+### Check 
+StratTable$n[is.nan(StratTable$n)] <- 0
+StratTable$prct[is.nan(StratTable$prct)] <- 0
+
+# Test
+StratTable %>% 
+  group_by(riding_id) %>% 
+  summarise(sum = sum(prct)) %>% 
+  arrange(-sum)
+#### Every riding has a sum of 1? Good!!
+
+saveRDS(StratTable, "_SharedFolder_article_pot-growth/data/warehouse/dimensions/census/provqc2022/poststrat.rds")
