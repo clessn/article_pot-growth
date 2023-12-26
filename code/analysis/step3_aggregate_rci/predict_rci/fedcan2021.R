@@ -8,18 +8,20 @@ Ridings <- read.csv("_SharedFolder_article_pot-growth/data/warehouse/dimensions/
   select(riding_id, granular)
 
 # poststrat
-Strat <- readRDS("_SharedFolder_article_pot-growth/data/warehouse/dimensions/census/provqc2022/poststrat.rds") %>% 
-  left_join(., Ridings, by = "riding_id") %>% 
+Strat <- readRDS("_SharedFolder_article_pot-growth/data/warehouse/dimensions/census/fedcan2021/poststrat.rds") %>% 
+  left_join(., Ridings, by = "riding_id",
+            relationship = "many-to-many") %>% 
   mutate(gender = ifelse(gender == "men", 1, 0)) %>% 
   rename(male = gender)
 
-parties <- c("CAQ", "PLQ", "QS", "PQ", "PCQ")
+parties <- c("PLC", "PCC", "NPD", "BQ", "PVC")
 
 # Predict RCI by disaggregated profile ------------------------------------
 
 for (i in parties){
-  model <- readRDS(paste0("_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_", i, ".rds"))
+  model <- readRDS(paste0("_SharedFolder_article_pot-growth/data/marts/models/fedcan2021/model_", i, ".rds"))
   Predsi <- marginaleffects::predictions(model, newdata = Strat,
+                                         vcov = "HC3", # adjust for heteroskedasticity
                                          conf_level = 0.95) %>% 
     select(-starts_with("rci")) %>% 
     mutate(party = i)
@@ -28,8 +30,9 @@ for (i in parties){
   } else {
     Preds <- rbind(Preds, Predsi)
   }
+  message(i)
 }
 
-saveRDS(Preds, "_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/disaggregated.rds")
+saveRDS(Preds, "_SharedFolder_article_pot-growth/data/marts/rci_by_riding/fedcan2021/disaggregated.rds")
 
 
