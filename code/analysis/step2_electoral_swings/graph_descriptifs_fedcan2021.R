@@ -1,5 +1,6 @@
 library(ggplot2)
 library(dplyr)
+library(ggridges)
 
 
 
@@ -91,14 +92,41 @@ ggplot(graphPVC, aes(x = electoral_swingness)) +
   xlim(-0.45, 0.65)
 
 # combined
+colors <- c("PLC" = "#D71B1E", "PCC" = "#142E52", "NPD" = "#F58220", "BQ" = "#080236", "PVC" = "#3D9B35")
 
-ggplot(fedcan2021, aes(x = electoral_swingness)) +
+ggplot(fedcan2021, aes(x = electoral_swingness, color = NA, fill = party, alpha = 0.8)) +
   geom_density() +
   facet_wrap(~party) +
+  scale_color_manual(values = NA) +
+  scale_fill_manual(values = colors) +
   clessnverse::theme_clean_light() +
   labs(title = "Electoral swingness distribution, by party", 
        x = "electoral swingness", 
        y = "") +
   geom_vline(xintercept = 0) +
-  xlim(-0.45, 0.65)
+  xlim(-0.45, 0.65) +
+  theme(legend.position = "none")
 
+
+# Save --------------------------------------------------------------------
+
+ggsave("_SharedFolder_article_pot-growth/graphs/step2_electoral_swings/fedcan2021/electoral_swings_distribution.png", height = 10, width = 12)
+
+# Graph ggridges
+
+ggplot(fedcan2021, aes(x = electoral_swingness, y = party, color = NA, fill = party, alpha = 0.8)) +
+  geom_density_ridges()+
+  scale_color_manual(values = NA) +
+  scale_fill_manual(values = colors) +
+  clessnverse::theme_clean_light() +
+  labs(title = "Electoral swingness distribution, by party", 
+       x = "electoral swingness", 
+       y = "") +
+  geom_vline(xintercept = 0) +
+  xlim(-0.45, 0.65) +
+  theme(legend.position = "none")
+
+
+# Save --------------------------------------------------------------------
+
+ggsave("_SharedFolder_article_pot-growth/graphs/step2_electoral_swings/fedcan2021/electoral_swings_distribution_ridges.png", height = 10, width = 12)
