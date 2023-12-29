@@ -2,7 +2,7 @@
 library(dplyr)
 
 # Data --------------------------------------------------------------------
-Data <- readRDS("_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/disaggregated.rds")
+Data <- readRDS("_SharedFolder_article_pot-growth/data/marts/rci_by_riding/fedcan2021/disaggregated.rds")
 
 # Aggregate ---------------------------------------------------------------
 
@@ -20,4 +20,4 @@ Agg <- Data %>%
          conf_low = weighted_mean_estimate - margin_error_95,
          conf_high = weighted_mean_estimate + margin_error_95)
 
-saveRDS(Agg, "_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/aggregated.rds")
+saveRDS(Agg, "_SharedFolder_article_pot-growth/data/marts/rci_by_riding/fedcan2021/aggregated.rds")
