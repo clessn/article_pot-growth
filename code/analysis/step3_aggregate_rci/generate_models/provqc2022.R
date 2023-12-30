@@ -15,24 +15,74 @@ Data <- left_join(Data, Ridings, by = "riding_id") %>%
          langue = factor(langue))
 
 
+## vote solidity
+Solidity <- Data %>% 
+  tidyr::pivot_longer(., cols = starts_with("rci"),
+                      names_to = "party", names_prefix = "rci_",
+                      values_to = "rci") %>% 
+  group_by(id, source_id) %>% 
+  filter(rci == max(rci))
+
+## potential for growth
+Potgrowth <- Data %>% 
+  tidyr::pivot_longer(., cols = starts_with("rci"),
+                      names_to = "party", names_prefix = "rci_",
+                      values_to = "rci") %>% 
+  group_by(id, source_id) %>% 
+  filter(rci != max(rci) | rci == 0)
+
+## vote intent
+Voteint <- Solidity %>%
+  # remove undecided voters
+  filter(rci != 0)
+
 # Train models ------------------------------------------------------------------
 
-model_CAQ <- lm(rci_CAQ ~ age * langue * granular + male, data = Data)
-saveRDS(model_CAQ, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_CAQ.rds")
+## Vote solidity -----------------------------------------------------------
 
-# Ajuster le modèle pour le PLQ et le sauvegarder
-model_PLQ <- lm(rci_PLQ ~ age * langue * granular + male, data = Data)
-saveRDS(model_PLQ, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_PLQ.rds")
+model_CAQ_solidity <- lm(rci ~ age * langue * granular * male, data = Solidity %>% filter(party == "CAQ"))
+saveRDS(model_CAQ_solidity, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/vote_solidity/model_CAQ.rds")
 
-# Ajuster le modèle pour le QS et le sauvegarder
-model_QS <- lm(rci_QS ~ age * langue * granular + male, data = Data)
-saveRDS(model_QS, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_QS.rds")
+# For PLQ
+model_PLQ_solidity <- lm(rci ~ age * langue * granular * male, data = Solidity %>% filter(party == "PLQ"))
+saveRDS(model_PLQ_solidity, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/vote_solidity/model_PLQ.rds")
 
-# Ajuster le modèle pour le PQ et le sauvegarder
-model_PQ <- lm(rci_PQ ~ age * langue * granular + male, data = Data)
-saveRDS(model_PQ, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_PQ.rds")
+# For QS
+model_QS_solidity <- lm(rci ~ age * langue * granular * male, data = Solidity %>% filter(party == "QS"))
+saveRDS(model_QS_solidity, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/vote_solidity/model_QS.rds")
 
-# Ajuster le modèle pour le PCQ et le sauvegarder
-model_PCQ <- lm(rci_PCQ ~ age * langue * granular + male, data = Data)
-saveRDS(model_PCQ, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/model_PCQ.rds")
+# For PQ
+model_PQ_solidity <- lm(rci ~ age * langue * granular * male, data = Solidity %>% filter(party == "PQ"))
+saveRDS(model_PQ_solidity, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/vote_solidity/model_PQ.rds")
 
+# For PCQ
+model_PCQ_solidity <- lm(rci ~ age * langue * granular * male, data = Solidity %>% filter(party == "PCQ"))
+saveRDS(model_PCQ_solidity, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/vote_solidity/model_PCQ.rds")
+
+
+## Potential for growth --------------------------------------------------
+
+model_CAQ_potgrowth <- lm(rci ~ age * langue * granular * male, data = Potgrowth %>% filter(party == "CAQ"))
+saveRDS(model_CAQ_potgrowth, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/potgrowth/model_CAQ.rds")
+
+# For PLQ
+model_PLQ_potgrowth <- lm(rci ~ age * langue * granular * male, data = Potgrowth %>% filter(party == "PLQ"))
+saveRDS(model_PLQ_potgrowth, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/potgrowth/model_PLQ.rds")
+
+# For QS
+model_QS_potgrowth <- lm(rci ~ age * langue * granular * male, data = Potgrowth %>% filter(party == "QS"))
+saveRDS(model_QS_potgrowth, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/potgrowth/model_QS.rds")
+
+# For PQ
+model_PQ_potgrowth <- lm(rci ~ age * langue * granular * male, data = Potgrowth %>% filter(party == "PQ"))
+saveRDS(model_PQ_potgrowth, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/potgrowth/model_PQ.rds")
+
+# For PCQ
+model_PCQ_potgrowth <- lm(rci ~ age * langue * granular * male, data = Potgrowth %>% filter(party == "PCQ"))
+saveRDS(model_PCQ_potgrowth, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/potgrowth/model_PCQ.rds")
+
+
+## Vote int --------------------------------------------------------------
+
+model <- nnet::multinom(party ~ age * langue * granular + male, Voteint)
+saveRDS(model, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/voteint/model.rds")

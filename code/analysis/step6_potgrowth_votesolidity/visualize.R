@@ -35,6 +35,8 @@ for (i in 1:unique(Data$riding_id)){
   riding_idi <- unique(Data$riding_id)[i]
   riding_name <- riding_names[as.character(riding_idi)]
   
+  xlimit <- 1.685
+  
   weights <- Data %>% 
     filter(riding_id == riding_idi) %>%
     group_by(party, gender) %>%
@@ -44,7 +46,7 @@ for (i in 1:unique(Data$riding_id)){
     group_by(gender, group) %>% 
     summarise(weight = mean(prct),
               order = mean(order)) %>% 
-    mutate(start = -1.5, end = -1.5 + weight*2.5)
+    mutate(start = -xlimit, end = -xlimit + weight*2.5)
   
   voteinti <- Data %>% 
     filter(riding_id == riding_idi) %>%
@@ -55,8 +57,8 @@ for (i in 1:unique(Data$riding_id)){
                                             "PLQ", "CAQ")),
            gender = ifelse(gender == "men+", "Hommes", "Femmes")) %>% 
     left_join(., Voteint, by = c("party", "male", "age", "langue", "riding_id")) %>% 
-    mutate(start = 1.5 - predicted_vote_share/2,
-           end = 1.5)
+    mutate(start = xlimit - predicted_vote_share/2.15,
+           end = xlimit)
   
   AggVoteInt <- voteinti %>% 
     group_by(party) %>% 
@@ -64,7 +66,7 @@ for (i in 1:unique(Data$riding_id)){
                                          w = prct))
   
   axisxlabels <- data.frame(
-    x = c(-1.475, -0.1, 0.1, 1.475),
+    x = c(-xlimit + 0.25, -0.1, 0.1, xlimit - 0.25),
     label = c("Poids", "Potentiel\nde croissance",
               "Solidité\ndu vote", "Distribution\nestimée des\nintentions de vote"),
     hjust = c(0, 1, 0, 1)
@@ -132,7 +134,7 @@ for (i in 1:unique(Data$riding_id)){
     scale_color_manual(values = colors) +
     scale_alpha_manual(values = c("potgrowth" = 0.3,
                                   "vote_solidity" = 0.7)) +
-    scale_x_continuous(limits = c(-1.5, 1.5),
+    scale_x_continuous(limits = c(-xlimit, xlimit),
                        expand = c(0, 0)) +
     guides(color = "none", alpha = "none") +
     ggtitle(riding_name) +
@@ -183,10 +185,10 @@ for (i in 1:unique(Data$riding_id)){
                      x = conf_low, xend = conf_high,
                      alpha = model),
                  linewidth = 3, alpha = 0.6) +
-    geom_linerange(aes(xmin = 1.5 - vote_share / 2,
-                       xmax = 1.5),
+    geom_linerange(aes(xmin = xlimit - vote_share / 2,
+                       xmax = xlimit),
                    linewidth = 4.5) +
-    geom_text(aes(x = 1.5 - vote_share / 2 - 0.025,
+    geom_text(aes(x = xlimit - vote_share / 2 - 0.025,
                   label = paste0(round(vote_share*100), "%")),
               color = "black", hjust = 1, size = 3.5) +
     geom_text(data = axisxlabels,
@@ -201,7 +203,7 @@ for (i in 1:unique(Data$riding_id)){
     scale_color_manual(values = colors) +
     scale_alpha_manual(values = c("potgrowth" = 0.3,
                                   "vote_solidity" = 0.7)) +
-    scale_x_continuous(limits = c(-1, 1.5)) +
+    scale_x_continuous(limits = c(-1, xlimit)) +
     scale_y_discrete(expand = c(0.4, 0.2)) +
     guides(color = "none") +
     clessnverse::theme_clean_light() +
