@@ -14,17 +14,17 @@ colors <- c("CAQ" = "#00cccc","PLQ" = "#FF0024","PQ" = "#099FFF",
             "QS" = "#FF6600","PCQ"="purple")
 
 # disaggregated
-Data <- readRDS("_SharedFolder_article_pot-growth/data/marts/step6_potgrowth_solidity/model_predictions/potgrowth_votesolidity.rds") %>% 
+Data <- readRDS("_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/disaggregated/potgrowth_votesolidity.rds") %>% 
   mutate(gender = ifelse(male == 1, "men+", "women+"),
          party = factor(party, levels = c("CAQ", "PLQ", "QS",
                                           "PQ", "PCQ"))) %>% 
   left_join(., Ridings, by = "riding_id")
 
 # aggregated
-Agg <- readRDS("_SharedFolder_article_pot-growth/data/marts/step6_potgrowth_solidity/model_predictions/potgrowth_solidity_aggregated.rds")
+Agg <- readRDS("_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/aggregated/potgrowth_votesolidity.rds")
 
 ## vote int
-Voteint <- readRDS("_SharedFolder_article_pot-growth/data/marts/step6_potgrowth_solidity/model_predictions/voteint.rds") %>% 
+Voteint <- readRDS("_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/disaggregated/voteint.rds") %>% 
   mutate(party = factor(party, levels = c("CAQ", "PLQ", "QS",
                                           "PQ", "PCQ")))
 
@@ -215,11 +215,11 @@ for (i in 1:unique(Data$riding_id)){
           axis.text.y = element_text(size = 12))
   # Combinaison des plots avec layout personnalisé
   plot <- p1 / (plot_spacer() + p2 + plot_spacer() +
-                plot_layout(widths = c(0.1, 0.8, 0.1))) +
+                  plot_layout(widths = c(0.1, 0.8, 0.1))) +
     plot_layout(heights = c(2, 0.55))
   
   ggsave(plot = plot,
-         filename = paste0("_SharedFolder_article_pot-growth/graphs/step6_potgrowth_votesolidity/",
+         filename = paste0("_SharedFolder_article_pot-growth/graphs/step3_aggregate_rci/provqc2022/riding_profile/",
                            riding_idi, ".", riding_name, ".png"),
          width = 11, height = 13)
   message(paste0(i, ": ", riding_name))
