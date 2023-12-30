@@ -1,0 +1,52 @@
+---
+title: "Forecasting Election Swings in Multiparty Systems Using Underlying Potential for Growth of Parties"
+author: "Hubert Cadieux<br>Catherine Ouellet<br>Sarah-Jane Vincent<br>Jérémy Gilbert<br>Camille Pelletier<br>Yannick Dufresne"
+format:
+  revealjs:
+    theme: dark
+    fontsize: 22pt
+editor: visual
+---
+
+<!-- Hi I'm Hubert Cadieux blabla I'm presenting the article I'm writing with blabla: titre 
+This article forms part of a collective effort to theorize, conceptualize, and operationalize the concept of a continuous potential for growth, by developing new measures of vote intention that capture its dynamic nature in multiparty systems.
+I will be conducting my master's thesis on this concept with the goal of mapping respondents' issue attitudes onto this concept.
+-->
+
+
+# Potential for Growth: what is it?
+
+## Traditional way of estimating parties' chances
+
+- In a riding or at the national level
+<!-- Ici, faire un exemple fictif d'une circonscription avec trois partis A, B et C
+
+Exemple 1.1:
+Graphique classique de Qc125.
+A a 45% +- 8
+B a 35% +- 8
+C a 20% +- 5
+Conclusions à la lecture du graphique?
+A a une excellente avance, mais pourrait peut-être être challengé par B.
+C a aucune chance de l'emporter.
+
+Exemple 1.2, MÊMES DONNÉES:
+A a beaucoup de votes fragiles et pas de potentiel de croissance
+B a un vote solide mais pas de potentiel de croissance
+C a une petite base mais solide et un gros potentiel de croissance
+Nouvelles conclusions?
+A a une bonne avance sur B, mais au niveau individuel peut facilement perdre des électeurs à C.
+B a une 2e place facile, mais impossible d'aller plus loin. Espère une séparation des votes entre A et C.
+C est loin en arrière, mais a un potentiel d'aller chercher des électeurs fragiles de A. C a donc + de chances de gagner que B.
+
+Exemple 1.3 MÊMES DONNÉES mais en simulant une attaque réussie de C sur les segments fragiles de A
+Nouveau graphique classique de Qc125 + graphique de potentiel de croissance
+
+Conclusions:
+
+L'opérationnalisation du potentiel de croissance permettrait de forecaster, anticiper des swings potentiels comme à l'exemple 1.3 que les méthodes traditionnelles d'intention de vote ne permettent pas.
+
+--> 
+
+# Why study it?
+
