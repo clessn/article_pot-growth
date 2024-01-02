@@ -35,7 +35,7 @@ for (i in 1:unique(Data$riding_id)){
   riding_idi <- unique(Data$riding_id)[i]
   riding_name <- riding_names[as.character(riding_idi)]
   
-  xlimit <- 1.685
+  xlimit <- 1.73
   
   weights <- Data %>% 
     filter(riding_id == riding_idi) %>%
@@ -57,7 +57,7 @@ for (i in 1:unique(Data$riding_id)){
                                             "PLQ", "CAQ")),
            gender = ifelse(gender == "men+", "Hommes", "Femmes")) %>% 
     left_join(., Voteint, by = c("party", "male", "age", "langue", "riding_id")) %>% 
-    mutate(start = xlimit - predicted_vote_share/2.15,
+    mutate(start = xlimit - predicted_vote_share/2.2,
            end = xlimit)
   
   AggVoteInt <- voteinti %>% 
@@ -66,7 +66,7 @@ for (i in 1:unique(Data$riding_id)){
                                          w = prct))
   
   axisxlabels <- data.frame(
-    x = c(-xlimit + 0.25, -0.1, 0.1, xlimit - 0.25),
+    x = c(-xlimit + 0.05, -0.1, 0.1, xlimit - 0.05),
     label = c("Poids", "Potentiel\nde croissance",
               "Solidité\ndu vote", "Distribution\nestimée des\nintentions de vote"),
     hjust = c(0, 1, 0, 1)

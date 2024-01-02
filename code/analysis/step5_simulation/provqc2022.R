@@ -1,6 +1,18 @@
 # Packages ----------------------------------------------------------------
 library(dplyr)
 
+
+# Convertir scores en probs -----------------------------------------------
+
+## 1. (1 + x)/sum(1 + x)
+
+# https://math.stackexchange.com/questions/2891778/how-to-convert-an-array-of-numbers-into-probability-values
+# https://en.wikipedia.org/wiki/Softmax_function
+# https://en.wikipedia.org/wiki/Propagation_of_uncertainty
+
+## Faire simulation fixe, seulement un lancer de dés
+## Puis aussi faire une simulation en inputant un indicateur de comm pol
+
 # Functions ---------------------------------------------------------------
 
 # Fonction sigmoïde pour convertir des scores en probabilités
