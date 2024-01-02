@@ -43,46 +43,46 @@ Voteint <- Solidity %>%
 ## Vote solidity -----------------------------------------------------------
 
 # For PLC
-model_PLC_solidity <- lm(rci ~ age * langue * granular * male, data = Solidity %>% filter(party == "PLC"))
+model_PLC_solidity <- lm(rci ~ age * langue * large_density * male, data = Solidity %>% filter(party == "PLC"))
 saveRDS(model_PLC_solidity, "_SharedFolder_article_pot-growth/data/marts/models/fedcan2021/vote_solidity/model_PLC.rds")
 
 # For PCC
-model_PCC_solidity <- lm(rci ~ age * langue * granular * male, data = Solidity %>% filter(party == "PCC"))
+model_PCC_solidity <- lm(rci ~ age * langue * large_density * male, data = Solidity %>% filter(party == "PCC"))
 saveRDS(model_PCC_solidity, "_SharedFolder_article_pot-growth/data/marts/models/fedcan2021/vote_solidity/model_PCC.rds")
 
 # For NPD
-model_NPD_solidity <- lm(rci ~ age * langue * granular * male, data = Solidity %>% filter(party == "NPD"))
+model_NPD_solidity <- lm(rci ~ age * langue * large_density * male, data = Solidity %>% filter(party == "NPD"))
 saveRDS(model_NPD_solidity, "_SharedFolder_article_pot-growth/data/marts/models/fedcan2021/vote_solidity/model_NPD.rds")
 
 # For BQ
-model_BQ_solidity <- lm(rci ~ age * langue * granular * male, data = Solidity %>% filter(party == "BQ"))
+model_BQ_solidity <- lm(rci ~ age * langue * large_density * male, data = Solidity %>% filter(party == "BQ"))
 saveRDS(model_BQ_solidity, "_SharedFolder_article_pot-growth/data/marts/models/fedcan2021/vote_solidity/model_BQ.rds")
 
 # For PVC
-model_PVC_solidity <- lm(rci ~ age * langue * granular * male, data = Solidity %>% filter(party == "PVC"))
+model_PVC_solidity <- lm(rci ~ age * langue * large_density * male, data = Solidity %>% filter(party == "PVC"))
 saveRDS(model_PVC_solidity, "_SharedFolder_article_pot-growth/data/marts/models/fedcan2021/vote_solidity/model_PVC.rds")
 
 
 ## Potential for growth ----------------------------------------------------
 
 # For PLC
-model_PLC_potgrowth <- lm(rci ~ age * langue * granular * male, data = Potgrowth %>% filter(party == "PLC"))
+model_PLC_potgrowth <- lm(rci ~ age * langue * large_density * male, data = Potgrowth %>% filter(party == "PLC"))
 saveRDS(model_PLC_potgrowth, "_SharedFolder_article_pot-growth/data/marts/models/fedcan2021/potgrowth/model_PLC.rds")
 
 # For PCC
-model_PCC_potgrowth <- lm(rci ~ age * langue * granular * male, data = Potgrowth %>% filter(party == "PCC"))
+model_PCC_potgrowth <- lm(rci ~ age * langue * large_density * male, data = Potgrowth %>% filter(party == "PCC"))
 saveRDS(model_PCC_potgrowth, "_SharedFolder_article_pot-growth/data/marts/models/fedcan2021/potgrowth/model_PCC.rds")
 
 # For NPD
-model_NPD_potgrowth <- lm(rci ~ age * langue * granular * male, data = Potgrowth %>% filter(party == "NPD"))
+model_NPD_potgrowth <- lm(rci ~ age * langue * large_density * male, data = Potgrowth %>% filter(party == "NPD"))
 saveRDS(model_NPD_potgrowth, "_SharedFolder_article_pot-growth/data/marts/models/fedcan2021/potgrowth/model_NPD.rds")
 
 # For BQ
-model_BQ_potgrowth <- lm(rci ~ age * langue * granular * male, data = Potgrowth %>% filter(party == "BQ"))
+model_BQ_potgrowth <- lm(rci ~ age * langue * large_density * male, data = Potgrowth %>% filter(party == "BQ"))
 saveRDS(model_BQ_potgrowth, "_SharedFolder_article_pot-growth/data/marts/models/fedcan2021/potgrowth/model_BQ.rds")
 
 # For PVC
-model_PVC_potgrowth <- lm(rci ~ age * langue * granular * male, data = Potgrowth %>% filter(party == "PVC"))
+model_PVC_potgrowth <- lm(rci ~ age * langue * large_density * male, data = Potgrowth %>% filter(party == "PVC"))
 saveRDS(model_PVC_potgrowth, "_SharedFolder_article_pot-growth/data/marts/models/fedcan2021/potgrowth/model_PVC.rds")
 
 

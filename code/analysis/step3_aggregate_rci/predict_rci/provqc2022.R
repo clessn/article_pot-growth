@@ -55,12 +55,11 @@ for (i in parties){
 
 model <- readRDS("_SharedFolder_article_pot-growth/data/marts/models/provqc2022/voteint/model.rds")
 
-PredsVoteInt <- marginaleffects::predictions(model, newdata = Strat,
-                                             conf_level = 0.95,
-                                             type = "probs") %>% 
-  rename(party = group,
-         predicted_vote_share = estimate) %>% 
-  select(-rowid, -n, -prct, -granular)
+PredsVoteInt <- cbind(Strat, predict(model, newdata = Strat, type = "probs")) %>% 
+  tidyr::pivot_longer(., cols = all_of(parties),
+                      names_to = "party",
+                      values_to = "predicted_vote_share") %>% 
+  select(-n, -prct, -granular)
 
 saveRDS(PredsVoteInt, "_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/disaggregated/voteint.rds")
 
