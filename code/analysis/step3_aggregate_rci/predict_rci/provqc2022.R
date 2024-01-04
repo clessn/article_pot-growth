@@ -18,6 +18,8 @@ parties <- c("CAQ", "PLQ", "QS", "PQ", "PCQ")
 
 # Predict models ----------------------------------------------------------
 
+#https://stats.stackexchange.com/questions/56895/do-the-predictions-of-a-random-forest-model-have-a-prediction-interval
+
 ## Vote solidity -----------------------------------------------------------
 
 model <- readRDS("code/analysis/step3_aggregate_rci/generate_models/models/solidity_CAQ.rds")
