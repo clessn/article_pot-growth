@@ -14,14 +14,14 @@ colors <- c("CAQ" = "#00cccc","PLQ" = "#FF0024","PQ" = "#099FFF",
             "QS" = "#FF6600","PCQ"="purple")
 
 # disaggregated
-Data <- readRDS("_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/disaggregated/potgrowth_votesolidity.rds") %>% 
+Data <- readRDS("code/analysis/step3_aggregate_rci/generate_models/models/disaggregated_potgrowth_votesol.rds") %>% 
   mutate(gender = ifelse(male == 1, "men+", "women+"),
          party = factor(party, levels = c("CAQ", "PLQ", "QS",
                                           "PQ", "PCQ"))) %>% 
   left_join(., Ridings, by = "riding_id")
 
 # aggregated
-Agg <- readRDS("_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/aggregated/potgrowth_votesolidity.rds")
+Agg <- readRDS("code/analysis/step3_aggregate_rci/generate_models/models/aggregated_potgrowth_votesol.rds")
 
 ## vote int
 Voteint <- readRDS("_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/disaggregated/voteint.rds") %>% 
@@ -63,7 +63,7 @@ for (i in 1:unique(Data$riding_id)){
   AggVoteInt <- voteinti %>% 
     group_by(party) %>% 
     summarise(vote_share = weighted.mean(x = predicted_vote_share,
-                                         w = prct))
+                                         w = prct.x))
   
   axisxlabels <- data.frame(
     x = c(-xlimit + 0.05, -0.1, 0.1, xlimit - 0.05),
@@ -219,7 +219,7 @@ for (i in 1:unique(Data$riding_id)){
     plot_layout(heights = c(2, 0.55))
   
   ggsave(plot = plot,
-         filename = paste0("_SharedFolder_article_pot-growth/graphs/step3_aggregate_rci/provqc2022/riding_profile/",
+         filename = paste0("_SharedFolder_article_pot-growth/graphs/step3_aggregate_rci/provqc2022/riding_profile_randomForest/",
                            riding_idi, ".", riding_name, ".png"),
          width = 11, height = 13)
   message(paste0(i, ": ", riding_name))
