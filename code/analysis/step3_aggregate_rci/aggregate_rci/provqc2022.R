@@ -2,7 +2,7 @@
 library(dplyr)
 
 # Data --------------------------------------------------------------------
-Data <- readRDS("_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/disaggregated/potgrowth_votesolidity.rds")
+Data <- readRDS("code/analysis/step3_aggregate_rci/generate_models/models/disaggregated_potgrowth_votesol.rds")
 
 # Aggregate ---------------------------------------------------------------
 
@@ -10,8 +10,17 @@ Data <- readRDS("_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provq
 # 2. Weighted aggregated standard error of estimates
 # 3. Margin of error at 95% confidence level
 
+
+## estimate sd
+estim_sd <- function(percentiles_25, percentiles_75){
+  iqr <- percentiles_75 - percentiles_25
+  estimated_sd <- iqr / 1.349
+  return(estimated_sd)
+}
+
 Agg <- Data %>% 
-  mutate(weighted_estimate = estimate * prct,
+  mutate(std.error = estim_sd(conf.low, conf.high),
+         weighted_estimate = estimate * prct,
          weighted_stderr = std.error^2 * prct^2) %>% 
   group_by(riding_id, party, model) %>% 
   summarise(weighted_mean_estimate = sum(weighted_estimate) / sum(prct),
@@ -20,4 +29,4 @@ Agg <- Data %>%
          conf_low = weighted_mean_estimate - margin_error_95,
          conf_high = weighted_mean_estimate + margin_error_95)
 
-saveRDS(Agg, "_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/aggregated/potgrowth_votesolidity.rds")
+saveRDS(Agg, "code/analysis/step3_aggregate_rci/generate_models/models/aggregated_potgrowth_votesol.rds")

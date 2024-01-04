@@ -22,25 +22,19 @@ parties <- c("CAQ", "PLQ", "QS", "PQ", "PCQ")
 
 ## Vote solidity -----------------------------------------------------------
 
-model <- readRDS("code/analysis/step3_aggregate_rci/generate_models/models/solidity_CAQ.rds")
-Stratpred <- cbind(Strat, predict(model, Strat, predict.all=TRUE,
-                   what=c(0.1, 0.25, 0.5, 0.75, 0.9)))
-
-pred.rf.int <- apply(pred.rf$individual, 1, function(x) {
-  c(mean(x) + c(-1, 1) * sd(x), 
-    quantile(x, c(0.025, 0.975)))
-})
-
-d <- as.data.frame(t(pred.rf.int))
-
-t <- predict(object = model, newdata = Strat, interval = "prediction")
-
 for (i in parties){
   model <- readRDS(paste0("code/analysis/step3_aggregate_rci/generate_models/models/solidity_", i, ".rds"))
-  Predsi <- marginaleffects::predictions(model, newdata = Strat,
-                                         conf_level = 0.95) %>% 
-    select(-starts_with("rci")) %>% 
-    mutate(party = i,
+  pred.rf <- predict(model, newdata = Strat,
+                     predict.all = TRUE)
+  pred.rf.int <- apply(pred.rf$individual, 1, function(x) {
+    c(quantile(x, c(0.25, 0.75))) ## 50% interval, we want the 50% trees in the middle.
+  })
+  Predsi <- as.data.frame(t(pred.rf.int)) %>% 
+    rename(conf.low = "25%", conf.high = "75%") %>%
+    cbind(Strat, .) %>% 
+    ungroup() %>% 
+    mutate(estimate = unlist(pred.rf$aggregate),
+           party = i,
            model = "vote_solidity")
   if (i == parties[1]){
     PredsVoteSol <- Predsi
@@ -53,11 +47,18 @@ for (i in parties){
 ## Potential for growth ----------------------------------------------------
 
 for (i in parties){
-  model <- readRDS(paste0("_SharedFolder_article_pot-growth/data/marts/models/provqc2022/potgrowth/model_", i, ".rds"))
-  Predsi <- marginaleffects::predictions(model, newdata = Strat,
-                                         conf_level = 0.95) %>% 
-    select(-starts_with("rci")) %>% 
-    mutate(party = i,
+  model <- readRDS(paste0("code/analysis/step3_aggregate_rci/generate_models/models/potgrowth_", i, ".rds"))
+  pred.rf <- predict(model, newdata = Strat,
+                     predict.all = TRUE)
+  pred.rf.int <- apply(pred.rf$individual, 1, function(x) {
+    c(quantile(x, c(0.25, 0.75))) ## 50% interval, we want the 50% trees in the middle.
+  })
+  Predsi <- as.data.frame(t(pred.rf.int)) %>% 
+    rename(conf.low = "25%", conf.high = "75%") %>%
+    cbind(Strat, .) %>% 
+    ungroup() %>% 
+    mutate(estimate = unlist(pred.rf$aggregate),
+           party = i,
            model = "potgrowth")
   if (i == parties[1]){
     PredsPotGrowth <- Predsi
@@ -82,4 +83,4 @@ saveRDS(PredsVoteInt, "_SharedFolder_article_pot-growth/data/marts/rci_by_riding
 
 Preds <- rbind(PredsVoteSol, PredsPotGrowth)
 
-saveRDS(Preds, "_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/disaggregated/potgrowth_votesolidity.rds")
+saveRDS(Preds, "code/analysis/step3_aggregate_rci/generate_models/models/disaggregated_potgrowth_votesol.rds")
