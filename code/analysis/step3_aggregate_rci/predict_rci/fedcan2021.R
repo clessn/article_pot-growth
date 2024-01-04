@@ -60,8 +60,7 @@ model <- readRDS("_SharedFolder_article_pot-growth/data/marts/models/fedcan2021/
 PredsVoteInt <- cbind(Strat, predict(model, newdata = Strat, type = "probs")) %>% 
   tidyr::pivot_longer(., cols = all_of(parties),
                       names_to = "party",
-                      values_to = "predicted_vote_share") %>% 
-  select(-n, -prct, -granular)
+                      values_to = "predicted_vote_share")
 
 saveRDS(PredsVoteInt, "_SharedFolder_article_pot-growth/data/marts/rci_by_riding/fedcan2021/disaggregated/voteint.rds")
 

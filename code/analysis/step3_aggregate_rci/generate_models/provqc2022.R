@@ -14,6 +14,8 @@ Data <- left_join(Data, Ridings, by = "riding_id") %>%
          age = factor(age),
          langue = factor(langue))
 
+## create vector of independent variables
+independent_vars <- c("male", "age", "langue", "granular")
 
 ## vote solidity
 Solidity <- Data %>% 
@@ -21,7 +23,8 @@ Solidity <- Data %>%
                       names_to = "party", names_prefix = "rci_",
                       values_to = "rci") %>% 
   group_by(id, source_id) %>% 
-  filter(rci == max(rci))
+  filter(rci == max(rci)) %>% 
+  tidyr::drop_na(all_of(independent_vars))
 
 ## potential for growth
 Potgrowth <- Data %>% 
@@ -29,7 +32,8 @@ Potgrowth <- Data %>%
                       names_to = "party", names_prefix = "rci_",
                       values_to = "rci") %>% 
   group_by(id, source_id) %>% 
-  filter(rci != max(rci) | rci == 0)
+  filter(rci != max(rci) | rci == 0) %>% 
+  tidyr::drop_na(all_of(independent_vars))
 
 ## vote intent
 Voteint <- Solidity %>%
@@ -38,49 +42,63 @@ Voteint <- Solidity %>%
 
 # Train models ------------------------------------------------------------------
 
+## function to train model of party
+custom_random_forest <- function(party, data){
+  model <- randomForest::tuneRF(
+    x = data[data$party == party, independent_vars],
+    y = data[data$party == party,]$rci,
+    doBest = TRUE,
+    stepFactor = 1.2,
+    improve = 0.01,
+    trace = T,
+    ntreeTry = 501
+  )
+  return(model)
+}
+
 ## Vote solidity -----------------------------------------------------------
 
-model_CAQ_solidity <- lm(rci ~ age * langue * granular * male, data = Solidity %>% filter(party == "CAQ"))
-saveRDS(model_CAQ_solidity, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/vote_solidity/model_CAQ.rds")
+model_CAQ_solidity <- custom_random_forest(party = "CAQ",
+                                           data = Solidity)
+saveRDS(model_CAQ_solidity, "code/analysis/step3_aggregate_rci/generate_models/models/solidity_CAQ.rds")
 
-# For PLQ
-model_PLQ_solidity <- lm(rci ~ age * langue * granular * male, data = Solidity %>% filter(party == "PLQ"))
-saveRDS(model_PLQ_solidity, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/vote_solidity/model_PLQ.rds")
+# Pour le PLQ
+model_PLQ_solidity <- custom_random_forest(party = "PLQ", data = Solidity)
+saveRDS(model_PLQ_solidity, "code/analysis/step3_aggregate_rci/generate_models/models/solidity_PLQ.rds")
 
-# For QS
-model_QS_solidity <- lm(rci ~ age * langue * granular * male, data = Solidity %>% filter(party == "QS"))
-saveRDS(model_QS_solidity, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/vote_solidity/model_QS.rds")
+# Pour le QS
+model_QS_solidity <- custom_random_forest(party = "QS", data = Solidity)
+saveRDS(model_QS_solidity, "code/analysis/step3_aggregate_rci/generate_models/models/solidity_QS.rds")
 
-# For PQ
-model_PQ_solidity <- lm(rci ~ age * langue * granular * male, data = Solidity %>% filter(party == "PQ"))
-saveRDS(model_PQ_solidity, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/vote_solidity/model_PQ.rds")
+# Pour le PQ
+model_PQ_solidity <- custom_random_forest(party = "PQ", data = Solidity)
+saveRDS(model_PQ_solidity, "code/analysis/step3_aggregate_rci/generate_models/models/solidity_PQ.rds")
 
-# For PCQ
-model_PCQ_solidity <- lm(rci ~ age * langue * granular * male, data = Solidity %>% filter(party == "PCQ"))
-saveRDS(model_PCQ_solidity, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/vote_solidity/model_PCQ.rds")
-
+# Pour le PCQ
+model_PCQ_solidity <- custom_random_forest(party = "PCQ", data = Solidity)
+saveRDS(model_PCQ_solidity, "code/analysis/step3_aggregate_rci/generate_models/models/solidity_PCQ.rds")
 
 ## Potential for growth --------------------------------------------------
 
-model_CAQ_potgrowth <- lm(rci ~ age * langue * granular * male, data = Potgrowth %>% filter(party == "CAQ"))
-saveRDS(model_CAQ_potgrowth, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/potgrowth/model_CAQ.rds")
+# Pour le CAQ
+model_CAQ_potgrowth <- custom_random_forest(party = "CAQ", data = Potgrowth)
+saveRDS(model_CAQ_potgrowth, "code/analysis/step3_aggregate_rci/generate_models/models/potgrowth_CAQ.rds")
 
-# For PLQ
-model_PLQ_potgrowth <- lm(rci ~ age * langue * granular * male, data = Potgrowth %>% filter(party == "PLQ"))
-saveRDS(model_PLQ_potgrowth, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/potgrowth/model_PLQ.rds")
+# Pour le PLQ
+model_PLQ_potgrowth <- custom_random_forest(party = "PLQ", data = Potgrowth)
+saveRDS(model_PLQ_potgrowth, "code/analysis/step3_aggregate_rci/generate_models/models/potgrowth_PLQ.rds")
 
-# For QS
-model_QS_potgrowth <- lm(rci ~ age * langue * granular * male, data = Potgrowth %>% filter(party == "QS"))
-saveRDS(model_QS_potgrowth, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/potgrowth/model_QS.rds")
+# Pour le QS
+model_QS_potgrowth <- custom_random_forest(party = "QS", data = Potgrowth)
+saveRDS(model_QS_potgrowth, "code/analysis/step3_aggregate_rci/generate_models/models/potgrowth_QS.rds")
 
-# For PQ
-model_PQ_potgrowth <- lm(rci ~ age * langue * granular * male, data = Potgrowth %>% filter(party == "PQ"))
-saveRDS(model_PQ_potgrowth, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/potgrowth/model_PQ.rds")
+# Pour le PQ
+model_PQ_potgrowth <- custom_random_forest(party = "PQ", data = Potgrowth)
+saveRDS(model_PQ_potgrowth, "code/analysis/step3_aggregate_rci/generate_models/models/potgrowth_PQ.rds")
 
-# For PCQ
-model_PCQ_potgrowth <- lm(rci ~ age * langue * granular * male, data = Potgrowth %>% filter(party == "PCQ"))
-saveRDS(model_PCQ_potgrowth, "_SharedFolder_article_pot-growth/data/marts/models/provqc2022/potgrowth/model_PCQ.rds")
-
+# Pour le PCQ
+model_PCQ_potgrowth <- custom_random_forest(party = "PCQ", data = Potgrowth)
+saveRDS(model_PCQ_potgrowth, "code/analysis/step3_aggregate_rci/generate_models/models/potgrowth_PCQ.rds")
 
 ## Vote int --------------------------------------------------------------
 

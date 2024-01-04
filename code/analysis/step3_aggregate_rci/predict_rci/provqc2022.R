@@ -10,7 +10,8 @@ Ridings <- read.csv("_SharedFolder_article_pot-growth/data/warehouse/dimensions/
 # poststrat
 Strat <- readRDS("_SharedFolder_article_pot-growth/data/warehouse/dimensions/census/provqc2022/poststrat.rds") %>% 
   left_join(., Ridings, by = "riding_id") %>% 
-  mutate(gender = ifelse(gender == "men", 1, 0)) %>% 
+  mutate(gender = ifelse(gender == "men", 1, 0),
+         granular = factor(granular)) %>% 
   rename(male = gender)
 
 parties <- c("CAQ", "PLQ", "QS", "PQ", "PCQ")
@@ -19,8 +20,21 @@ parties <- c("CAQ", "PLQ", "QS", "PQ", "PCQ")
 
 ## Vote solidity -----------------------------------------------------------
 
+model <- readRDS("code/analysis/step3_aggregate_rci/generate_models/models/solidity_CAQ.rds")
+Stratpred <- cbind(Strat, predict(model, Strat, predict.all=TRUE,
+                   what=c(0.1, 0.25, 0.5, 0.75, 0.9)))
+
+pred.rf.int <- apply(pred.rf$individual, 1, function(x) {
+  c(mean(x) + c(-1, 1) * sd(x), 
+    quantile(x, c(0.025, 0.975)))
+})
+
+d <- as.data.frame(t(pred.rf.int))
+
+t <- predict(object = model, newdata = Strat, interval = "prediction")
+
 for (i in parties){
-  model <- readRDS(paste0("_SharedFolder_article_pot-growth/data/marts/models/provqc2022/vote_solidity/model_", i, ".rds"))
+  model <- readRDS(paste0("code/analysis/step3_aggregate_rci/generate_models/models/solidity_", i, ".rds"))
   Predsi <- marginaleffects::predictions(model, newdata = Strat,
                                          conf_level = 0.95) %>% 
     select(-starts_with("rci")) %>% 
@@ -58,8 +72,7 @@ model <- readRDS("_SharedFolder_article_pot-growth/data/marts/models/provqc2022/
 PredsVoteInt <- cbind(Strat, predict(model, newdata = Strat, type = "probs")) %>% 
   tidyr::pivot_longer(., cols = all_of(parties),
                       names_to = "party",
-                      values_to = "predicted_vote_share") %>% 
-  select(-n, -prct, -granular)
+                      values_to = "predicted_vote_share")
 
 saveRDS(PredsVoteInt, "_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/disaggregated/voteint.rds")
 
