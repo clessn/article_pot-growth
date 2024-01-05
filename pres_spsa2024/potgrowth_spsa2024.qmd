@@ -8,12 +8,13 @@ format:
 editor: source
 ---
 
+# Potential for Growth: what is it?
+
 <!-- Hi I'm Hubert Cadieux blabla I'm presenting the article I'm writing with blabla: titre 
 This article forms part of a collective effort to theorize, conceptualize, and operationalize the concept of a continuous potential for growth and vote solidity by developing new measures of vote intention that capture its dynamic nature in multiparty systems.
 I will be conducting my master's thesis on this concept with the goal of mapping respondents' issue attitudes onto this concept.
 -->
 
-# Potential for Growth: what is it?
 
 ## Traditional way of estimating parties' chances
 
@@ -95,6 +96,8 @@ An innovative range approach to measure vote intention
 - Déry et al. (2022):
 - *Unpublished* Cadieux et al. (2023): On Volatility and Parties' Potential for Growth
 
+{Montrer des graphs intéressants de ces notes de recherche}
+
 <!-- Montrer des graphs intéressants de ces notes de recherche -->
 
 ## Theoretical Benefits of Such Measure
@@ -108,7 +111,11 @@ An innovative range approach to measure vote intention
 ## Some individual validity
 <!--- What does it mean to be a 3? A -2? A 6? Mettre les probabilités prédites sur l'intention de vote binaire --->
 
+{What does it mean to be a 3? A -2? A 6? Mettre les probabilités prédites sur l'intention de vote binaire}
+
 ## Descriptive: RCI distribution by party
+
+{Distribution de l'IRC des partis prov et féd}
 
 # Data and Context
 
@@ -177,6 +184,10 @@ Electoral swings
 <!-- Partir de step 2 et agrégér, trouver une façon que ça soit bien visualisé -->
 
 ## Output
+
+{Faire un graphique où on ordonne les ridings pour la CAQ avec les 3 modèles (potgrowth vote solidity et vote intent) sur le graph}
+
+{Faire un graphique qui résume pour une circonscription avec les 5 partis ou pour 2-3 segments dans une circonscription}
 
 <!-- Faire un graphique où on ordonne les ridings pour la CAQ exemple avec les 3 modèles sur le graph -->
 
