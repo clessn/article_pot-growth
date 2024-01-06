@@ -5,110 +5,116 @@ format:
   revealjs:
     theme: dark
     fontsize: 31pt
+  pdf:
+    fontsize: 31pt
 editor: source
 ---
 
 # Potential for Growth: what is it?
 
+```{=html}
 <!-- Hi I'm Hubert Cadieux blabla I'm presenting the article I'm writing with blabla: titre 
 This article forms part of a collective effort to theorize, conceptualize, and operationalize the concept of a continuous potential for growth and vote solidity by developing new measures of vote intention that capture its dynamic nature in multiparty systems.
 I will be conducting my master's thesis on this concept with the goal of mapping respondents' issue attitudes onto this concept.
 -->
-
-
+```
 ## Traditional way of estimating parties' chances
 
 -   In a riding or at the national level <!-- Ici, faire un exemple fictif d'une circonscription avec trois partis A, B et C
 
-    Exemple 1.1:
-    Graphique classique de Qc125.
-    A a 45% +- 8
-    B a 35% +- 8
-    C a 20% +- 5
-    Conclusions à la lecture du graphique?
-    A a une excellente avance, mais pourrait peut-être être challengé par B.
-    C a aucune chance de l'emporter.
+        Exemple 1.1:
+        Graphique classique de Qc125.
+        A a 45% +- 8
+        B a 35% +- 8
+        C a 20% +- 5
+        Conclusions à la lecture du graphique?
+        A a une excellente avance, mais pourrait peut-être être challengé par B.
+        C a aucune chance de l'emporter.
 
-    Exemple 1.2, MÊMES DONNÉES:
-    A a beaucoup de votes fragiles et pas de potentiel de croissance
-    B a un vote solide mais pas de potentiel de croissance
-    C a une petite base mais solide et un gros potentiel de croissance
-    Nouvelles conclusions?
-    A a une bonne avance sur B, mais au niveau individuel peut facilement perdre des électeurs à C.
-    B a une 2e place facile, mais impossible d'aller plus loin. Espère une séparation des votes entre A et C.
-    C est loin en arrière, mais a un potentiel d'aller chercher des électeurs fragiles de A. C a donc + de chances de gagner que B.
+        Exemple 1.2, MÊMES DONNÉES:
+        A a beaucoup de votes fragiles et pas de potentiel de croissance
+        B a un vote solide mais pas de potentiel de croissance
+        C a une petite base mais solide et un gros potentiel de croissance
+        Nouvelles conclusions?
+        A a une bonne avance sur B, mais au niveau individuel peut facilement perdre des électeurs à C.
+        B a une 2e place facile, mais impossible d'aller plus loin. Espère une séparation des votes entre A et C.
+        C est loin en arrière, mais a un potentiel d'aller chercher des électeurs fragiles de A. C a donc + de chances de gagner que B.
 
-    Exemple 1.3 MÊMES DONNÉES mais en simulant une attaque réussie de C sur les segments fragiles de A
-    Nouveau graphique classique de Qc125 + graphique de potentiel de croissance
+        Exemple 1.3 MÊMES DONNÉES mais en simulant une attaque réussie de C sur les segments fragiles de A
+        Nouveau graphique classique de Qc125 + graphique de potentiel de croissance
 
-    Conclusions:
+        Conclusions:
 
-    L'opérationnalisation du potentiel de croissance permettrait de forecaster, anticiper des swings potentiels comme à l'exemple 1.3 que les méthodes traditionnelles d'intention de vote ne permettent pas. C'est la logique derrière ce qui nous intéresse dans ce concept.
-    
-  Deux concepts distincts: solidité du vote et potentiel de croissance
+        L'opérationnalisation du potentiel de croissance permettrait de forecaster, anticiper des swings potentiels comme à l'exemple 1.3 que les méthodes traditionnelles d'intention de vote ne permettent pas. C'est la logique derrière ce qui nous intéresse dans ce concept.
+        
+      Deux concepts distincts: solidité du vote et potentiel de croissance
 
-    -->
+        -->
 
 # Why study it?
 
-- More nuanced interpretation of agregated vote intentions
-- Better allocation of parties' resources
-- Identifying parties' room to maneuver
-- Identifying parties' fragile segments of electorate
-- Improving electoral forecasting
-- Better anticipation of electoral swings
+-   More nuanced interpretation of agregated vote intentions
+-   Better allocation of parties' resources
+-   Identifying parties' room to maneuver
+-   Identifying parties' fragile segments of electorate
+-   Improving electoral forecasting
+-   Better anticipation of electoral swings
 
-# <span style="font-size: 85pt;">Research Question</span>
+# [Research Question]{style="font-size: 85pt;"}
 
-<span style="font-size: 47pt;">Can the forecast of <span style="font-size: 55pt; color: #00BFFF;">***electoral swings***</span> during a campaign be improved by quantifying a <span style="font-size: 55pt; color: #00BFFF;">***party's potential for growth***</span>?</span>
-
+[Can the forecast of ]{style="font-size: 47pt;"}[***electoral swings***]{style="font-size: 55pt; color: #00BFFF;"} during a campaign be improved by quantifying a [***party's potential for growth***]{style="font-size: 55pt; color: #00BFFF;"}?
 
 # Article Contributions
 
-- Empirical results to validate the concept of potential for growth
-- Broadening the recognition of the concept in the field
-- Explore basic and simplified operationalisations
-- Open the door to more complex operationalisations
+-   Empirical results to validate the concept of potential for growth
+-   Broadening the recognition of the concept in the field
+-   Explore basic and simplified operationalisations
+-   Open the door to more complex operationalisations
 
 # Theoretical Background
 
 ## Election Forecasting {.smaller}
 
-- Small history
-- Uncertainty and error of election forecasts
-- Four classes of forecasting methods
-  1. Structural models
-  2. Models based on the traditional vote intention question
-  3. Vote expectations, wisdom of the crowd
-  4. Combination of the three
-- These four models do not capture essential information
-  - Potential shifts
-  - Fragile segments
+-   Small history
+-   Uncertainty and error of election forecasts
+-   Four classes of forecasting methods
+    1.  Structural models
+    2.  Models based on the traditional vote intention question
+    3.  Vote expectations, wisdom of the crowd
+    4.  Combination of the three
+-   These four models do not capture essential information
+    -   Potential shifts
+    -   Fragile segments
 
 # Bridging this gap: the Relative Confidence Index (RCI)
+
 An innovative range approach to measure vote intention
 
 ## How is it Calculated?
+
 <!-- COMMENT C'EST CALCULER, copier les slides de l'an passé -->
 
 ## What Has Been Done With This Approach?
-- Dufresne et al. (2018): Sur le potentiel de croissance du PQ (*On the Potential for Growth of the PQ*)
-- Déry et al. (2022):
-- *Unpublished* Cadieux et al. (2023): On Volatility and Parties' Potential for Growth
+
+-   Dufresne et al. (2018): Sur le potentiel de croissance du PQ (*On the Potential for Growth of the PQ*)
+-   Déry et al. (2022):
+-   *Unpublished* Cadieux et al. (2023): On Volatility and Parties' Potential for Growth
 
 {Montrer des graphs intéressants de ces notes de recherche}
 
 <!-- Montrer des graphs intéressants de ces notes de recherche -->
 
 ## Theoretical Benefits of Such Measure
-- More suitable to multiparty systems
-- Adding layer of choices &rarr; reduction of prediction error
-- More nuance to deal with undecided voters
-- Alleviate uncertainty associated with attitude/behaviour discrepancies
-- Makes a difference between unreachable and reachable electors &rarr; <span style="font-size: 40pt; color: #00BFFF;">***potential for growth***</span>
-- Makes a difference between a solid and a fragile voter &rarr; <span style="font-size: 40pt; color: #00BFFF;">***vote solidity***</span>
+
+-   More suitable to multiparty systems
+-   Adding layer of choices → reduction of prediction error
+-   More nuance to deal with undecided voters
+-   Alleviate uncertainty associated with attitude/behaviour discrepancies
+-   Makes a difference between unreachable and reachable electors → [***potential for growth***]{style="font-size: 40pt; color: #00BFFF;"}
+-   Makes a difference between a solid and a fragile voter → [***vote solidity***]{style="font-size: 40pt; color: #00BFFF;"}
 
 ## Some individual validity
+
 <!--- What does it mean to be a 3? A -2? A 6? Mettre les probabilités prédites sur l'intention de vote binaire --->
 
 {What does it mean to be a 3? A -2? A 6? Mettre les probabilités prédites sur l'intention de vote binaire}
@@ -120,60 +126,58 @@ An innovative range approach to measure vote intention
 # Data and Context
 
 ## Case studies
-- Canada Federal Election, 2021
-- Quebec Provincial Election, 2022
+
+-   Canada Federal Election, 2021
+-   Quebec Provincial Election, 2022
 
 ## Datasets {.smaller}
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="50%"}
 Potential for growth
 
-- Surveys
-  - Canada 2021: 2021 Canadian Electoral Study (n = 13,272)
-  - Quebec 2022: monthly surveys taken from January 2022 to August 2022 (n = 9,135)
-  - (in discussion to obtain Vote Compass' datasets)
-- 2021 Canadian Census data (by riding)
+-   Surveys
+    -   Canada 2021: 2021 Canadian Electoral Study (n = 13,272)
+    -   Quebec 2022: monthly surveys taken from January 2022 to August 2022 (n = 9,135)
+    -   (in discussion to obtain Vote Compass' datasets)
+-   2021 Canadian Census data (by riding)
 :::
 
 ::: {.column width="50%"}
 Electoral swings
 
-- Electoral results
-- Vote expectations (wisdom of the crowds) <!-- Expliquer un peu -->
-  - Canada 2021: 2021 Canadian Electoral Study (n = 5,084)
-  - Quebec 2022: Datagotchi (n = 47,478)
+-   Electoral results
+-   Vote expectations (wisdom of the crowds) <!-- Expliquer un peu -->
+    -   Canada 2021: 2021 Canadian Electoral Study (n = 5,084)
+    -   Quebec 2022: Datagotchi (n = 47,478)
 :::
-
-::::
-
+:::
 
 # Methodology
 
 ## Identifying electoral swings
 
-- Estimate the expectation in a riding using vote expectations (wisdom of the crowds)
-- Compare with actual elections results
-<!-- expliquer brièvement comment on identifie les electoral swings -->
+-   Estimate the expectation in a riding using vote expectations (wisdom of the crowds)
+-   Compare with actual elections results <!-- expliquer brièvement comment on identifie les electoral swings -->
 
 ## Descriptive graphs: electoral swings
-
 
 ## Estimating the RCI at the riding-level
 
 <!-- Why at the riding level? Because electoral results are only at the riding-level -->
-- Why? Only way to compare actual election results to survey data
-- Step 1: compute regression models to predict the RCI using survey data
-- Step 2: predict those models on riding-level census data
-- Step 3: aggregate the RCI and its uncertainty using segments' weights in the riding 
+
+-   Why? Only way to compare actual election results to survey data
+-   Step 1: compute regression models to predict the RCI using survey data
+-   Step 2: predict those models on riding-level census data
+-   Step 3: aggregate the RCI and its uncertainty using segments' weights in the riding
 
 ## Step 1: compute regression models to predict the RCI using survey data
 
 <!-- Il faut trouver une façon de bien expliquer ici -->
-- Vote solidity: `lm(rci ~ age * langue * region * male)` but only for a party's current electoral base
-- Potential for growth: `lm(rci ~ age * langue * region * male)` but only for respondents who do not currently vote for the party
-- Vote intention: `multinom(party ~ age * langue * granular + male)`
+
+-   Vote solidity: `lm(rci ~ age * langue * region * male)` but only for a party's current electoral base
+-   Potential for growth: `lm(rci ~ age * langue * region * male)` but only for respondents who do not currently vote for the party
+-   Vote intention: `multinom(party ~ age * langue * granular + male)`
 
 ## Step 2: predict those models on riding-level census data
 
@@ -193,56 +197,58 @@ Electoral swings
 
 <!-- Faire un graphique qui résume pas pire pour une circonscription avec les 5 partis ou pour 2-3 segments dans une circonscription -->
 
-
 # Results: Can it Improve the Forecasting of Electoral Swings?
-
-
 
 # Discussion & Next Steps
 
 ## The End of the Line?
+
 ### Weak Signal, Yet Still Worth Exploring
 
-- Preliminary weak findings: caution against premature dismissal of the concept
-- Solid theoretical foundation, derived from logical intuitions
-- Only a handful of operationalisations have been explored as of yet
-  - Broad range of research possibilities
+-   Preliminary weak findings: caution against premature dismissal of the concept
+-   Solid theoretical foundation, derived from logical intuitions
+-   Only a handful of operationalisations have been explored as of yet
+    -   Broad range of research possibilities
 
 ## Improving its Conceptualization
-- Catalysts
-  - Electoral campaign
-  - Salient events
-  - Parties' efforts to reach segments
-- Position of parties and respondents on salient issues
-  - Parties' room to maneuver
-- Political sophistication
+
+-   Catalysts
+    -   Electoral campaign
+    -   Salient events
+    -   Parties' efforts to reach segments
+-   Position of parties and respondents on salient issues
+    -   Parties' room to maneuver
+-   Political sophistication
 
 ## Operationalisation of the Concepts
-- Challenge: need to start with simplistic measures before going into more complicated operationalisations
-- Catalysts
+
+-   Challenge: need to start with simplistic measures before going into more complicated operationalisations
+-   Catalysts
 
 ## Improving the Models
-- Adding independent variables (income, education, etc.)
-  - Need more data points to add independent variables &rarr; VPL (Vote Compass)
-  - (For the synthetic post-stratification table)
-- Testing other types of models
-  - Random forest
-  - Gradient boosting
+
+-   Adding independent variables (income, education, etc.)
+    -   Need more data points to add independent variables → VPL (Vote Compass)
+    -   (For the synthetic post-stratification table)
+-   Testing other types of models
+    -   Random forest
+    -   Gradient boosting
 
 ## Survey Experiments: Validate at the Individual Level
-- Panel before and after election to follow the variation across the same individuals
+
+-   Panel before and after election to follow the variation across the same individuals
 
 ## The ***Real*** End of the Line {.smaller}
+
 <!-- faire un lien avec mon mémoire -->
 
 **Theoretically valid quantitative indicators of:**
 
-- The propensity of an individual or group to support a political party, given targeted efforts towards them.
-- The fragility of segments within a party's current electoral base
-- The room to maneuver of parties
-  - Optimal positions on salient issues
-  - Segments to target
-- The estimable number of seats that is possibly reachable by a party if an election campaign would be launched today
+-   The propensity of an individual or group to support a political party, given targeted efforts towards them.
+-   The fragility of segments within a party's current electoral base
+-   The room to maneuver of parties
+    -   Optimal positions on salient issues
+    -   Segments to target
+-   The estimable number of seats that is possibly reachable by a party if an election campaign would be launched today
 
 <!-- Montrer un exemple du end game avec des données simulées -->
-
