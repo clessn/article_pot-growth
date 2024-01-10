@@ -2,7 +2,6 @@
 library(dplyr)
 library(ggplot2)
 
-
 # Data --------------------------------------------------------------------
 
 ResultsQc125 <- left_join(readRDS("_SharedFolder_article_pot-growth/data/warehouse/step2_electoral_swings/qc125_provqc2022.rds"),
@@ -26,16 +25,6 @@ DataAgg <- readRDS("_SharedFolder_article_pot-growth/data/marts/rci_by_riding/pr
   mutate(conf.low = estimate - stderr*1.96,
          conf.high = estimate + stderr*1.96)
 
-## disaggregated
-VoteShares <- readRDS("_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/disaggregated/voteint.rds") %>% 
-  select(riding_id, party, male, age, langue, predicted_vote_share)
-
-SurveysDis <- readRDS("_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/disaggregated/potgrowth_votesolidity.rds") %>%
-  select(riding_id, party, model, estimate, std.error, prct, male, age, langue) %>%
-  left_join(., VoteShares, by = c("riding_id", "party", "male", "age", "langue"))
-  tidyr::pivot_wider(names_from = "model",
-                     values_from = c("estimate", "std.error"))
-  
 party_colors <- c(
     "CAQ" = "#12BBFF",
     "PLQ" = "#d90000",
@@ -47,6 +36,7 @@ party_colors <- c(
 
 # Explo aggregated ------------------------------------------------------
 
+## raw - potgrowth
 DataAgg %>% 
     mutate(confidence = 1 - stderr) %>% 
     filter(model == "potgrowth") %>%
@@ -58,6 +48,7 @@ DataAgg %>%
     xlab("pot growth estimate") +
     ylab("qc125 projected vote share")
 
+## raw - votesol
 DataAgg %>% 
   mutate(confidence = 1 - stderr) %>% 
   filter(model == "vote_solidity") %>%
@@ -68,7 +59,8 @@ DataAgg %>%
   facet_wrap(~party) +
   xlab("vote solidity estimate") +
   ylab("qc125 projected vote share")
-  
+
+## gains - potgrowth
 DataAgg %>% 
   mutate(confidence = 1 - stderr) %>% 
   filter(model == "potgrowth") %>%
@@ -79,6 +71,19 @@ DataAgg %>%
   xlab("pot growth estimate") +
   ylab("Gains depuis l'élection 2022\n(Projection Qc125 - résultats électoraux 2022)")
 
+## gains - vote solidity
+DataAgg %>% 
+  mutate(confidence = 1 - stderr) %>% 
+  filter(model == "vote_solidity") %>%
+  ggplot(aes(x = estimate, y = delta)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_wrap(~party) +
+  xlab("vote solidity estimate") +
+  ylab("Gains depuis l'élection 2022\n(Projection Qc125 - résultats électoraux 2022)")
+
+
+## gains - pot growth
 DataAgg %>% 
   mutate(confidence = 1 - stderr) %>% 
   filter(model == "potgrowth") %>%
@@ -89,7 +94,7 @@ DataAgg %>%
   xlab("pot growth estimate") +
   ylab("Gains depuis l'élection 2022\n(Projection Qc125 - résultats électoraux 2022)")
 
-
+## losses - vote solidity
 DataAgg %>% 
   mutate(confidence = 1 - stderr) %>% 
   filter(model == "vote_solidity") %>%
@@ -99,24 +104,6 @@ DataAgg %>%
   scale_y_continuous(limits = c(-0.3, 0)) +
   xlab("vote solidity estimate") +
   ylab("Gains depuis l'élection 2022\n(Projection Qc125 - résultats électoraux 2022)")
-
-
-ggplot(Data, aes(x = estimate_potgrowth, y = delta)) +
-  geom_point(aes(color = party)) +
-  geom_smooth(aes(color = party,
-                  group = party),
-              method = "lm")
-
-ggplot(Data, aes(x = estimate_vote_solidity, y = delta)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  facet_wrap(~party) +
-  ylab("Gains depuis l'élection 2022\n(Projection Qc125 - résultats électoraux 2022)")
-
-ggplot(Data, aes(x = estimate_potgrowth, y = estimate_vote_solidity)) +
-  geom_point() +
-  facet_wrap(~party)
-
 
 # CAQ vote solidity vs PQ pot growth ------------------------------------------------------------
 

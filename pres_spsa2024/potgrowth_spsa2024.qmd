@@ -10,7 +10,8 @@ format:
 editor: source
 ---
 
-# Potential for Growth: what is it?
+# [Theoretical Background]{style="font-size: 85pt;"}
+[Potential for Growth: What Is It?]{style="font-size: 55pt;"}
 
 ```{=html}
 <!-- Hi I'm Hubert Cadieux blabla I'm presenting the article I'm writing with blabla: titre 
@@ -18,7 +19,8 @@ This article forms part of a collective effort to theorize, conceptualize, and o
 I will be conducting my master's thesis on this concept with the goal of mapping respondents' issue attitudes onto this concept.
 -->
 ```
-## Traditional way of estimating parties' chances
+
+## Traditional Way of Estimating Parties' Chances of Winning
 
 -   In a riding or at the national level <!-- Ici, faire un exemple fictif d'une circonscription avec trois partis A, B et C
 
@@ -51,7 +53,7 @@ I will be conducting my master's thesis on this concept with the goal of mapping
 
         -->
 
-# Why study it?
+## Why Study It?
 
 -   More nuanced interpretation of agregated vote intentions
 -   Better allocation of parties' resources
@@ -60,20 +62,15 @@ I will be conducting my master's thesis on this concept with the goal of mapping
 -   Improving electoral forecasting
 -   Better anticipation of electoral swings
 
-# [Research Question]{style="font-size: 85pt;"}
+## [Research Question]{style="font-size: 85pt;"}
 
-[Can the forecast of ]{style="font-size: 47pt;"}[***electoral swings***]{style="font-size: 55pt; color: #00BFFF;"} during a campaign be improved by quantifying a [***party's potential for growth***]{style="font-size: 55pt; color: #00BFFF;"}?
+[Can the forecast of ]{style="font-size: 47pt;"} [***electoral swings***]{style="font-size: 55pt; color: #00BFFF;"} [be improved by quantifying a]{style="font-size: 47pt;"} [***party's potential for growth***]{style="font-size: 55pt; color: #00BFFF;"}?
 
-# Article Contributions
-
--   Empirical results to validate the concept of potential for growth
--   Broadening the recognition of the concept in the field
--   Explore basic and simplified operationalisations
--   Open the door to more complex operationalisations
-
-# Theoretical Background
+<!--- Research question to validate --->
 
 ## Election Forecasting {.smaller}
+
+<!-- Ajouter une source par model --> 
 
 -   Small history
 -   Uncertainty and error of election forecasts
@@ -86,19 +83,23 @@ I will be conducting my master's thesis on this concept with the goal of mapping
     -   Potential shifts
     -   Fragile segments
 
-# Bridging this gap: the Relative Confidence Index (RCI)
+## Bridging this gap: the Relative Confidence Index (RCI)
+
+<!-- Insister ici que c'est "théorique" -->
 
 An innovative range approach to measure vote intention
 
 ## How is it Calculated?
 
-<!-- COMMENT C'EST CALCULER, copier les slides de l'an passé -->
+<!-- COMMENT C'EST CALCULÉ, copier les slides de l'an passé -->
 
 ## What Has Been Done With This Approach?
 
+<!-- Ne pas commencer ton bullet point avec la référence: inverse les deux éléments d’info. Ce qui a été fait d’abord, la référence ensuite. Et assure-toi de bien faire ressortir en quoi cette approche apporte ou répond à de nouvelles questions par rapport aux notes de recherche précédentes. -->
+
 -   Dufresne et al. (2018): Sur le potentiel de croissance du PQ (*On the Potential for Growth of the PQ*)
 -   Déry et al. (2022):
--   *Unpublished* Cadieux et al. (2023): On Volatility and Parties' Potential for Growth
+-   *Unpublished* Cadieux et al. (2024): On Volatility and Parties' Potential for Growth
 
 {Montrer des graphs intéressants de ces notes de recherche}
 
@@ -113,22 +114,28 @@ An innovative range approach to measure vote intention
 -   Makes a difference between unreachable and reachable electors → [***potential for growth***]{style="font-size: 40pt; color: #00BFFF;"}
 -   Makes a difference between a solid and a fragile voter → [***vote solidity***]{style="font-size: 40pt; color: #00BFFF;"}
 
-## Some individual validity
+## Validity at the Individual Level
 
 <!--- What does it mean to be a 3? A -2? A 6? Mettre les probabilités prédites sur l'intention de vote binaire --->
 
 {What does it mean to be a 3? A -2? A 6? Mettre les probabilités prédites sur l'intention de vote binaire}
 
-## Descriptive: RCI distribution by party
+## Descriptive: RCI Distribution by Party
 
 {Distribution de l'IRC des partis prov et féd}
 
 # Data and Context
 
-## Case studies
+## Case Study
 
--   Canada Federal Election, 2021
 -   Quebec Provincial Election, 2022
+- CAQ won 89 ridings, majority of seats
+- Today's projections, one year later: PQ close to a majority, CAQ **19**
+
+{Montrer le graphique des sièges par parti}
+{Expliquer rapidement les 5 partis sur l'axe gauche-droite et leur aspect historique}
+
+- Could we have predicted this {montée} of the PQ?
 
 ## Datasets {.smaller}
 
@@ -137,41 +144,30 @@ An innovative range approach to measure vote intention
 Potential for growth
 
 -   Surveys
-    -   Canada 2021: 2021 Canadian Electoral Study (n = 13,272)
-    -   Quebec 2022: monthly surveys taken from January 2022 to August 2022 (n = 9,135)
+    -   Monthly surveys taken from January 2022 to August 2022 (n = 9,135)
     -   (in discussion to obtain Vote Compass' datasets)
--   2021 Canadian Census data (by riding)
+-   2021 Canadian Census data (by provincial riding)
 :::
 
 ::: {.column width="50%"}
 Electoral swings
 
--   Electoral results
--   Vote expectations (wisdom of the crowds) <!-- Expliquer un peu -->
-    -   Canada 2021: 2021 Canadian Electoral Study (n = 5,084)
-    -   Quebec 2022: Datagotchi (n = 47,478)
+-   2022 Electoral results
+-   Qc125.com December 2023 projections
 :::
 :::
 
 # Methodology
 
-## Identifying electoral swings
-
--   Estimate the expectation in a riding using vote expectations (wisdom of the crowds)
--   Compare with actual elections results <!-- expliquer brièvement comment on identifie les electoral swings -->
-
-## Descriptive graphs: electoral swings
-
-## Estimating the RCI at the riding-level
+## Estimating the RCI at the Riding-Level
 
 <!-- Why at the riding level? Because electoral results are only at the riding-level -->
 
--   Why? Only way to compare actual election results to survey data
 -   Step 1: compute regression models to predict the RCI using survey data
 -   Step 2: predict those models on riding-level census data
 -   Step 3: aggregate the RCI and its uncertainty using segments' weights in the riding
 
-## Step 1: compute regression models to predict the RCI using survey data
+## Step 1: Compute Regression Models to Predict the RCI Using Survey Data
 
 <!-- Il faut trouver une façon de bien expliquer ici -->
 
@@ -179,11 +175,11 @@ Electoral swings
 -   Potential for growth: `lm(rci ~ age * langue * region * male)` but only for respondents who do not currently vote for the party
 -   Vote intention: `multinom(party ~ age * langue * granular + male)`
 
-## Step 2: predict those models on riding-level census data
+## Step 2: Predict Those Models on Riding-Level Census Data
 
 <!-- Avoir tableau/graph exemple pour une circonscription où on voit le poids des répondants, leur prédiction, marge d'erreur etc. -->
 
-## Step 3: aggregate the RCI and its uncertainty using segments' weights in the riding
+## Step 3: Aggregate the RCI and Its Uncertainty Using Segments' Weights in the Riding
 
 <!-- Partir de step 2 et agrégér, trouver une façon que ça soit bien visualisé -->
 
@@ -198,6 +194,37 @@ Electoral swings
 <!-- Faire un graphique qui résume pas pire pour une circonscription avec les 5 partis ou pour 2-3 segments dans une circonscription -->
 
 # Results: Can it Improve the Forecasting of Electoral Swings?
+
+## Descriptive Graphs : Distribution of Potential for Growth of Ridings by Party
+
+## Descriptive Graphs : Distribution of Vote Solidity of Ridings by Party
+
+## Descriptive Graphs: Correlation Between Potential for Growth and Actual Qc125 Projections
+
+## Descriptive Graphs: Parties' Electoral Gains Since 2022
+
+<!-- Ici on voit que le PQ a full gagné et la CAQ a full perdu -->
+
+## Using a Traditional Measure: 2022 Vote Shares
+{Graphique Vote solidity CAQ VS 2022 Vote Shares}
+
+<!-- From this graph, impossible to explain the montée of the PQ -->
+
+## Using the RCI
+{Graphique Vote solidity CAQ VS Potential for growth}
+<!-- From this graph, PQ in good position in ridings CAQ won.-->
+<!-- Needs a catalyst!!! -->
+
+## Other Potential Future Swings?
+
+<!-- Checker PCQ-CAQ, QS-PLQ, QS-PQ -->
+
+# Article Contributions
+
+-   Empirical results to validate the concept of potential for growth
+-   Broadening the recognition of the concept in the field
+-   Explore basic and simplified operationalisations
+-   Opening the door to more complex operationalisations
 
 # Discussion & Next Steps
 
@@ -225,6 +252,11 @@ Electoral swings
 -   Challenge: need to start with simplistic measures before going into more complicated operationalisations
 -   Catalysts
 
+## More Case Studies
+
+- 2021 Canadian Federal Election
+- 2024 (?) Canadian Federal Election
+
 ## Improving the Models
 
 -   Adding independent variables (income, education, etc.)
@@ -234,9 +266,10 @@ Electoral swings
     -   Random forest
     -   Gradient boosting
 
-## Survey Experiments: Validate at the Individual Level
+## Survey Experiments: Better Validation at the Individual Level
 
 -   Panel before and after election to follow the variation across the same individuals
+- Survey experiments to test potential framing effects
 
 ## The ***Real*** End of the Line {.smaller}
 
