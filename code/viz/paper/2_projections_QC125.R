@@ -3,29 +3,16 @@ library(dplyr)
 library(ggplot2)
 
 # data loading ------------------------------------------------------------
-df <- readRDS("_SharedFolder_article_pot-growth/data/warehouse/step2_electoral_swings/results_provqc2022.rds")
-
-
+df <- readRDS("_SharedFolder_article_pot-growth/data/warehouse/step2_electoral_swings/qc125_provqc2022.rds")
+df_vote <- readxl::read_xlsx("_SharedFolder_article_pot-growth/data/warehouse/step2_electoral_swings/qc125_votes_share_provqc2022.xlsx")
 # data wrangling ----------------------------------------------------------
 
-df_vote <- df %>% 
-  group_by(party) %>% 
-  summarise(nvotes = sum(nvotes_party)) %>% 
-  mutate(vote_share = (nvotes / sum(nvotes)) * 100) %>% 
-  select(-nvotes) %>% 
-  rename(share = vote_share) %>% 
-  mutate(facet = "Votes share")
-
 df_seat <- df %>% 
-  group_by(riding_name) %>% 
-  top_n(1, prop_vote) %>% 
+  group_by(riding_id) %>% 
+  top_n(1, proj_vote) %>% 
   ungroup %>% 
   count(party) %>% 
-  mutate(seat_share = (n / sum(n)) * 100)
-
-PCQ <- data.frame(party = "PCQ", n = 0, seat_share = 0)
-
-df_seat <- rbind(df_seat, PCQ) %>% 
+  mutate(seat_share = (n / sum(n)) * 100) %>% 
   select(-n) %>% 
   rename(share = seat_share) %>% 
   mutate(facet = "Seats share")
@@ -48,7 +35,7 @@ ggplot(df_graph, aes(x = reorder(party, +share), y = share, fill = party, color 
   geom_text(aes(label = paste0(round(share), "%")), hjust = -0.2, position = position_dodge(0.9), size = 8) +
   scale_fill_manual(values = colors) +
   scale_color_manual(values = colors) +
-  scale_y_continuous(limits = c(0, 80)) +
+  scale_y_continuous(limits = c(0, 52)) +
   labs(title = "", x = "", y = "Share (%)") +
   coord_flip() +
   facet_grid(cols = vars(facet), switch = "x") + 
@@ -62,8 +49,8 @@ ggplot(df_graph, aes(x = reorder(party, +share), y = share, fill = party, color 
 
 
 
-ggsave("_SharedFolder_article_pot-growth/graphs/paper/1_electoral_results.png", height = 7, width = 12)
-  
+ggsave("_SharedFolder_article_pot-growth/graphs/paper/2_projections_QC125.png", height = 7, width = 12)
 
 
-  
+
+
