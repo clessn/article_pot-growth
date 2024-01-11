@@ -39,17 +39,20 @@ df_graph$facet <- factor(df_graph$facet, levels = levels)
 df_graph$party[df_graph$party == "PLQ"] <- "QLP"
 df_graph$party[df_graph$party == "PCQ"] <- "CPQ"
 
+saveRDS(df_graph, "_SharedFolder_article_pot-growth/data/marts/electoral_swings/figure1_electoral_results.rds")
+
 # graphs ------------------------------------------------------------------
 
 colors <- c("CAQ" = "#00cccc", "QLP" = "#ED1A2D", "PQ" = "#099FFF", "QS" = "#FF5605", "CPQ" = "#172853")
 
 ggplot(df_graph, aes(x = reorder(party, +share), y = share, fill = party, color = party)) +
-  geom_bar(stat = "identity", alpha = 0.4, color = NA) +
+  geom_col(width = 0.8, alpha = 0.4, color = NA) +
   geom_text(aes(label = paste0(round(share), "%")), hjust = -0.2, position = position_dodge(0.9), size = 8) +
   scale_fill_manual(values = colors) +
   scale_color_manual(values = colors) +
   scale_y_continuous(limits = c(0, 80)) +
-  labs(title = "", x = "", y = "Share (%)") +
+  labs(title = "", x = "", y = "Share (%)",
+       caption = " ") +
   coord_flip() +
   facet_grid(cols = vars(facet), switch = "x") + 
   clessnverse::theme_clean_light() +
@@ -58,7 +61,8 @@ ggplot(df_graph, aes(x = reorder(party, +share), y = share, fill = party, color 
         axis.text.x = element_text(size = 20),
         axis.text.y = element_text(size = 20),
         strip.text.x = element_text(size = 20),
-        strip.placement = "outside")
+        strip.placement = "outside",
+        plot.caption = element_text(size = 12))
 
 
 

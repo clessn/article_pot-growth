@@ -37,7 +37,8 @@ ggplot(df_pg, aes(x = weighted_mean_estimate, y = party, fill = party, color = p
   theme(legend.position = "none",
         axis.title.x = element_text(hjust = 0.5, size = 20),
         axis.text.x = element_text(size = 20),
-        axis.text.y = element_text(size = 20)) 
+        axis.text.y = element_text(size = 20),
+        plot.caption = element_text(size = 12)) 
 
 ggsave("_SharedFolder_article_pot-growth/graphs/paper/3_pot_growth_distribution.png", height = 7, width = 10)
 
@@ -52,6 +53,7 @@ ggplot(df_vs, aes(x = weighted_mean_estimate, y = party, fill = party, color = p
   theme(legend.position = "none",
         axis.title.x = element_text(hjust = 0.5, size = 20),
         axis.text.x = element_text(size = 20),
-        axis.text.y = element_text(size = 20)) 
+        axis.text.y = element_text(size = 20),
+        plot.caption = element_text(size = 12)) 
 
 ggsave("_SharedFolder_article_pot-growth/graphs/paper/4_vote_solidity_distribution.png", height = 7, width = 10)

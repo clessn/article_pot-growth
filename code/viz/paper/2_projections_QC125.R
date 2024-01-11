@@ -26,25 +26,42 @@ df_graph$facet <- factor(df_graph$facet, levels = levels)
 df_graph$party[df_graph$party == "PLQ"] <- "QLP"
 df_graph$party[df_graph$party == "PCQ"] <- "CPQ"
 
+### Join 2022 electoral results
+elxnresults22 <- readRDS("_SharedFolder_article_pot-growth/data/marts/electoral_swings/figure1_electoral_results.rds") %>% 
+  rename(share_elxn = share)
+
+df_graph2 <- df_graph %>% 
+  left_join(., elxnresults22, by = c("party", "facet"))
+df_graph2$party <- factor(df_graph2$party, levels = rev(c("CAQ", "QLP", "QS", "PQ", "CPQ")))
+
 # graphs ------------------------------------------------------------------
 
-ggplot(df_graph, aes(x = reorder(party, +share), y = share, fill = party, color = party)) +
-  geom_bar(stat = "identity", alpha = 0.4, color = NA) +
-  geom_text(aes(label = paste0(round(share), "%")), hjust = -0.2, position = position_dodge(0.9), size = 8) +
+colors <- c("CAQ" = "#00cccc", "QLP" = "#ED1A2D", "PQ" = "#099FFF", "QS" = "#FF5605", "CPQ" = "#172853")
+
+barwidth <- 0.8
+
+ggplot(df_graph2, aes(x = party, y = share, fill = party, color = party)) +
+  facet_grid(cols = vars(facet), switch = "x") + 
+  geom_col(alpha = 0.4, color = NA, width = barwidth) +
+  geom_linerange(aes(xmin = as.numeric(factor(party)) - barwidth / 2,
+                   xmax = as.numeric(factor(party)) + barwidth / 2,
+                   y = share_elxn),
+                 linetype = "dashed") +
+  geom_text(aes(label = paste0(round(share), "%")), hjust = -0.3, position = position_dodge(0.9), size = 8) +
   scale_fill_manual(values = colors) +
   scale_color_manual(values = colors) +
-  scale_y_continuous(limits = c(0, 52)) +
-  labs(title = "", x = "", y = "Share (%)") +
+  scale_y_continuous(limits = c(0, 80)) +
+  labs(title = "", x = "", y = "Share (%)",
+       caption = "Dashed lines represent the party's share in the 2022 Quebec provincial election") +
   coord_flip() +
-  facet_grid(cols = vars(facet), switch = "x") + 
   clessnverse::theme_clean_light() +
   theme(legend.position = "none",
         axis.title.x = element_text(hjust = 0.5, size = 20),
         axis.text.x = element_text(size = 20),
         axis.text.y = element_text(size = 20),
         strip.text.x = element_text(size = 20),
-        strip.placement = "outside")
-
+        strip.placement = "outside",
+        plot.caption = element_text(size = 12))
 
 
 ggsave("_SharedFolder_article_pot-growth/graphs/paper/2_projections_QC125.png", height = 7, width = 12)
