@@ -28,8 +28,6 @@ df_graph$party[df_graph$party == "PCQ"] <- "CPQ"
 
 # graphs ------------------------------------------------------------------
 
-colors <- c("CAQ" = "#00cccc", "QLP" = "#ED1A2D", "PQ" = "#099FFF", "QS" = "#FF5605", "CPQ" = "#172853")
-
 ggplot(df_graph, aes(x = reorder(party, +share), y = share, fill = party, color = party)) +
   geom_bar(stat = "identity", alpha = 0.4, color = NA) +
   geom_text(aes(label = paste0(round(share), "%")), hjust = -0.2, position = position_dodge(0.9), size = 8) +
