@@ -319,12 +319,15 @@
       margin-right: 0; 
     }
   </style>
+  
+  <script src="potgrowth_spsa2024_files/libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="potgrowth_spsa2024_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
 <body class="quarto-dark">
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
+<section id="title-slide" data-notes="Hi Im Hubert Cadieux first year Master Student in Politcal Science at Université Laval<br>Planning on doing masters thesis on operationalisation political parties potential for growth in multiparty systems<br>With my colleagues, we wrote this article trying to empirically validate a measure of this concept by trying to forecast electoral swings" class="quarto-title-block center">
   <h1 class="title"><span style="font-size: 49pt;">Forecasting Election Swings in Multiparty Systems Using Underlying Potential for Growth of Parties</span></h1>
 
 <div class="quarto-title-authors">
@@ -349,56 +352,118 @@ Catherine Ouellet<br>Jérémy Gilbert<br>Yannick Dufresne<br>
 <section id="theoretical-background" class="title-slide slide level1 center">
 <h1><span style="font-size: 85pt;">Theoretical Background</span></h1>
 <p><span style="font-size: 55pt;">Potential for Growth: What Is It?</span></p>
-<!-- Hi I'm Hubert Cadieux blabla I'm presenting the article I'm writing with blabla: titre 
-This article forms part of a collective effort to theorize, conceptualize, and operationalize the concept of a continuous potential for growth and vote solidity by developing new measures of vote intention that capture its dynamic nature in multiparty systems.
-I will be conducting my master's thesis on this concept with the goal of mapping respondents' issue attitudes onto this concept.
--->
+<aside class="notes">
+<p>First, what is the pot growth, where does it come from?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="traditional-way-of-estimating-parties-chances-of-winning" class="slide level2">
 <h2>Traditional Way of Estimating Parties’ Chances of Winning</h2>
+<div>
 <ul>
-<li>In a riding or at the national level <!-- Ici, faire un exemple fictif d'une circonscription avec trois partis A, B et C
-
-        Exemple 1.1:
-        Graphique classique de Qc125.
-        A a 45% +- 8
-        B a 35% +- 8
-        C a 20% +- 5
-        Conclusions à la lecture du graphique?
-        A a une excellente avance, mais pourrait peut-être être challengé par B.
-        C a aucune chance de l'emporter.
-
-        Exemple 1.2, MÊMES DONNÉES:
-        A a beaucoup de votes fragiles et pas de potentiel de croissance
-        B a un vote solide mais pas de potentiel de croissance
-        C a une petite base mais solide et un gros potentiel de croissance
-        Nouvelles conclusions?
-        A a une bonne avance sur B, mais au niveau individuel peut facilement perdre des électeurs à C.
-        B a une 2e place facile, mais impossible d'aller plus loin. Espère une séparation des votes entre A et C.
-        C est loin en arrière, mais a un potentiel d'aller chercher des électeurs fragiles de A. C a donc + de chances de gagner que B.
-
-        Exemple 1.3 MÊMES DONNÉES mais en simulant une attaque réussie de C sur les segments fragiles de A
-        Nouveau graphique classique de Qc125 + graphique de potentiel de croissance
-
-        Conclusions:
-
-        L'opérationnalisation du potentiel de croissance permettrait de forecaster, anticiper des swings potentiels comme à l'exemple 1.3 que les méthodes traditionnelles d'intention de vote ne permettent pas. C'est la logique derrière ce qui nous intéresse dans ce concept.
-        
-      Deux concepts distincts: solidité du vote et potentiel de croissance
-
-        --></li>
+<li>In a riding or at the national level <img data-src="graphs/pres_spsa24/1_theoretical_example1.png" style="width:70.0%"></li>
 </ul>
+</div>
+<aside class="notes">
+<p>It comes from the intuition <br> Tradtional measures of vote intention fail to capture essential information about an electoral race</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section id="section" class="title-slide slide level1 center">
+<h1></h1>
+
+<img data-src="graphs/pres_spsa24/1_theoretical_example1.png" style="width:90.0%" class="r-stretch"><aside class="notes">
+<p>Let’s take this fictional example. <br> In this graph, the X-axis is the Projected Vote share of parties. <br> We can come to the following conclusions in interpreting this graph: <br> A has an excellent lead <br> But B is a potential challenger <br> C has no chance of winning.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section id="section-1" class="title-slide slide level1 center">
+<h1></h1>
+
+<img data-src="graphs/pres_spsa24/1_theoretical_example2.png" style="width:100.0%" class="r-stretch"><aside class="notes">
+<p>However, these conclusions completely go out the window when we interpret vote intention as a continuous spectrum <br> EXPLAIN GRAPH <br> Same fictional voters <br> one side actual voters of the party, other side voters of other parties <br> Ordered from Solid to fragile voters <br> Ordered from reachable voters to unreachable <br> Whole new set of conclusions <br> A fragile shape <br> B solid electoral base, but no potential to grow<br> C small electoral base, but a lot of potential to grow<br> so we can conclude that<br> A and C are a communicating vase <br> A has a good lead, but could relatively easily lose electors to party C<br> B is easily in second place but cant go further. Hopes for A and C to separate votes between themselves. Will try to keep fragile electors<br> C is far behind, but could make a play for fragile segments of the electorate of A.<br> What if it does?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section>
+<section id="section-2" class="title-slide slide level1 center">
+<h1></h1>
+
+<img data-src="graphs/pres_spsa24/1_theoretical_example3.png" style="width:100.0%" class="r-stretch"><aside class="notes">
+<p>We get a whole new picture.<br> DRINK WATER C and A switched<br> Like I said, C could also gain less votes and give victory to B, but it is clear that the parties’s strategies are far more different when we look deeper in the data.<br> Operationalisation enables forecast and anticipate potential electoral swings like in this fictional example that traditional methods do not allow.<br> Logic, intuition behind this.<br> Two distincts concepts: potential for growth and vote solidity</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="why-study-it" class="slide level2">
 <h2>Why Study It?</h2>
 <ul>
-<li>More nuanced interpretation of agregated vote intentions</li>
-<li>Better allocation of parties’ resources</li>
-<li>Identifying parties’ room to maneuver</li>
-<li>Identifying parties’ fragile segments of electorate</li>
-<li>Improving electoral forecasting</li>
-<li>Better anticipation of electoral swings</li>
+<li class="fragment">More nuanced interpretation of agregated vote intentions</li>
+<li class="fragment">Better allocation of parties’ resources</li>
+<li class="fragment">Identifying parties’ room to maneuver</li>
+<li class="fragment">Identifying parties’ fragile segments of electorate</li>
+<li class="fragment">Improving electoral forecasting</li>
+<li class="fragment">Better anticipation of electoral swings</li>
 </ul>
+<aside class="notes">
+<p>better alloc, example of party B: instead of trying to gain new voters, defend its fragile electors</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="research-question" class="slide level2">
 <h2><span style="font-size: 85pt;">Research Question</span></h2>
@@ -409,61 +474,133 @@ I will be conducting my master's thesis on this concept with the goal of mapping
 <h2>Election Forecasting</h2>
 <!-- Ajouter une source par model -->
 <ul>
-<li>Small history</li>
-<li>Uncertainty and error of election forecasts</li>
-<li>Four classes of forecasting methods
+<li class="fragment">Small history</li>
+<li class="fragment">Four classes of forecasting methods
 <ol type="1">
-<li>Structural models</li>
-<li>Models based on the traditional vote intention question</li>
-<li>Vote expectations, wisdom of the crowd</li>
-<li>Combination of the three</li>
+<li class="fragment">Structural models</li>
+<li class="fragment">Models based on the traditional vote intention question</li>
+<li class="fragment">Vote expectations, wisdom of the crowd</li>
+<li class="fragment">Combination of the three</li>
 </ol></li>
-<li>These four models do not capture essential information
+<li class="fragment">These four models do not capture essential information
 <ul>
-<li>Potential shifts</li>
-<li>Fragile segments</li>
+<li class="fragment">Potential swings</li>
+<li class="fragment">Fragile segments</li>
 </ul></li>
 </ul>
+<aside class="notes">
+<p>Continue with Little breakdown<br> History: since the 80s as academic enterprise<br></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="bridging-this-gap-the-relative-confidence-index-rci" class="slide level2">
 <h2>Bridging this gap: the Relative Confidence Index (RCI)</h2>
 <!-- Insister ici que c'est "théorique" -->
 <p>An innovative range approach to measure vote intention</p>
+<aside class="notes">
+<p>to bridge this gap <br> we bring forward a new range measure of vote intention<br> relative confidence index</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="how-is-it-calculated" class="slide level2">
 <h2>How is it Calculated?</h2>
-<!-- COMMENT C'EST CALCULÉ, copier les slides de l'an passé -->
+
+<img data-src="graphs/pres_spsa24/2_rci_1.png" class="r-stretch"><aside class="notes">
+<p>to measure rci, we ask respondents on scale 0-10<br> thats the continuous part<br> WATER</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="how-is-it-calculated-1" class="slide level2">
+<h2>How is it Calculated?</h2>
+
+<img data-src="graphs/pres_spsa24/2_rci_2.png" class="r-stretch"><aside class="notes">
+<p>the relative part is that we<br> substract the vote likelihood of the second party to vote likelhiood of the first: positive value<br> Julie party a Tomas party c<br> substract the vote likelihood of the first party to all other parties: negative value<br> julie B and c<br> positive: as you approach 10, the more solid is your vote<br> negative: as you aproach 0, you gradually become a elector with more potential<br></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="what-has-been-done-with-this-approach" class="slide level2">
 <h2>What Has Been Done With This Approach?</h2>
 <!-- Ne pas commencer ton bullet point avec la référence: inverse les deux éléments d’info. Ce qui a été fait d’abord, la référence ensuite. Et assure-toi de bien faire ressortir en quoi cette approche apporte ou répond à de nouvelles questions par rapport aux notes de recherche précédentes. -->
+<div>
 <ul>
-<li>Dufresne et al.&nbsp;(2018): Sur le potentiel de croissance du PQ (<em>On the Potential for Growth of the PQ</em>)</li>
-<li>Déry et al.&nbsp;(2022):</li>
-<li><em>Unpublished</em> Cadieux et al.&nbsp;(2024): On Volatility and Parties’ Potential for Growth</li>
+<li>Dufresne et al.&nbsp;(2022): Le potentiel de croissance du Parti québécois : L’envers du vote (<em>The Potential for Growth of the Parti Québécois: The Flip Side of Voting</em>)</li>
+<li>Déry et al.&nbsp;(2022): Sur le potentiel de croissance du Parti conservateur du Québec (<em>On the Potential for Growth of the Conservative Party of Quebec</em>)</li>
+<li><em>Unpublished</em> Cadieux et al.&nbsp;(2024?): On Volatility and Parties’ Potential for Growth</li>
 </ul>
-<p>{Montrer des graphs intéressants de ces notes de recherche}</p>
-<!-- Montrer des graphs intéressants de ces notes de recherche -->
+</div>
+<aside class="notes">
+<p>The measure has been introduced and presented descriptively in these 3 articles<br> More descriptive rather than validating its value</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="theoretical-benefits-of-such-measure" class="slide level2">
 <h2>Theoretical Benefits of Such Measure</h2>
 <ul>
-<li>More suitable to multiparty systems</li>
-<li>Adding layer of choices → reduction of prediction error</li>
-<li>More nuance to deal with undecided voters</li>
-<li>Alleviate uncertainty associated with attitude/behaviour discrepancies</li>
-<li>Makes a difference between unreachable and reachable electors → <span style="font-size: 40pt; color: #00BFFF;"><strong><em>potential for growth</em></strong></span></li>
-<li>Makes a difference between a solid and a fragile voter → <span style="font-size: 40pt; color: #00BFFF;"><strong><em>vote solidity</em></strong></span></li>
+<li class="fragment">More suitable to multiparty systems</li>
+<li class="fragment">Adding layer of choices → reduction of prediction error</li>
+<li class="fragment">More nuance to deal with undecided voters</li>
+<li class="fragment">Alleviate uncertainty associated with attitude/behaviour discrepancies</li>
+<li class="fragment">Makes a difference between unreachable and reachable electors → <span style="font-size: 40pt; color: #00BFFF;"><strong><em>potential for growth</em></strong></span></li>
+<li class="fragment">Makes a difference between a solid and a fragile voter → <span style="font-size: 40pt; color: #00BFFF;"><strong><em>vote solidity</em></strong></span></li>
 </ul>
-</section>
-<section id="validity-at-the-individual-level" class="slide level2">
-<h2>Validity at the Individual Level</h2>
-<!--- What does it mean to be a 3? A -2? A 6? Mettre les probabilités prédites sur l'intention de vote binaire --->
-<p>{What does it mean to be a 3? A -2? A 6? Mettre les probabilités prédites sur l’intention de vote binaire}</p>
-</section>
-<section id="descriptive-rci-distribution-by-party" class="slide level2">
-<h2>Descriptive: RCI Distribution by Party</h2>
-<p>{Distribution de l’IRC des partis prov et féd}</p>
+<aside class="notes">
+<p>these articles also lay out the theoretical benefits of the measure most important are</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="data-and-context" class="title-slide slide level1 center">
@@ -473,14 +610,98 @@ I will be conducting my master's thesis on this concept with the goal of mapping
 <section id="case-study" class="slide level2">
 <h2>Case Study</h2>
 <ul>
-<li>Quebec Provincial Election, 2022</li>
-<li>CAQ won 89 ridings, majority of seats</li>
-<li>Today’s projections, one year later: PQ close to a majority, CAQ <strong>19</strong></li>
+<li class="fragment">Quebec Provincial Election, 2022</li>
+<li class="fragment">Election date: October 3rd, 2022</li>
+<li class="fragment">First-past-the-post</li>
+<li class="fragment">125 electoral ridings</li>
+<li class="fragment">Drastic decline of the majority government since then</li>
 </ul>
-<p>{Montrer le graphique des sièges par parti} {Expliquer rapidement les 5 partis sur l’axe gauche-droite et leur aspect historique}</p>
-<ul>
-<li>Could we have predicted this {montée} of the PQ?</li>
-</ul>
+<aside class="notes">
+<p>alright if we go back to the research question, which is<br> we used the months before and after Quebec Provincial Election of 2022 as case study<br> for context, Quebec is a multiparty parliamentary system with first past the post elections where each party aims to elect a representative in 125 electoral ridings<br></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="election-results" class="slide level2">
+<h2>2022 Election Results</h2>
+
+<img data-src="graphs/pres_spsa24/6_casestudy_elxnresults.png" class="r-stretch"><aside class="notes">
+<p>CAQ (majority incumbent) won 90 ridings, majority of seats If we look at the electoral results, we can clearly see that CAQ won by a landslide, even in popular vote.<br> We can also observe the PQ, which had 15% of the popular vote and 2% of the seats</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="projections-from-december-2023" class="slide level2">
+<h2>Projections from December 2023</h2>
+
+<img data-src="graphs/pres_spsa24/6_casestudy_projections.png" class="r-stretch"><aside class="notes">
+<p>Projections from today show a complete different picture<br> CAQ now sits 2nd in popular vote and 3rd in projected seats.<br> CAQ <strong>19 seats</strong> PQ is close to a majority with 57 projected seats and leads popular vote<br></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<p><span style="font-size: 47pt;">Could we have forecasted the rise of the PQ?</span></p>
+
+<img data-src="graphs/pres_spsa24/6_casestudy_projections.png" width="530" class="r-stretch"><aside class="notes">
+<p>This case study is perfect to test the rci as a measure of potential for growth: in a matter of 14 months, the PQ went from 2% of the seats to 46%. This enormous rise can definitely be studied through the lenses of potential for growth and vote solidity. Impossible to predict using traditional measures</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="hypotheses" class="title-slide slide level1 center">
+<h1><span style="font-size: 85pt;">Hypotheses</span></h1>
+<ol type="1">
+<li class="fragment"><span style="font-size: 47pt;">PQ had high</span> <span style="font-size: 55pt; color: #00BFFF;"><strong><em>potential for growth</em></strong></span> <span style="font-size: 47pt;">in ridings won by the CAQ</span></li>
+<li class="fragment"><span style="font-size: 47pt;">CAQ had low</span> <span style="font-size: 55pt; color: #00BFFF;"><strong><em>vote solidity</em></strong></span> <span style="font-size: 47pt;">overall</span></li>
+</ol>
+<aside class="notes">
+<p>we lay out 2 hypotheses to test this</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="datasets" class="slide level2 smaller">
 <h2>Datasets</h2>
@@ -488,100 +709,812 @@ I will be conducting my master's thesis on this concept with the goal of mapping
 <div class="column" style="width:50%;">
 <p>Potential for growth</p>
 <ul>
-<li>Surveys
+<li class="fragment">Surveys
 <ul>
-<li>Monthly surveys taken from January 2022 to August 2022 (n = 9,135)</li>
-<li>(in discussion to obtain Vote Compass’ datasets)</li>
+<li class="fragment">Monthly surveys taken from January 2022 to August 2022 (n = 9,135)</li>
+<li class="fragment">(in discussion to obtain Vote Compass’ datasets)</li>
 </ul></li>
-<li>2021 Canadian Census data (by provincial riding)</li>
+<li class="fragment">2021 Canadian Census data (by provincial riding)</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <p>Electoral swings</p>
 <ul>
-<li>2022 Electoral results</li>
-<li>Qc125.com December 2023 projections</li>
+<li class="fragment">2022 Electoral results compared with Qc125.com December 2023 projections</li>
 </ul>
 </div>
 </div>
+<aside class="notes">
+<p>To obtain estimates of potential for growth and vote solidity in each electoral riding, we used a combination of monthly surveys taken before the 2022 election.<br> We are currently in discussion to obtain data from the Vote Compasses, which would gather hundreds of thousands data points.<br> We projected the survey data on populational data from 2021 Canadian Census<br></p>
+<p>To compare with actual projections, we collected data from the survey aggregator Qc125.com, which is equivalent to 538 in the USA.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="methodology" class="title-slide slide level1 center">
 <h1>Methodology</h1>
-
+<aside class="notes">
+<p>The methodological part of this artile is related to the challenge of estimating the RCI at the riding level considering our 9000 data points</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="estimating-the-rci-at-the-riding-level" class="slide level2">
 <h2>Estimating the RCI at the Riding-Level</h2>
-<!-- Why at the riding level? Because electoral results are only at the riding-level -->
+<div>
 <ul>
 <li>Step 1: compute regression models to predict the RCI using survey data</li>
 <li>Step 2: predict those models on riding-level census data</li>
 <li>Step 3: aggregate the RCI and its uncertainty using segments’ weights in the riding</li>
 </ul>
+</div>
+<aside class="notes">
+<p>So the 3 main steps are the following. We needed to estimate the negative and positive rci for each party in each riding.<br></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="step-1-compute-regression-models-to-predict-the-rci-using-survey-data" class="slide level2">
 <h2>Step 1: Compute Regression Models to Predict the RCI Using Survey Data</h2>
-<!-- Il faut trouver une façon de bien expliquer ici -->
 <ul>
-<li>Vote solidity: <code>lm(rci ~ age * langue * region * male)</code> but only for a party’s current electoral base</li>
-<li>Potential for growth: <code>lm(rci ~ age * langue * region * male)</code> but only for respondents who do not currently vote for the party</li>
-<li>Vote intention: <code>multinom(party ~ age * langue * granular + male)</code></li>
+<li class="fragment">Vote solidity: <code>lm(rci ~ age * langue * region * male)</code> but only for a party’s current electoral base</li>
+<li class="fragment">Potential for growth: <code>lm(rci ~ age * langue * region * male)</code> but only for respondents who do not currently vote for the party <!-- -   Vote intention: `multinom(party ~ age * langue * granular + male)` --></li>
 </ul>
+<aside class="notes">
+<p>Interaction term between age language gender and region<br> The models were the same for vote sol and pot growth and were the same for each party<br> Total of 10 models (5 parties TIMES 2 DV)<br> <!-- Each riding was associated with one of the 17ish administrative regions of Quebec (some tweaks). Done because low number of respondents by some ridings.---></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="step-2-predict-those-models-on-riding-level-census-data" class="slide level2">
 <h2>Step 2: Predict Those Models on Riding-Level Census Data</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Riding</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Region</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Weight</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Language</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Gender</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Age</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Pot Growth Estimate CAQ</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Std Error CAQ</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Pot Growth Estimate PQ</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Std Error PQ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Granby</td>
+<td style="text-align: left;">Estrie</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">34m</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.35</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.36</td>
+<td style="text-align: right;">0.05</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Granby</td>
+<td style="text-align: left;">Estrie</td>
+<td style="text-align: right;">0.07</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">34m</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.37</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.35</td>
+<td style="text-align: right;">0.05</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Borduas</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">34m</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.40</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.36</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Borduas</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">3554</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.43</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.48</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Granby</td>
+<td style="text-align: left;">Estrie</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">3554</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.44</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.48</td>
+<td style="text-align: right;">0.04</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Granby</td>
+<td style="text-align: left;">Estrie</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">55p</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.44</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.54</td>
+<td style="text-align: right;">0.04</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Borduas</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">55p</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.48</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.56</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Borduas</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right;">0.07</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">34m</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.49</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.48</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Borduas</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">55p</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.51</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.62</td>
+<td style="text-align: right;">0.02</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Granby</td>
+<td style="text-align: left;">Estrie</td>
+<td style="text-align: right;">0.18</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">55p</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.54</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.62</td>
+<td style="text-align: right;">0.04</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Granby</td>
+<td style="text-align: left;">Estrie</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">3554</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.58</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.55</td>
+<td style="text-align: right;">0.04</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Borduas</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">3554</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.60</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.61</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+</tbody>
+</table>
 
-<!-- Avoir tableau/graph exemple pour une circonscription où on voit le poids des répondants, leur prédiction, marge d'erreur etc. -->
+
+</div>
+</div>
+<p><span style="font-size: 12pt;"><em>Example with potential for growth estimates for two parties, PQ and CAQ, in two ridings, Borduas and Granby, for francophones segments</em></span></p>
+<aside class="notes">
+<p>example french women 34 years or younger<br> we can also observe the different weights in the riding of each segment.<br> we can also observe that the same profile in a riding from a different region has different predictions<br> WATER</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<!---
+## 
+
+::: {.cell}
+::: {.cell-output-display}
+
+`````{=html}
+
+<table class="table" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Riding</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Region</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Weight</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Language</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Gender</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Age</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Pot Growth Estimate CAQ</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Std Error CAQ</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Pot Growth Estimate PQ</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Std Error PQ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Borduas</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">34m</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.40</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.36</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Montarville</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right;">0.08</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">34m</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.40</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.36</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Borduas</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">3554</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.43</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.48</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Montarville</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">3554</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.43</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.48</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Borduas</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">55p</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.48</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.56</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Montarville</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">55p</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.48</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.56</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Borduas</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right;">0.07</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">34m</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.49</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.48</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Montarville</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">34m</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.49</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.48</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Borduas</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">55p</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.51</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.62</td>
+<td style="text-align: right;">0.02</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Montarville</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">55p</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.51</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.62</td>
+<td style="text-align: right;">0.02</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Borduas</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">3554</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.60</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.61</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Montarville</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">3554</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.60</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.61</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+</tbody>
+</table>
+
+
+`````
+
+:::
+:::
+
+
+[*Same profiles from the same regions have the same estimates*]{style="font-size: 12pt;"}
+
+:::{.notes}
+here we can observe that profiles in ridings from the same regions have the same predictions.<br>
+By riding differences will come for the socio-demographical composition
+:::
+--->
 </section>
 <section id="step-3-aggregate-the-rci-and-its-uncertainty-using-segments-weights-in-the-riding" class="slide level2">
 <h2>Step 3: Aggregate the RCI and Its Uncertainty Using Segments’ Weights in the Riding</h2>
-<!-- Partir de step 2 et agrégér, trouver une façon que ça soit bien visualisé -->
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<table class="table" data-quarto-postprocess="true" style="font-size: 9px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Riding</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Region</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Weight</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Language</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Gender</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Age</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Pot Growth Estimate CAQ</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Std Error CAQ</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Pot Growth Estimate PQ</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Std Error PQ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Borduas</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right; color: white !important; background-color: red !important;">0.10</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">34m</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.40</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.36</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Montarville</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right; color: white !important; background-color: red !important;">0.08</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">34m</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.40</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.36</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Borduas</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right; color: white !important; background-color: red !important;">0.23</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">3554</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.43</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.48</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Montarville</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right; color: white !important; background-color: red !important;">0.20</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">3554</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.43</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.48</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Borduas</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right; color: white !important; background-color: red !important;">0.16</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">55p</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.48</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.56</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Montarville</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right; color: white !important; background-color: red !important;">0.16</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">55p</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.48</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.56</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Borduas</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right; color: white !important; background-color: red !important;">0.07</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">34m</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.49</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.48</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Montarville</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right; color: white !important; background-color: red !important;">0.06</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">34m</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.49</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.48</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Borduas</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right; color: white !important; background-color: red !important;">0.17</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">55p</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.51</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.62</td>
+<td style="text-align: right;">0.02</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Montarville</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right; color: white !important; background-color: red !important;">0.17</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">55p</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.51</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.62</td>
+<td style="text-align: right;">0.02</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Borduas</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right; color: white !important; background-color: red !important;">0.23</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">3554</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.60</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.61</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Montarville</td>
+<td style="text-align: left;">Montérégie</td>
+<td style="text-align: right; color: white !important; background-color: red !important;">0.20</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">3554</td>
+<td style="text-align: right; color: white !important; background-color: #00cccc !important;">-0.60</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right; color: white !important; background-color: #004C9D !important;">-0.61</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="cell">
+<div class="cell-output-display">
+<table class="table" data-quarto-postprocess="true" style="font-size: 25px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Riding</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Weighted mean CAQ</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Weighted mean PQ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Borduas</td>
+<td style="text-align: right;">-0.49</td>
+<td style="text-align: right;">-0.54</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Montarville</td>
+<td style="text-align: right;">-0.50</td>
+<td style="text-align: right;">-0.54</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><span style="font-size: 12pt;"><em>The weighted standard error is also calculated.</em></span></p>
+<aside class="notes">
+<p>We simply did a weighted mean</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</div>
 </section>
-<section id="output" class="slide level2">
-<h2>Output</h2>
-<p>{Faire un graphique où on ordonne les ridings pour la CAQ avec les 3 modèles (potgrowth vote solidity et vote intent) sur le graph}</p>
-<p>{Faire un graphique qui résume pour une circonscription avec les 5 partis ou pour 2-3 segments dans une circonscription}</p>
-<!-- Faire un graphique où on ordonne les ridings pour la CAQ exemple avec les 3 modèles sur le graph -->
-<!-- Faire un graphique qui résume pas pire pour une circonscription avec les 5 partis ou pour 2-3 segments dans une circonscription -->
+<section id="output-of-the-aggregation" class="slide level2">
+<h2>Output of the Aggregation</h2>
+
+<img data-src="potgrowth_spsa2024_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"><aside class="notes">
+<p>top 10 ridings for PQ and CAQ in potential for growth estimate.<br> Important to remember that there is also this estimate for vote solidity following the exact same steps</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
-<section id="results-can-it-improve-the-forecasting-of-electoral-swings" class="title-slide slide level1 center">
-<h1>Results: Can it Improve the Forecasting of Electoral Swings?</h1>
+<section id="results-can-it-improve-the-forecasting-of-electoral-swings-the-case-of-the-pq" class="title-slide slide level1 center">
+<h1>Results: Can it Improve the Forecasting of Electoral Swings? The Case of the PQ</h1>
 
 </section>
-<section id="descriptive-graphs-distribution-of-potential-for-growth-of-ridings-by-party" class="slide level2">
-<h2>Descriptive Graphs : Distribution of Potential for Growth of Ridings by Party</h2>
+<section id="descriptive-distribution-of-potential-for-growth-of-ridings" class="slide level2">
+<h2>Descriptive : Distribution of Potential for Growth of Ridings</h2>
+
+<img data-src="potgrowth_spsa2024_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"><aside class="notes">
+<p>First, intriguing that CAQ is 1st in potential for growth<br> Second, PQ is leading among challenger parties<br> WATER</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="descriptive-graphs-distribution-of-vote-solidity-of-ridings-by-party" class="slide level2">
-<h2>Descriptive Graphs : Distribution of Vote Solidity of Ridings by Party</h2>
+<section id="descriptive-distribution-of-vote-solidity-of-ridings" class="slide level2">
+<h2>Descriptive : Distribution of Vote Solidity of Ridings</h2>
+
+<img data-src="potgrowth_spsa2024_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"><aside class="notes">
+<p>When we look vote solidity, results are less what we expected<br> CAQ is still leading. We expected CAQ to have more fragile ridings.<br> Even though CAQ had solid vote, we still expect the following: PQ had high pot growth in ridings CAQ won.<br> That means that if CAQ were to fail (which should not have been likely from this analysis), we should expect PQ to rise and not another challenger.<br> This leads us to the following analysis using TRADITIONAL MEASURE, vote shares:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="descriptive-graphs-correlation-between-potential-for-growth-and-actual-qc125-projections" class="slide level2">
-<h2>Descriptive Graphs: Correlation Between Potential for Growth and Actual Qc125 Projections</h2>
-</section>
-<section id="descriptive-graphs-parties-electoral-gains-since-2022" class="slide level2">
-<h2>Descriptive Graphs: Parties’ Electoral Gains Since 2022</h2>
-<!-- Ici on voit que le PQ a full gagné et la CAQ a full perdu -->
-</section>
-<section id="using-a-traditional-measure-2022-vote-shares" class="slide level2">
-<h2>Using a Traditional Measure: 2022 Vote Shares</h2>
-<p>{Graphique Vote solidity CAQ VS 2022 Vote Shares}</p>
+<section id="using-2022-vote-shares" class="slide level2">
+<h2>Using 2022 Vote Shares</h2>
+
+<img data-src="potgrowth_spsa2024_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"><p><span style="font-size: 12pt;"><em>Among challengers, PQ is first in 46% of the ridings.</em></span></p>
+<aside class="notes">
+<p>I’ll take some time to explain this one.<br> x-axis<br> y-axis<br> Observation: Difficult to predict from this that PQ would rise.<br> Among challengers, PQ leads in 46% of the ridings won by CAQ</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <!-- From this graph, impossible to explain the montée of the PQ -->
 </section>
-<section id="using-the-rci" class="slide level2">
-<h2>Using the RCI</h2>
-<p>{Graphique Vote solidity CAQ VS Potential for growth} <!-- From this graph, PQ in good position in ridings CAQ won.--> <!-- Needs a catalyst!!! --></p>
+<section id="using-potential-for-growth" class="slide level2">
+<h2>Using Potential for Growth</h2>
+
+<img data-src="potgrowth_spsa2024_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"><p><span style="font-size: 12pt;"><em>Among challengers, PQ is first in 85% of the ridings.</em></span></p>
+<aside class="notes">
+<p>If we do the same graph but by changing the traditional measure with the potential for growth estimates…<br> PQ is now clearly in the best position among challengers to take over if CAQ fails.<br> Leads in 85% of the ridings<br> WATER</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<!-- From this graph, PQ in good position in ridings CAQ won.-->
+<!-- Needs a catalyst!!! -->
 </section>
-<section id="other-potential-future-swings" class="slide level2">
-<h2>Other Potential Future Swings?</h2>
-<!-- Checker PCQ-CAQ, QS-PLQ, QS-PQ -->
+<section id="conclusions" class="slide level2">
+<h2>Conclusions</h2>
+<ol type="1">
+<li class="fragment">PQ had high potential for growth in ridings won by the CAQ → confirmed</li>
+<li class="fragment">CAQ had low vote solidity overall → rejected</li>
+</ol>
 </section></section>
 <section id="article-contributions" class="title-slide slide level1 center">
 <h1>Article Contributions</h1>
+<div>
 <ul>
 <li>Empirical results to validate the concept of potential for growth</li>
 <li>Broadening the recognition of the concept in the field</li>
 <li>Explore basic and simplified operationalisations</li>
 <li>Opening the door to more complex operationalisations</li>
+<li>More case studies
+<ul>
+<li>2021 Canadian Federal Election</li>
+<li>2024 (?) Canadian Federal Election</li>
+</ul></li>
 </ul>
+</div>
+<aside class="notes">
+<p>So this article brings some validation to the RCI and this method of aggregating it for Potential for Growth<br> However, results are more intriguing in the case of vote solidity.<br> The decline of the CAQ was not likely by the results presented in this article.<br> Next steps for this article include more comlex and nuanced operationalisations as well as adding more case studies<br> Thank you</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 
 <section>
@@ -591,66 +1524,67 @@ I will be conducting my master's thesis on this concept with the goal of mapping
 </section>
 <section id="the-end-of-the-line" class="slide level2">
 <h2>The End of the Line?</h2>
-<h3 id="weak-signal-yet-still-worth-exploring">Weak Signal, Yet Still Worth Exploring</h3>
 <ul>
-<li>Preliminary weak findings: caution against premature dismissal of the concept</li>
-<li>Solid theoretical foundation, derived from logical intuitions</li>
-<li>Only a handful of operationalisations have been explored as of yet
+<li class="fragment">Preliminary weak findings: caution against premature dismissal of the concept</li>
+<li class="fragment">Solid theoretical foundation, derived from logical intuitions</li>
+<li class="fragment">Only a handful of operationalisations have been explored as of yet
 <ul>
-<li>Broad range of research possibilities</li>
+<li class="fragment">Broad range of research possibilities</li>
 </ul></li>
 </ul>
 </section>
 <section id="improving-its-conceptualization" class="slide level2">
 <h2>Improving its Conceptualization</h2>
 <ul>
-<li>Catalysts
+<li class="fragment">Catalysts
 <ul>
-<li>Electoral campaign</li>
-<li>Salient events</li>
-<li>Parties’ efforts to reach segments</li>
+<li class="fragment">Electoral campaign</li>
+<li class="fragment">Salient events</li>
+<li class="fragment">Parties’ efforts to reach segments</li>
 </ul></li>
-<li>Position of parties and respondents on salient issues
+<li class="fragment">Position of parties and public opinion on salient issues
 <ul>
-<li>Parties’ room to maneuver</li>
+<li class="fragment">Parties’ room to maneuver</li>
 </ul></li>
-<li>Political sophistication</li>
+<li class="fragment">Political sophistication</li>
+<li class="fragment">Does potential for growth vary through time?</li>
 </ul>
 </section>
 <section id="operationalisation-of-the-concepts" class="slide level2">
 <h2>Operationalisation of the Concepts</h2>
 <ul>
-<li>Challenge: need to start with simplistic measures before going into more complicated operationalisations</li>
-<li>Catalysts</li>
+<li class="fragment">Challenge: need to start with simplistic measures before going into more complicated operationalisations</li>
+<li class="fragment">Current limit: party models are independent one another</li>
+<li class="fragment">Catalysts</li>
 </ul>
 </section>
 <section id="more-case-studies" class="slide level2">
 <h2>More Case Studies</h2>
 <ul>
-<li>2021 Canadian Federal Election</li>
-<li>2024 (?) Canadian Federal Election</li>
+<li class="fragment">2021 Canadian Federal Election</li>
+<li class="fragment">2024 (?) Canadian Federal Election</li>
 </ul>
 </section>
 <section id="improving-the-models" class="slide level2">
 <h2>Improving the Models</h2>
 <ul>
-<li>Adding independent variables (income, education, etc.)
+<li class="fragment">Adding independent variables (income, education, etc.)
 <ul>
-<li>Need more data points to add independent variables → VPL (Vote Compass)</li>
-<li>(For the synthetic post-stratification table)</li>
+<li class="fragment">Need more data points to add independent variables → VPL (Vote Compass)</li>
+<li class="fragment">(For the synthetic post-stratification table)</li>
 </ul></li>
-<li>Testing other types of models
+<li class="fragment">Testing other types of models
 <ul>
-<li>Random forest</li>
-<li>Gradient boosting</li>
+<li class="fragment">Random forest</li>
+<li class="fragment">Gradient boosting</li>
 </ul></li>
 </ul>
 </section>
 <section id="survey-experiments-better-validation-at-the-individual-level" class="slide level2">
 <h2>Survey Experiments: Better Validation at the Individual Level</h2>
 <ul>
-<li>Panel before and after election to follow the variation across the same individuals</li>
-<li>Survey experiments to test potential framing effects</li>
+<li class="fragment">Panel before and after election to follow the variation across the same individuals</li>
+<li class="fragment">Survey experiments to test potential framing effects</li>
 </ul>
 </section>
 <section id="the-real-end-of-the-line" class="slide level2 smaller">
@@ -658,17 +1592,98 @@ I will be conducting my master's thesis on this concept with the goal of mapping
 <!-- faire un lien avec mon mémoire -->
 <p><strong>Theoretically valid quantitative indicators of:</strong></p>
 <ul>
-<li>The propensity of an individual or group to support a political party, given targeted efforts towards them.</li>
-<li>The fragility of segments within a party’s current electoral base</li>
-<li>The room to maneuver of parties
+<li class="fragment">The propensity of an individual or group to support a political party, given targeted efforts towards them.</li>
+<li class="fragment">The fragility of segments within a party’s current electoral base</li>
+<li class="fragment">The room to maneuver of parties
 <ul>
-<li>Optimal positions on salient issues</li>
-<li>Segments to target</li>
+<li class="fragment">Optimal positions on salient issues</li>
+<li class="fragment">Segments to target</li>
+<li class="fragment">Valuable information for political communication</li>
 </ul></li>
-<li>The estimable number of seats that is possibly reachable by a party if an election campaign would be launched today</li>
+<li class="fragment">The estimable number of seats that is possibly reachable by a party if an election campaign would be launched today</li>
+<li class="fragment">Given its current positions on salient issues</li>
+<li class="fragment">Given its optimal positions on salient issues</li>
 </ul>
-<!-- Montrer un exemple du end game avec des données simulées -->
-<div class="footer footer-default">
+</section>
+<section id="dufresne-et-al.-2022" class="slide level2">
+<h2>Dufresne et al.&nbsp;2022</h2>
+
+<img data-src="graphs/pres_spsa24/3_done.png" class="r-stretch"><aside class="notes">
+<p>we can see this kind of vizualisation<br> where we see the mean rci of a party’s voters for other parties.<br> by looking through the 2018 panel, we could interpret that the PQ had high potential for growth for electors of CAQ and QS</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="déry-et-al.-2022" class="slide level2">
+<h2>Déry et al.&nbsp;2022</h2>
+
+<img data-src="graphs/pres_spsa24/3_done2.png" class="r-stretch"><aside class="notes">
+<p>we opted for a more simplistic portrait of the electoral<br> rectangles with dotted border are potential electors for a party</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="cadieux-et-al.-2024" class="slide level2">
+<h2>Cadieux et al.&nbsp;2024?</h2>
+
+<img data-src="graphs/pres_spsa24/3_done3.png" class="r-stretch"><aside class="notes">
+<p>in this paper that I wrote, trying to get published with my colleague gurth rémy<br> some weak validation of the rci as a condition for local electoral volatility</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="theoretical-benefits-of-such-measure-1" class="slide level2">
+<h2>Theoretical Benefits of Such Measure</h2>
+<ul>
+<li class="fragment">More suitable to multiparty systems</li>
+<li class="fragment">Adding layer of choices → reduction of prediction error</li>
+<li class="fragment">More nuance to deal with undecided voters</li>
+<li class="fragment">Alleviate uncertainty associated with attitude/behaviour discrepancies</li>
+<li class="fragment">Makes a difference between unreachable and reachable electors → <span style="font-size: 40pt; color: #00BFFF;"><strong><em>potential for growth</em></strong></span></li>
+<li class="fragment">Makes a difference between a solid and a fragile voter → <span style="font-size: 40pt; color: #00BFFF;"><strong><em>vote solidity</em></strong></span></li>
+</ul>
+</section>
+<section id="validity-at-the-individual-level" class="slide level2">
+<h2>Validity at the Individual Level</h2>
+<aside class="notes">
+<p>What does it mean to be a 3, a -2 or a 6? Here we have the aggregated predictive outcomes of a logit regression with the traditional, binary vote intention question as the DV<br> it allows us to pinpoint some threshold where the RCI is more surely turned into a vote intention<br> Limit: vote intent at the same point in time than the rci, so really just matter of coherence of respondents</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+<img data-src="graphs/pres_spsa24/4_validity.png" class="r-stretch"><div class="footer footer-default">
 
 </div>
 </section></section>
@@ -883,6 +1898,44 @@ I will be conducting my master's thesis on this concept with the goal of mapping
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

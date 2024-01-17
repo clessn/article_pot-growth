@@ -4,54 +4,82 @@ author: "<table style='margin-top: -290px; width: 100%; text-align: center;'><tr
 format:
   revealjs:
     theme: dark
+    incremental: true
     fontsize: 31pt
   pdf:
     fontsize: 31pt
+title-slide-attributes: 
+  data-notes: "Hi Im Hubert Cadieux first year Master Student in Politcal Science at Université Laval<br>Planning on doing masters thesis on operationalisation political parties potential for growth in multiparty systems<br>With my colleagues, we wrote this article trying to empirically validate a measure of this concept by trying to forecast electoral swings"
 editor: source
 ---
 
 # [Theoretical Background]{style="font-size: 85pt;"}
 [Potential for Growth: What Is It?]{style="font-size: 55pt;"}
 
-```{=html}
-<!-- Hi I'm Hubert Cadieux blabla I'm presenting the article I'm writing with blabla: titre 
-This article forms part of a collective effort to theorize, conceptualize, and operationalize the concept of a continuous potential for growth and vote solidity by developing new measures of vote intention that capture its dynamic nature in multiparty systems.
-I will be conducting my master's thesis on this concept with the goal of mapping respondents' issue attitudes onto this concept.
--->
-```
+::: {.notes}
+First, what is the pot growth, where does it come from?
+:::
 
 ## Traditional Way of Estimating Parties' Chances of Winning
 
--   In a riding or at the national level <!-- Ici, faire un exemple fictif d'une circonscription avec trois partis A, B et C
+::: {.nonincremental}
+-   In a riding or at the national level
+![](graphs/pres_spsa24/1_theoretical_example1.png){width=70%}
+:::
 
-        Exemple 1.1:
-        Graphique classique de Qc125.
-        A a 45% +- 8
-        B a 35% +- 8
-        C a 20% +- 5
-        Conclusions à la lecture du graphique?
-        A a une excellente avance, mais pourrait peut-être être challengé par B.
-        C a aucune chance de l'emporter.
+::: {.notes}
+It comes from the intuition <br>
+Tradtional measures of vote intention fail to capture essential information about an electoral race 
+:::
 
-        Exemple 1.2, MÊMES DONNÉES:
-        A a beaucoup de votes fragiles et pas de potentiel de croissance
-        B a un vote solide mais pas de potentiel de croissance
-        C a une petite base mais solide et un gros potentiel de croissance
-        Nouvelles conclusions?
-        A a une bonne avance sur B, mais au niveau individuel peut facilement perdre des électeurs à C.
-        B a une 2e place facile, mais impossible d'aller plus loin. Espère une séparation des votes entre A et C.
-        C est loin en arrière, mais a un potentiel d'aller chercher des électeurs fragiles de A. C a donc + de chances de gagner que B.
 
-        Exemple 1.3 MÊMES DONNÉES mais en simulant une attaque réussie de C sur les segments fragiles de A
-        Nouveau graphique classique de Qc125 + graphique de potentiel de croissance
+#
+![](graphs/pres_spsa24/1_theoretical_example1.png){width=90%}
 
-        Conclusions:
+::: {.notes}
+Let's take this fictional example. <br>
+In this graph, the X-axis is the Projected Vote share of parties. <br>
+We can come to the following conclusions in interpreting this graph: <br>
+A has an excellent lead <br>
+But B is a potential challenger <br>
+C has no chance of winning.
+:::
 
-        L'opérationnalisation du potentiel de croissance permettrait de forecaster, anticiper des swings potentiels comme à l'exemple 1.3 que les méthodes traditionnelles d'intention de vote ne permettent pas. C'est la logique derrière ce qui nous intéresse dans ce concept.
-        
-      Deux concepts distincts: solidité du vote et potentiel de croissance
 
-        -->
+#
+![](graphs/pres_spsa24/1_theoretical_example2.png){width=100%}
+
+::: {.notes}
+However, these conclusions completely go out the window when we interpret vote intention as a continuous spectrum <br>
+EXPLAIN GRAPH <br>
+Same fictional voters <br>
+one side actual voters of the party, other side voters of other parties <br>
+Ordered from Solid to fragile voters <br>
+Ordered from reachable voters to unreachable <br>
+Whole new set of conclusions <br>
+A fragile shape <br>
+B solid electoral base, but no potential to grow<br>
+C small electoral base, but a lot of potential to grow<br>
+so we can conclude that<br>
+A and C are a communicating vase <br>
+A has a good lead, but could relatively easily lose electors to party C<br>
+B is easily in second place but cant go further. Hopes for A and C to separate votes between themselves. Will try to keep fragile electors<br>
+C is far behind, but could make a play for fragile segments of the electorate of A.<br>
+What if it does?
+:::
+
+#
+![](graphs/pres_spsa24/1_theoretical_example3.png){width=100%}
+
+::: {.notes}
+We get a whole new picture.<br>
+DRINK WATER
+C and A switched<br>
+Like I said, C could also gain less votes and give victory to B, but it is clear that the parties's strategies are far more different when we look deeper in the data.<br>
+Operationalisation enables forecast and anticipate potential electoral swings like in this fictional example that traditional methods do not allow.<br>
+Logic, intuition behind this.<br>
+Two distincts concepts: potential for growth and vote solidity
+:::
 
 ## Why Study It?
 
@@ -61,6 +89,10 @@ I will be conducting my master's thesis on this concept with the goal of mapping
 -   Identifying parties' fragile segments of electorate
 -   Improving electoral forecasting
 -   Better anticipation of electoral swings
+
+::: {.notes}
+better alloc, example of party B: instead of trying to gain new voters, defend its fragile electors
+:::
 
 ## [Research Question]{style="font-size: 85pt;"}
 
@@ -73,15 +105,19 @@ I will be conducting my master's thesis on this concept with the goal of mapping
 <!-- Ajouter une source par model --> 
 
 -   Small history
--   Uncertainty and error of election forecasts
 -   Four classes of forecasting methods
     1.  Structural models
     2.  Models based on the traditional vote intention question
     3.  Vote expectations, wisdom of the crowd
     4.  Combination of the three
 -   These four models do not capture essential information
-    -   Potential shifts
+    -   Potential swings
     -   Fragile segments
+
+::: {.notes}
+Continue with Little breakdown<br>
+History: since the 80s as academic enterprise<br>
+:::
 
 ## Bridging this gap: the Relative Confidence Index (RCI)
 
@@ -89,21 +125,51 @@ I will be conducting my master's thesis on this concept with the goal of mapping
 
 An innovative range approach to measure vote intention
 
+::: {.notes}
+to bridge this gap <br>
+we bring forward a new range measure of vote intention<br>
+relative confidence index
+:::
+
 ## How is it Calculated?
 
-<!-- COMMENT C'EST CALCULÉ, copier les slides de l'an passé -->
+![](graphs/pres_spsa24/2_rci_1.png)
+
+::: {.notes}
+to measure rci, we ask respondents on scale 0-10<br>
+thats the continuous part<br>
+WATER
+:::
+
+
+## How is it Calculated?
+![](graphs/pres_spsa24/2_rci_2.png)
+
+::: {.notes}
+the relative part is that we<br>
+substract the vote likelihood of the second party to vote likelhiood of the first: positive value<br>
+Julie party a Tomas party c<br>
+substract the vote likelihood of the first party to all other parties: negative value<br>
+julie B and c<br>
+positive: as you approach 10, the more solid is your vote<br>
+negative: as you aproach 0, you gradually become a elector with more potential<br>
+:::
+
 
 ## What Has Been Done With This Approach?
 
 <!-- Ne pas commencer ton bullet point avec la référence: inverse les deux éléments d’info. Ce qui a été fait d’abord, la référence ensuite. Et assure-toi de bien faire ressortir en quoi cette approche apporte ou répond à de nouvelles questions par rapport aux notes de recherche précédentes. -->
 
--   Dufresne et al. (2018): Sur le potentiel de croissance du PQ (*On the Potential for Growth of the PQ*)
--   Déry et al. (2022):
--   *Unpublished* Cadieux et al. (2024): On Volatility and Parties' Potential for Growth
+::: {.nonincremental}
+-   Dufresne et al. (2022): Le potentiel de croissance du Parti québécois : L’envers du vote (*The Potential for Growth of the Parti Québécois: The Flip Side of Voting*)
+-   Déry et al. (2022): Sur le potentiel de croissance du Parti conservateur du Québec (*On the Potential for Growth of the Conservative Party of Quebec*)
+-   *Unpublished* Cadieux et al. (2024?): On Volatility and Parties' Potential for Growth
+:::
 
-{Montrer des graphs intéressants de ces notes de recherche}
-
-<!-- Montrer des graphs intéressants de ces notes de recherche -->
+::: {.notes}
+The measure has been introduced and presented descriptively in these 3 articles<br>
+More descriptive rather than validating its value
+:::
 
 ## Theoretical Benefits of Such Measure
 
@@ -114,28 +180,67 @@ An innovative range approach to measure vote intention
 -   Makes a difference between unreachable and reachable electors → [***potential for growth***]{style="font-size: 40pt; color: #00BFFF;"}
 -   Makes a difference between a solid and a fragile voter → [***vote solidity***]{style="font-size: 40pt; color: #00BFFF;"}
 
-## Validity at the Individual Level
+::: {.notes}
+these articles also lay out the theoretical benefits of the measure
+most important are
+:::
 
-<!--- What does it mean to be a 3? A -2? A 6? Mettre les probabilités prédites sur l'intention de vote binaire --->
-
-{What does it mean to be a 3? A -2? A 6? Mettre les probabilités prédites sur l'intention de vote binaire}
-
-## Descriptive: RCI Distribution by Party
-
-{Distribution de l'IRC des partis prov et féd}
 
 # Data and Context
 
 ## Case Study
 
 -   Quebec Provincial Election, 2022
-- CAQ won 89 ridings, majority of seats
-- Today's projections, one year later: PQ close to a majority, CAQ **19**
+- Election date: October 3rd, 2022
+- First-past-the-post
+- 125 electoral ridings
+- Drastic decline of the majority government since then
 
-{Montrer le graphique des sièges par parti}
-{Expliquer rapidement les 5 partis sur l'axe gauche-droite et leur aspect historique}
+::: {.notes}
+alright if we go back to the research question, which is<br>
+we used the months before and after Quebec Provincial Election of 2022 as case study<br>
+for context, Quebec is a multiparty parliamentary system with first past the post elections where each party aims to elect a representative in 125 electoral ridings<br>
+:::
 
-- Could we have predicted this {montée} of the PQ?
+
+## 2022 Election Results
+![](graphs/pres_spsa24/6_casestudy_elxnresults.png)
+
+::: {.notes}
+CAQ (majority incumbent) won 90 ridings, majority of seats
+If we look at the electoral results, we can clearly see that CAQ won by a landslide, even in popular vote.<br>
+We can also observe the PQ, which had 15% of the popular vote and 2% of the seats
+:::
+
+
+## Projections from December 2023
+![](graphs/pres_spsa24/6_casestudy_projections.png)
+
+::: {.notes}
+Projections from today show a complete different picture<br>
+CAQ now sits 2nd in popular vote and 3rd in projected seats.<br>
+CAQ **19 seats**
+PQ is close to a majority with 57 projected seats and leads popular vote<br>
+:::
+
+
+##
+[Could we have forecasted the rise of the PQ?]{style="font-size: 47pt;"}
+
+![](graphs/pres_spsa24/6_casestudy_projections.png){width=530px}
+
+:::{.notes}
+This case study is perfect to test the rci as a measure of potential for growth: in a matter of 14 months, the PQ went from 2% of the seats to 46%. This enormous rise can definitely be studied through the lenses of potential for growth and vote solidity. Impossible to predict using traditional measures
+:::
+
+# [Hypotheses]{style="font-size: 85pt;"}
+
+1. [PQ had high]{style="font-size: 47pt;"} [***potential for growth***]{style="font-size: 55pt; color: #00BFFF;"} [in ridings won by the CAQ]{style="font-size: 47pt;"}
+2. [CAQ had low]{style="font-size: 47pt;"} [***vote solidity***]{style="font-size: 55pt; color: #00BFFF;"} [overall]{style="font-size: 47pt;"}
+
+:::{.notes}
+we lay out 2 hypotheses to test this
+:::
 
 ## Datasets {.smaller}
 
@@ -152,85 +257,583 @@ Potential for growth
 ::: {.column width="50%"}
 Electoral swings
 
--   2022 Electoral results
--   Qc125.com December 2023 projections
+-   2022 Electoral results compared with Qc125.com December 2023 projections
 :::
+:::
+
+::: {.notes}
+To obtain estimates of potential for growth and vote solidity in each electoral riding, we used a combination of monthly surveys taken before the 2022 election.<br>
+We are currently in discussion to obtain data from the Vote Compasses, which would gather hundreds of thousands data points.<br>
+We projected the survey data on populational data from 2021 Canadian Census<br>
+
+To compare with actual projections, we collected data from the survey aggregator Qc125.com, which is equivalent to 538 in the USA.
 :::
 
 # Methodology
 
+::: {.notes}
+The methodological part of this artile is related to the challenge of estimating the RCI at the riding level considering our 9000 data points
+:::
+
 ## Estimating the RCI at the Riding-Level
 
-<!-- Why at the riding level? Because electoral results are only at the riding-level -->
-
+::: {.nonincremental}
 -   Step 1: compute regression models to predict the RCI using survey data
 -   Step 2: predict those models on riding-level census data
 -   Step 3: aggregate the RCI and its uncertainty using segments' weights in the riding
+:::
+
+:::{.notes}
+So the 3 main steps are the following. We needed to estimate the negative and positive rci for each party in each riding.<br>
+:::
 
 ## Step 1: Compute Regression Models to Predict the RCI Using Survey Data
 
-<!-- Il faut trouver une façon de bien expliquer ici -->
-
 -   Vote solidity: `lm(rci ~ age * langue * region * male)` but only for a party's current electoral base
 -   Potential for growth: `lm(rci ~ age * langue * region * male)` but only for respondents who do not currently vote for the party
--   Vote intention: `multinom(party ~ age * langue * granular + male)`
+<!-- -   Vote intention: `multinom(party ~ age * langue * granular + male)` -->
+
+:::{.notes}
+Interaction term between age language gender and region<br>
+The models were the same for vote sol and pot growth and were the same for each party<br>
+Total of 10 models (5 parties TIMES 2 DV)<br>
+<!-- Each riding was associated with one of the 17ish administrative regions of Quebec (some tweaks). Done because low number of respondents by some ridings.--->
+:::
 
 ## Step 2: Predict Those Models on Riding-Level Census Data
 
-<!-- Avoir tableau/graph exemple pour une circonscription où on voit le poids des répondants, leur prédiction, marge d'erreur etc. -->
+```{r}
+# Packages ----------------------------------------------------------------
+library(dplyr)
+# Data --------------------------------------------------------------------
+Data <- readRDS("../_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/disaggregated/potgrowth_votesolidity.rds") %>% 
+  filter(riding_id %in% c(258, 206) &
+           model == "potgrowth" &
+           langue == "french" &
+           party %in% c("PQ", "CAQ")) %>% 
+  mutate(Riding = case_when(
+    riding_id == 258 ~ "Borduas",
+    riding_id == 206 ~ "Granby"
+    ),
+         Region = case_when(
+    riding_id == 258 ~ "Montérégie",
+    riding_id == 206 ~ "Estrie"
+    ),
+         Gender = ifelse(male == 1, "Male", "Female"),
+         Language = case_when(
+           langue == "french" ~ "French",
+           langue == "english" ~ "English"
+           ),
+         prct = round(prct, digits = 2),
+         estimate = round(estimate, digits = 2),
+         std.error = round(std.error, digits = 2)) %>% 
+  arrange(-estimate) %>% 
+  select(Riding, Region, Weight = prct, Language, Gender,
+         Age = age, party, estimate,
+         std.error) %>% 
+  tidyr::pivot_wider(., names_from = "party",
+              values_from = c("estimate", "std.error"),
+              id_cols = c("Gender", "Age", "Language", "Riding", "Region", "Weight")) %>% 
+  rename("Pot Growth\nEstimate CAQ" = estimate_CAQ,
+         "Std Error CAQ" = std.error_CAQ,
+         "Pot Growth\nEstimate PQ" = estimate_PQ,
+         "Std Error PQ" = std.error_PQ) %>% 
+  select(Riding, Region, Weight, Language, Gender,
+         Age, `Pot Growth\nEstimate CAQ`, `Std Error CAQ`,
+         `Pot Growth\nEstimate PQ`,
+         `Std Error PQ`)
+  
+knitr::kable(Data) %>% 
+  kableExtra::kable_styling(font_size = 20) %>% 
+  kableExtra::column_spec(7, color = "white", background = "#00cccc") %>% 
+  kableExtra::column_spec(9, color = "white", background = "#004C9D")
+```
+
+[*Example with potential for growth estimates for two parties, PQ and CAQ, in two ridings, Borduas and Granby, for francophones segments*]{style="font-size: 12pt;"}
+
+:::{.notes}
+example french women 34 years or younger<br>
+we can also observe the different weights in the riding of each segment.<br>
+we can also observe that the same profile in a riding from a different region has different predictions<br>
+WATER
+:::
+
+<!---
+## 
+```{r}
+# Packages ----------------------------------------------------------------
+library(dplyr)
+# Data --------------------------------------------------------------------
+Data <- readRDS("../_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/disaggregated/potgrowth_votesolidity.rds") %>% 
+  filter(riding_id %in% c(258, 252) &
+           model == "potgrowth" &
+           langue == "french" &
+           party %in% c("PQ", "CAQ")) %>% 
+  mutate(Riding = case_when(
+    riding_id == 258 ~ "Borduas",
+    riding_id == 252 ~ "Montarville"
+    ),
+         Region = case_when(
+    riding_id == 258 ~ "Montérégie",
+    riding_id == 252 ~ "Montérégie"
+    ),
+         Gender = ifelse(male == 1, "Male", "Female"),
+         Language = case_when(
+           langue == "french" ~ "French",
+           langue == "english" ~ "English"
+           ),
+         prct = round(prct, digits = 2),
+         estimate = round(estimate, digits = 2),
+         std.error = round(std.error, digits = 2)) %>% 
+  arrange(-estimate) %>% 
+  select(Riding, Region, Weight = prct, Language, Gender,
+         Age = age, party, estimate,
+         std.error) %>% 
+  tidyr::pivot_wider(., names_from = "party",
+              values_from = c("estimate", "std.error"),
+              id_cols = c("Gender", "Age", "Language", "Riding", "Region", "Weight")) %>% 
+  rename("Pot Growth\nEstimate CAQ" = estimate_CAQ,
+         "Std Error CAQ" = std.error_CAQ,
+         "Pot Growth\nEstimate PQ" = estimate_PQ,
+         "Std Error PQ" = std.error_PQ) %>% 
+  select(Riding, Region, Weight, Language, Gender,
+         Age, `Pot Growth\nEstimate CAQ`, `Std Error CAQ`,
+         `Pot Growth\nEstimate PQ`,
+         `Std Error PQ`)
+knitr::kable(Data) %>% 
+  kableExtra::kable_styling(font_size = 20) %>% 
+  kableExtra::column_spec(7, color = "white", background = "#00cccc") %>% 
+  kableExtra::column_spec(9, color = "white", background = "#004C9D")
+```
+
+[*Same profiles from the same regions have the same estimates*]{style="font-size: 12pt;"}
+
+:::{.notes}
+here we can observe that profiles in ridings from the same regions have the same predictions.<br>
+By riding differences will come for the socio-demographical composition
+:::
+--->
 
 ## Step 3: Aggregate the RCI and Its Uncertainty Using Segments' Weights in the Riding
 
-<!-- Partir de step 2 et agrégér, trouver une façon que ça soit bien visualisé -->
+::: columns
+::: {.column width="50%"}
+```{r}
+# Packages ----------------------------------------------------------------
+library(dplyr)
+# Data --------------------------------------------------------------------
+Data <- readRDS("../_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/disaggregated/potgrowth_votesolidity.rds") %>% 
+  filter(riding_id %in% c(258, 252) &
+           model == "potgrowth" &
+           langue == "french" &
+           party %in% c("PQ", "CAQ")) %>% 
+  mutate(Riding = case_when(
+    riding_id == 258 ~ "Borduas",
+    riding_id == 252 ~ "Montarville"
+    ),
+         Region = case_when(
+    riding_id == 258 ~ "Montérégie",
+    riding_id == 252 ~ "Montérégie"
+    ),
+         Gender = ifelse(male == 1, "Male", "Female"),
+         Language = case_when(
+           langue == "french" ~ "French",
+           langue == "english" ~ "English"
+           ),
+         prct = round(prct, digits = 2),
+         estimate = round(estimate, digits = 2),
+         std.error = round(std.error, digits = 2)) %>% 
+  arrange(-estimate) %>% 
+  select(Riding, Region, Weight = prct, Language, Gender,
+         Age = age, party, estimate,
+         std.error) %>% 
+  tidyr::pivot_wider(., names_from = "party",
+              values_from = c("estimate", "std.error"),
+              id_cols = c("Gender", "Age", "Language", "Riding", "Region", "Weight")) %>% 
+  rename("Pot Growth\nEstimate CAQ" = estimate_CAQ,
+         "Std Error CAQ" = std.error_CAQ,
+         "Pot Growth\nEstimate PQ" = estimate_PQ,
+         "Std Error PQ" = std.error_PQ) %>% 
+  select(Riding, Region, Weight, Language, Gender,
+         Age, `Pot Growth\nEstimate CAQ`, `Std Error CAQ`,
+         `Pot Growth\nEstimate PQ`,
+         `Std Error PQ`)
+knitr::kable(Data) %>% 
+  kableExtra::kable_styling(font_size = 9) %>% 
+  kableExtra::column_spec(3, color = "white", background = "red") %>% 
+  kableExtra::column_spec(7, color = "white", background = "#00cccc") %>% 
+  kableExtra::column_spec(9, color = "white", background = "#004C9D")
+```
+:::
 
-## Output
+::: {.column width="45%"}
+```{r}
+# Packages ----------------------------------------------------------------
+library(dplyr)
+# Data --------------------------------------------------------------------
+Data <- readRDS("../_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/disaggregated/potgrowth_votesolidity.rds") %>% 
+  filter(riding_id %in% c(258, 252) &
+           model == "potgrowth" &
+           langue == "french" &
+           party %in% c("PQ", "CAQ")) %>% 
+  mutate(Riding = case_when(
+    riding_id == 258 ~ "Borduas",
+    riding_id == 252 ~ "Montarville"
+    ),
+         Region = case_when(
+    riding_id == 258 ~ "Montérégie",
+    riding_id == 252 ~ "Montérégie"
+    ),
+         Gender = ifelse(male == 1, "Male", "Female"),
+         Language = case_when(
+           langue == "french" ~ "French",
+           langue == "english" ~ "English"
+           ),
+         prct = round(prct, digits = 2),
+         estimate = round(estimate, digits = 2),
+         std.error = round(std.error, digits = 2)) %>% 
+  arrange(-estimate) %>% 
+  select(Riding, Region, Weight = prct, Language, Gender,
+         Age = age, party, estimate,
+         std.error) %>% 
+  tidyr::pivot_wider(., names_from = "party",
+              values_from = c("estimate", "std.error"),
+              id_cols = c("Gender", "Age", "Language", "Riding", "Region", "Weight")) %>% 
+  rename("Pot Growth\nEstimate CAQ" = estimate_CAQ,
+         "Std Error CAQ" = std.error_CAQ,
+         "Pot Growth\nEstimate PQ" = estimate_PQ,
+         "Std Error PQ" = std.error_PQ) %>% 
+  select(Riding, Region, Weight, Language, Gender,
+         Age, `Pot Growth\nEstimate CAQ`, `Std Error CAQ`,
+         `Pot Growth\nEstimate PQ`,
+         `Std Error PQ`)
 
-{Faire un graphique où on ordonne les ridings pour la CAQ avec les 3 modèles (potgrowth vote solidity et vote intent) sur le graph}
+Agg <- Data %>% 
+  mutate(weighted_estimate_CAQ = `Pot Growth\nEstimate CAQ` * Weight,
+         weighted_estimate_PQ = `Pot Growth\nEstimate PQ` * Weight) %>% 
+  group_by(Riding) %>% 
+  summarise(`Weighted mean\nCAQ` = round(sum(weighted_estimate_CAQ) / sum(Weight), 2),
+            `Weighted mean\nPQ`  = round(sum(weighted_estimate_PQ) / sum(Weight), 2))
 
-{Faire un graphique qui résume pour une circonscription avec les 5 partis ou pour 2-3 segments dans une circonscription}
+knitr::kable(Agg) %>% 
+  kableExtra::kable_styling(font_size = 25)
+```
 
-<!-- Faire un graphique où on ordonne les ridings pour la CAQ exemple avec les 3 modèles sur le graph -->
+[*The weighted standard error is also calculated.*]{style="font-size: 12pt;"}
 
-<!-- Faire un graphique qui résume pas pire pour une circonscription avec les 5 partis ou pour 2-3 segments dans une circonscription -->
+:::{.notes}
+We simply did a weighted mean
+:::
 
-# Results: Can it Improve the Forecasting of Electoral Swings?
 
-## Descriptive Graphs : Distribution of Potential for Growth of Ridings by Party
+:::
+:::
 
-## Descriptive Graphs : Distribution of Vote Solidity of Ridings by Party
 
-## Descriptive Graphs: Correlation Between Potential for Growth and Actual Qc125 Projections
+## Output of the Aggregation
 
-## Descriptive Graphs: Parties' Electoral Gains Since 2022
+```{r}
+library(dplyr)
+library(ggplot2)
 
-<!-- Ici on voit que le PQ a full gagné et la CAQ a full perdu -->
+ridings <- readRDS("../_SharedFolder_article_pot-growth/data/warehouse/dimensions/prov_ridings/data.rds")
 
-## Using a Traditional Measure: 2022 Vote Shares
-{Graphique Vote solidity CAQ VS 2022 Vote Shares}
+Data <- readRDS("../_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/aggregated/potgrowth_votesolidity.rds") %>% 
+  left_join(., ridings, by = "riding_id") %>% 
+  filter(party %in% c("PQ", "CAQ") &
+           model == "potgrowth" &
+           riding_id != "938") %>% 
+  group_by(party) %>% 
+  mutate(rank = rank(-weighted_mean_estimate),
+         riding_name = tidytext::reorder_within(riding_name, weighted_mean_estimate, party)) %>% 
+  filter(rank <= 10)
+
+colors <- c("CAQ" = "#00cccc", "PQ" = "#004C9D")
+ggplot(Data, aes(x = weighted_mean_estimate, y = riding_name,
+                 color = party)) +
+  facet_wrap(~party, scales = "free_y") +
+  tidytext::scale_y_reordered() +
+  clessnverse::theme_clean_light() +
+  geom_point() +
+  geom_linerange(aes(xmin = conf_low, xmax = conf_high)) +
+  guides(color = "none") +
+  scale_color_manual(values = colors) +
+  xlab("\nPotential for Growth Estimate\n") +
+  ylab("") +
+  theme(axis.title.x = element_text(hjust = 0.5, size = 20),
+        axis.text.y = element_text(size = 14))
+
+```
+
+:::{.notes}
+top 10 ridings for PQ and CAQ in potential for growth estimate.<br>
+Important to remember that there is also this estimate for vote solidity following the exact same steps
+:::
+
+# Results: Can it Improve the Forecasting of Electoral Swings? The Case of the PQ
+
+## Descriptive : Distribution of Potential for Growth of Ridings
+
+```{r}
+# data loading ------------------------------------------------------------
+df <- readRDS("../_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/aggregated/potgrowth_votesolidity.rds")
+# data wrangling ----------------------------------------------------------
+df_pg <- df %>% 
+  filter(model == "potgrowth", riding_id != "938") %>% 
+  mutate(weighted_mean_estimate == ifelse(weighted_mean_estimate > 0, 0, weighted_mean_estimate))
+df_pg$party[df_pg$party == "PLQ"] <- "QLP"
+df_pg$party[df_pg$party == "PCQ"] <- "CPQ"
+df_pg$party <- factor(df_pg$party, levels = c("CPQ", "PQ", "QS", "QLP", "CAQ"))
+df_vs <- df %>% 
+  filter(model == "vote_solidity", riding_id != "938")
+df_vs$party[df_vs$party == "PLQ"] <- "QLP"
+df_vs$party[df_vs$party == "PCQ"] <- "CPQ"
+df_vs$party <- factor(df_vs$party, levels = c("CPQ", "PQ", "QS", "QLP", "CAQ"))
+# graphs ------------------------------------------------------------------
+colors <- c("CAQ" = "#00cccc", "QLP" = "#ED1A2D", "PQ" = "#004C9D", "QS" = "#FF5605", "CPQ" = "purple")
+ggplot(df_pg, aes(x = weighted_mean_estimate, y = party, fill = party, color = party)) +
+  ggridges::geom_density_ridges(alpha = 0.4, color = "white", quantile_lines = TRUE) +
+  scale_fill_manual(values = colors) +
+  scale_color_manual(values = colors) +
+  labs(title = "", x = "\nPotential for Growth Estimate Using RCI\n", y = "",
+       caption = "The quantile lines represent the 25th, 50th and 75th percentiles of the distribution") +
+  clessnverse::theme_clean_light() +
+  theme(legend.position = "none",
+        axis.title.x = element_text(hjust = 0.5, size = 20),
+        axis.text.x = element_text(size = 20),
+        axis.text.y = element_text(size = 20),
+        plot.caption = element_text(size = 12)) 
+```
+
+:::{.notes}
+First, intriguing that CAQ is 1st in potential for growth<br>
+Second, PQ is leading among challenger parties<br>
+WATER
+:::
+
+## Descriptive : Distribution of Vote Solidity of Ridings
+
+
+```{r}
+ggplot(df_vs, aes(x = weighted_mean_estimate, y = party, fill = party, color = party)) +
+  ggridges::geom_density_ridges(alpha = 0.4, color = "white", quantile_lines = TRUE) +
+  scale_fill_manual(values = colors) +
+  scale_color_manual(values = colors) +
+  labs(title = "", x = "\nVote Solidity Estimate Using RCI\n", y = "",
+       caption = "The quantile lines represent the 25th, 50th and 75th percentiles of the distribution") +
+  clessnverse::theme_clean_light() +
+  theme(legend.position = "none",
+        axis.title.x = element_text(hjust = 0.5, size = 20),
+        axis.text.x = element_text(size = 20),
+        axis.text.y = element_text(size = 20),
+        plot.caption = element_text(size = 12)) 
+```
+
+:::{.notes}
+When we look vote solidity, results are less what we expected<br>
+CAQ is still leading. We expected CAQ to have more fragile ridings.<br>
+Even though CAQ had solid vote, we still expect the following: PQ had high pot growth in ridings CAQ won.<br>
+That means that if CAQ were to fail (which should not have been likely from this analysis), we should expect PQ to rise and not another challenger.<br>
+This leads us to the following analysis using TRADITIONAL MEASURE, vote shares:
+:::
+
+
+## Using 2022 Vote Shares
+
+```{r}
+ResultsQc125 <- left_join(readRDS("../_SharedFolder_article_pot-growth/data/warehouse/step2_electoral_swings/qc125_provqc2022.rds"),
+                          readRDS("../_SharedFolder_article_pot-growth/data/warehouse/step2_electoral_swings/results_provqc2022.rds"),
+                          by = c("riding_id", "party")) %>%
+  tidyr::drop_na() %>% 
+  mutate(delta = proj_vote - prop_vote) %>% 
+  group_by(riding_id) %>% 
+  mutate(winner2022 = ifelse(prop_vote == max(prop_vote), 1, 0),
+         winnernow = ifelse(proj_vote == max(proj_vote), 1, 0))
+
+DataAgg <- readRDS("../_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2022/aggregated/potgrowth_votesolidity.rds") %>%
+  select(riding_id, party, model, estimate = weighted_mean_estimate, stderr = weighted_stderr) %>%
+  left_join(., ResultsQc125, by = c("riding_id", "party")) %>% 
+  filter(riding_id != "938") %>% # removing Ungava too uncertain
+  tidyr::drop_na() %>% 
+  mutate(conf.low = estimate - stderr*1.96,
+         conf.high = estimate + stderr*1.96)
+
+CaqWon <- DataAgg %>% 
+  filter(party == "CAQ" & model == "vote_solidity" &
+           winner2022 == 1) %>% 
+  ungroup() %>% 
+  select(riding_id, votesolCAQ = estimate, caq_still_winning = winnernow)
+
+# Graph ------------------------------------------------------------------
+
+colors <- c("CAQ" = "#00cccc", "PLQ" = "#ED1A2D", "PQ" = "#004C9D", "QS" = "#FF5605", "PCQ" = "purple")
+
+Data <- DataAgg %>% 
+  filter(riding_id %in% CaqWon$riding_id &
+           party != "CAQ" & model == "potgrowth") %>% 
+  select(riding_id, riding_name, party, potgrowth = estimate, prop_vote22 = prop_vote,
+         delta, winnernow) %>% 
+  mutate(prop_vote22 = prop_vote22 * 100) %>% 
+  tidyr::pivot_longer(., cols = c("potgrowth", "prop_vote22"),
+                      names_to = "method") %>% 
+  left_join(., CaqWon, by = "riding_id") %>% 
+  mutate(winnernow = ifelse(winnernow == 1, "Leading as of\nlatest projections", "Still behind"),
+         method = ifelse(method == "potgrowth", "Potential for Growth Estimate", "Vote share in 2022 (%)"),
+         caq_still_winning = ifelse(caq_still_winning == 1, "CAQ still winning", "Challenger winning"))
+
+means <- Data %>% 
+  filter(method == "Vote share in 2022 (%)") %>% 
+  group_by(party, method) %>% 
+  summarise(mean = mean(value))
+
+Data %>% 
+  filter(method == "Vote share in 2022 (%)") %>% 
+  mutate(delta = delta*100) %>% 
+  ggplot(aes(x = reorder(riding_name, votesolCAQ), y = value)) +
+  geom_linerange(aes(ymin = -Inf, ymax = Inf,
+                     color = caq_still_winning),
+                 alpha = 0.6, linewidth = 0.1) +
+  scale_color_manual(name = "", values = c("grey20", "grey85")) +
+  guides(color = guide_legend(
+    override.aes = list(alpha = 1,
+                        linewidth = 0.5)
+  )) +
+  ggnewscale::new_scale_color() +
+  geom_hline(data = means, aes(yintercept = mean,
+                               color = party),
+             show.legend = F, linetype = "dashed",
+             linewidth = 0.8, alpha = 0.4) +
+  geom_point(aes(color = party,
+                 size = delta),
+             alpha = 0.4,
+             shape = 19,
+             stroke = NA) +
+  guides(color = "none",
+         size = guide_legend(title = "Gains by the\nchallenger since\n2022 (vote shares %)",
+                             title.position = "top")) +
+  scale_color_manual(values = colors) +
+  scale_size_continuous(range = c(1, 5)) +
+  scale_x_discrete(expand = c(0.015, 0.015)) +
+  ylab("\nVote share in 2022 (%)\n") +
+  xlab("\nRidings won by the CAQ\n(ordered from least to most solid)\n") +
+  clessnverse::theme_clean_light() +
+  labs(caption = "Dashed lines represent the mean of the measure.\nUngava riding was removed due to the uncertainty of its estimate.") +
+  theme(axis.title.x = element_text(hjust = 0.5, size = 15),
+        axis.title.y = element_text(hjust = 0.5),
+        legend.title = element_text(),
+        strip.placement = "outside",
+        strip.text.y = element_text(size = 15),
+        panel.grid.major.x = element_line(color = "grey85", linewidth = 0.15),
+        panel.grid.minor.x = element_blank(),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 4),
+        axis.text.y = element_text(size = 11),
+        legend.position = "right")
+```
+[*Among challengers, PQ is first in 46% of the ridings.*]{style="font-size: 12pt;"}
+
+:::{.notes}
+I'll take some time to explain this one.<br>
+x-axis<br>
+y-axis<br>
+Observation: Difficult to predict from this that PQ would rise.<br>
+Among challengers, PQ leads in 46% of the ridings won by CAQ
+:::
 
 <!-- From this graph, impossible to explain the montée of the PQ -->
 
-## Using the RCI
-{Graphique Vote solidity CAQ VS Potential for growth}
+## Using Potential for Growth
+
+```{r}
+means <- Data %>% 
+  filter(method == "Potential for Growth Estimate") %>% 
+  group_by(party, method) %>% 
+  summarise(mean = mean(value))
+
+Data %>% 
+  filter(method == "Potential for Growth Estimate") %>% 
+  mutate(delta = delta*100) %>% 
+  ggplot(aes(x = reorder(riding_name, votesolCAQ), y = value)) +
+  geom_linerange(aes(ymin = -Inf, ymax = Inf,
+                     color = caq_still_winning),
+                 alpha = 0.6, linewidth = 0.1) +
+  scale_color_manual(name = "", values = c("grey20", "grey85")) +
+  guides(color = guide_legend(
+    override.aes = list(alpha = 1,
+                        linewidth = 0.5)
+  )) +
+  ggnewscale::new_scale_color() +
+  geom_hline(data = means, aes(yintercept = mean,
+                               color = party),
+             show.legend = F, linetype = "dashed",
+             linewidth = 0.8, alpha = 0.4) +
+  geom_point(aes(color = party,
+                 size = delta),
+             alpha = 0.4,
+             shape = 19,
+             stroke = NA) +
+  guides(color = "none",
+         size = guide_legend(title = "Gains by the\nchallenger since\n2022 (vote shares %)",
+                             title.position = "top")) +
+  scale_color_manual(values = colors) +
+  scale_size_continuous(range = c(1, 5)) +
+  scale_x_discrete(expand = c(0.015, 0.015)) +
+  ylab("\nPotential for Growth Estimate\n") +
+  xlab("\nRidings won by the CAQ\n(ordered from least to most solid)\n") +
+  clessnverse::theme_clean_light() +
+  labs(caption = "Dashed lines represent the mean of the measure.\nUngava riding was removed due to the uncertainty of its estimate.") +
+  theme(axis.title.x = element_text(hjust = 0.5, size = 15),
+        axis.title.y = element_text(hjust = 0.5),
+        legend.title = element_text(),
+        strip.placement = "outside",
+        strip.text.y = element_text(size = 15),
+        panel.grid.major.x = element_line(color = "grey85", linewidth = 0.15),
+        panel.grid.minor.x = element_blank(),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 4),
+        axis.text.y = element_text(size = 11),
+        legend.position = "right")
+```
+[*Among challengers, PQ is first in 85% of the ridings.*]{style="font-size: 12pt;"}
+
+:::{.notes}
+If we do the same graph but by changing the traditional measure with the potential for growth estimates...<br>
+PQ is now clearly in the best position among challengers to take over if CAQ fails.<br>
+Leads in 85% of the ridings<br>
+WATER
+:::
+
 <!-- From this graph, PQ in good position in ridings CAQ won.-->
 <!-- Needs a catalyst!!! -->
 
-## Other Potential Future Swings?
+## Conclusions
 
-<!-- Checker PCQ-CAQ, QS-PLQ, QS-PQ -->
+1. PQ had high potential for growth in ridings won by the CAQ → confirmed
+2. CAQ had low vote solidity overall → rejected
 
 # Article Contributions
 
+::: {.nonincremental}
 -   Empirical results to validate the concept of potential for growth
 -   Broadening the recognition of the concept in the field
 -   Explore basic and simplified operationalisations
 -   Opening the door to more complex operationalisations
+- More case studies
+  - 2021 Canadian Federal Election
+  - 2024 (?) Canadian Federal Election
+  
+:::
+
+::: {.notes}
+So this article brings some validation to the RCI and this method of aggregating it for Potential for Growth<br>
+However, results are more intriguing in the case of vote solidity.<br>
+The decline of the CAQ was not likely by the results presented in this article.<br>
+Next steps for this article include more comlex and nuanced operationalisations as well as adding more case studies<br>
+Thank you
+:::
+
 
 # Discussion & Next Steps
 
 ## The End of the Line?
-
-### Weak Signal, Yet Still Worth Exploring
 
 -   Preliminary weak findings: caution against premature dismissal of the concept
 -   Solid theoretical foundation, derived from logical intuitions
@@ -243,13 +846,15 @@ Electoral swings
     -   Electoral campaign
     -   Salient events
     -   Parties' efforts to reach segments
--   Position of parties and respondents on salient issues
+-   Position of parties and public opinion on salient issues
     -   Parties' room to maneuver
 -   Political sophistication
+- Does potential for growth vary through time?
 
 ## Operationalisation of the Concepts
 
 -   Challenge: need to start with simplistic measures before going into more complicated operationalisations
+- Current limit: party models are independent one another
 -   Catalysts
 
 ## More Case Studies
@@ -282,6 +887,57 @@ Electoral swings
 -   The room to maneuver of parties
     -   Optimal positions on salient issues
     -   Segments to target
+    - Valuable information for political communication
 -   The estimable number of seats that is possibly reachable by a party if an election campaign would be launched today
+  - Given its current positions on salient issues
+  - Given its optimal positions on salient issues
 
-<!-- Montrer un exemple du end game avec des données simulées -->
+
+## Dufresne et al. 2022
+![](graphs/pres_spsa24/3_done.png)
+
+::: {.notes}
+we can see this kind of vizualisation<br>
+where we see the mean rci of a party's voters for other parties.<br>
+by looking through the 2018 panel, we could interpret that the PQ had high potential for growth for electors of CAQ and QS 
+:::
+
+
+
+## Déry et al. 2022
+![](graphs/pres_spsa24/3_done2.png)
+
+::: {.notes}
+we opted for a more simplistic portrait of the electoral<br>
+rectangles with dotted border are potential electors for a party
+:::
+
+
+## Cadieux et al. 2024?
+![](graphs/pres_spsa24/3_done3.png)
+
+:::{.notes}
+in this paper that I wrote, trying to get published with my colleague gurth rémy<br>
+some weak validation of the rci as a condition for local electoral volatility 
+:::
+
+## Theoretical Benefits of Such Measure
+
+-   More suitable to multiparty systems
+-   Adding layer of choices → reduction of prediction error
+-   More nuance to deal with undecided voters
+-   Alleviate uncertainty associated with attitude/behaviour discrepancies
+-   Makes a difference between unreachable and reachable electors → [***potential for growth***]{style="font-size: 40pt; color: #00BFFF;"}
+-   Makes a difference between a solid and a fragile voter → [***vote solidity***]{style="font-size: 40pt; color: #00BFFF;"}
+
+
+## Validity at the Individual Level
+
+::: {.notes}
+What does it mean to be a 3, a -2 or a 6?
+Here we have the aggregated predictive outcomes of a logit regression with the traditional, binary vote intention question as the DV<br>
+it allows us to pinpoint some threshold where the RCI is more surely turned into a vote intention<br>
+Limit: vote intent at the same point in time than the rci, so really just matter of coherence of respondents
+:::
+
+![](graphs/pres_spsa24/4_validity.png)

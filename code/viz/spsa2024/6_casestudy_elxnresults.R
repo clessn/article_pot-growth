@@ -5,7 +5,6 @@ library(ggplot2)
 # data loading ------------------------------------------------------------
 df <- readRDS("_SharedFolder_article_pot-growth/data/warehouse/step2_electoral_swings/results_provqc2022.rds")
 
-
 # data wrangling ----------------------------------------------------------
 
 df_vote <- df %>% 
@@ -39,35 +38,33 @@ df_graph$facet <- factor(df_graph$facet, levels = levels)
 df_graph$party[df_graph$party == "PLQ"] <- "QLP"
 df_graph$party[df_graph$party == "PCQ"] <- "CPQ"
 
-saveRDS(df_graph, "_SharedFolder_article_pot-growth/data/marts/electoral_swings/figure1_electoral_results.rds")
-
 # graphs ------------------------------------------------------------------
 
 colors <- c("CAQ" = "#00cccc", "QLP" = "#ED1A2D", "PQ" = "#004C9D", "QS" = "#FF5605", "CPQ" = "purple")
 
 ggplot(df_graph, aes(x = reorder(party, +share), y = share, fill = party, color = party)) +
   geom_col(width = 0.8, alpha = 0.4, color = NA) +
-  geom_text(aes(label = paste0(round(share), "%")), hjust = -0.2, position = position_dodge(0.9), size = 8) +
+  geom_text(aes(label = paste0(round(share), "%")), hjust = -0.2, position = position_dodge(0.9), size = 9) +
   scale_fill_manual(values = colors) +
   scale_color_manual(values = colors) +
-  scale_y_continuous(limits = c(0, 80)) +
+  scale_y_continuous(limits = c(0, 85)) +
   labs(title = "", x = "", y = "Share (%)",
        caption = " ") +
   coord_flip() +
   facet_grid(cols = vars(facet), switch = "x") + 
   clessnverse::theme_clean_light() +
   theme(legend.position = "none",
-        axis.title.x = element_text(hjust = 0.5, size = 20),
-        axis.text.x = element_text(size = 20),
-        axis.text.y = element_text(size = 20),
-        strip.text.x = element_text(size = 20),
+        axis.title.x = element_text(hjust = 0.5, size = 25),
+        axis.text.x = element_text(size = 25),
+        axis.text.y = element_text(size = 25),
+        strip.text.x = element_text(size = 25),
         strip.placement = "outside",
-        plot.caption = element_text(size = 12))
+        plot.caption = element_text(size = 15))
+
+ggsave("pres_spsa2024/graphs/pres_spsa24/6_casestudy_elxnresults.png", height = 7, width = 12)
 
 
 
-ggsave("_SharedFolder_article_pot-growth/graphs/paper/1_electoral_results.png", height = 7, width = 12)
-  
 
 
-  
+

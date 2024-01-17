@@ -44,27 +44,27 @@ ggplot(df_graph2, aes(x = party, y = share, fill = party, color = party)) +
   facet_grid(cols = vars(facet), switch = "x") + 
   geom_col(alpha = 0.4, color = NA, width = barwidth) +
   geom_linerange(aes(xmin = as.numeric(factor(party)) - barwidth / 2,
-                   xmax = as.numeric(factor(party)) + barwidth / 2,
-                   y = share_elxn),
-                 linetype = "dashed", linewidth = 0.9) +
-  geom_text(aes(label = paste0(round(share), "%")), hjust = -0.3, position = position_dodge(0.9), size = 8) +
+                     xmax = as.numeric(factor(party)) + barwidth / 2,
+                     y = share_elxn),
+                 linetype = "dashed", linewidth = 1) +
+  geom_text(aes(label = paste0(round(share), "%")), hjust = -0.19, position = position_dodge(0.9), size = 9) +
   scale_fill_manual(values = colors) +
   scale_color_manual(values = colors) +
-  scale_y_continuous(limits = c(0, 80)) +
+  scale_y_continuous(limits = c(0, 85)) +
   labs(title = "", x = "", y = "Share (%)",
-       caption = "Bars and percentages represent current projections.\nDashed lines represent the party's share in the 2022 Quebec provincial election") +
+       caption = "Dashed lines represent the party's share in the 2022 Quebec provincial election") +
   coord_flip() +
   clessnverse::theme_clean_light() +
   theme(legend.position = "none",
-        axis.title.x = element_text(hjust = 0.5, size = 20),
-        axis.text.x = element_text(size = 20),
-        axis.text.y = element_text(size = 20),
-        strip.text.x = element_text(size = 20),
+        axis.title.x = element_text(hjust = 0.5, size = 25),
+        axis.text.x = element_text(size = 25),
+        axis.text.y = element_text(size = 25),
+        strip.text.x = element_text(size = 25),
         strip.placement = "outside",
-        plot.caption = element_text(size = 12))
+        plot.caption = element_text(size = 15))
 
 
-ggsave("_SharedFolder_article_pot-growth/graphs/paper/2_projections_QC125.png", height = 7, width = 12)
+ggsave("pres_spsa2024/graphs/pres_spsa24/6_casestudy_projections.png", height = 7, width = 12)
 
 
 

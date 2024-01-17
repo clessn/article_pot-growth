@@ -25,9 +25,9 @@ df_vs$party[df_vs$party == "PCQ"] <- "CPQ"
 df_vs$party <- factor(df_vs$party, levels = c("CPQ", "PQ", "QS", "QLP", "CAQ"))
 
 # graphs ------------------------------------------------------------------
-colors <- c("CAQ" = "#00cccc", "QLP" = "#ED1A2D", "PQ" = "#099FFF", "QS" = "#FF5605", "CPQ" = "#172853")
+colors <- c("CAQ" = "#00cccc", "QLP" = "#ED1A2D", "PQ" = "#004C9D", "QS" = "#FF5605", "CPQ" = "purple")
 
-ggplot(df_pg, aes(x = weighted_mean_estimate, y = party, fill = party, color = party)) +
+ggplot(df_pg, aes(x = weighted_mean_estimate * 10, y = party, fill = party, color = party)) +
   geom_density_ridges(alpha = 0.4, color = "white", quantile_lines = TRUE) +
   scale_fill_manual(values = colors) +
   scale_color_manual(values = colors) +
