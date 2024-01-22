@@ -21,3 +21,4 @@ Agg <- Data %>%
          conf_high = weighted_mean_estimate + margin_error_95)
 
 saveRDS(Agg, "_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provqc2023/aggregated/potgrowth_votesolidity.rds")
+

@@ -17,7 +17,7 @@ Data <- left_join(Data, Ridings, by = "riding_id") %>%
          langue = factor(langue))
 
 ### Add weights for year (put x more importance on 2023 than 2022 in the regressions)
-x <- 3
+x <- 8
 Data$year_weight <- ifelse(Data$year == 2023, (x * table(Data$year)["2022"]) / table(Data$year)["2023"], 1)
 
 ## vote solidity
