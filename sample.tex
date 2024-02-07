@@ -1,0 +1,181 @@
+\documentclass[
+  journal=medium,
+  manuscript=article-type,
+  year=2024
+]{cup-journal}
+
+\usepackage{amsmath}
+\usepackage[nopatch]{microtype}
+\usepackage{booktabs}
+\usepackage{setspace}
+\doublespacing
+%\singlespacingspacing
+
+\title{Electoral Dynamics in Quebec: Analyzing the Rise of the Parti Québécois through the Lens of Potential for Growth}
+
+\author{Hubert Cadieux}
+\affiliation{Université Laval}
+
+\author{Catherine Ouellet}
+\affiliation{Université de Montréal}
+
+\author{Sarah-Jane Vincent}
+\affiliation{Université Laval}
+
+\author{Jérémy Gilbert}
+\affiliation{Université Laval}
+
+\author{Camille Pelletier}
+\affiliation{Université Laval}
+
+\author{Yannick Dufresne}
+\affiliation{Université Laval}
+
+\addbibresource{article_spsa2024_pot-growth.bib}
+
+\keywords{Electoral dynamics, Quebec politics, Relative Confidence Index (RCI), Multiparty systems, Election forecasting} %% First letter not capped
+
+\begin{document}
+
+\begin{abstract}
+
+In October 2022, the Coalition Avenir Quebec (CAQ) secured an unprecedented majority in Quebec's political history. However, within less than a year, the CAQ faced a dramatic decline in the vote intentions, while the Parti Québécois (PQ) experienced a significant surge. If elections were held today, the PQ is now in position to win a majority--a scenario not realized since 1998. This research note examines the dynamics of Quebec's political landscape after the last 2022 Quebec provincial election, focusing on the PQ's estimated rise in vote intentions (from 15\% to 31\%) and projected seat shares (from 3 to 57 seats) at the expense of the CAQ, according to the projections from December 2023 \autocite{Qc12523}. %For doing so, we employ the Relative Confidence Index (RCI), a tool designed to measure the latent growth potential of political parties. Findings reveal that the PQ had already a significative and discernable growth potential ahead of the 2022 election. This note highlights the theoretical and practical potential of this innovative measure of vote intentions that allow for better electoral forecastin and a more nuanced understanding of partisan dynamics in a multiparty party system.
+\end{abstract}
+
+\section{Introduction}
+
+The political landscape of Quebec underwent a significant transformation in the 14 months following the October 3rd, 2022 provincial election\footnote{The 2022 Quebec provincial election featured 5 competing political parties: the CAQ, the Quebec Liberal Party (QLP), Québec Solidaire (QS), the PQ and the Conservative Party of Quebec (CPQ).}, with the PQ gaining the lead over the ruling CAQ. This research note examines this shift, focusing on the PQ's rise and the CAQ's decline in late 2023. The aim is to explore whether the PQ's rise could have been anticipated using pre-election data. In order to do so, we employ the Relative Confidence Index (RCI) -a theoretical tool designed to measure the latent potential for growth of political parties- to gauge the party's pre-election potential for growth in CAQ-won electoral ridings. This offers a novel perspective on electoral forecasting. Importantly, we abstain from discussing the potential reasons behind the CAQ's recent decline or the specific attitudes of voters towards various issues. Instead, we concentrate on utilizing the RCI as a novel, granular measure of vote intent. Through this lens, we underscore the RCI's utility and efficacy in unraveling complex electoral trends within a multiparty system.
+
+
+\section{The 2022 Quebec General Election}
+
+Before analyzing the data, let us refer to the \textit{Figure \ref{fig:projectionsnow}} which compares the outcomes of the 2022 election with the most recent projections as of December 2023. As we can observe, during the election, the CAQ secured 42\% of the popular vote and 90 out of 125 seats, achieving a substantial majority (72\%). Conversely, the PQ captured 15\% of the popular vote, translating into three seats in Quebec's Assemblée nationale.
+
+Just 14 months after the election, by December 7, 2023, Quebec's political landscape has seen a significant shift. The latest projections from the survey aggregator Qc125.com at the moment of writing (see \textit{Figure \ref{fig:projectionsnow}})\footnote{To assess the present vote share estimates of political parties in each riding, we use data from the survey aggregator Qc125.com. As of today, Qc125.com is "a statistical model of electoral projections based on opinion polls, electoral history, and demographic data" \autocite{Qc12523}. Despite the specifics of Qc125's weighting methodologies remaining confidential, its projections are widely regarded as among the most accurate in Quebec--therefore justifying its selection as our primary source for current electoral projections. The data was fetched on December 7, 2023.} indicate a considerable rise in both the provincial vote shares and seat counts for the PQ, marking a dramatic turnaround in its electoral stance.\\
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=10cm]{graphs/2_projections_QC125.png}
+    \caption{Comparison Between December 7, 2023 Projections from Qc125.com and 2022 Quebec Provincial Election}
+    \label{fig:projectionsnow}
+\end{figure}
+
+Based on these projections, the PQ now leads with 31\% of the vote share among the five parties. In terms of seats, the PQ is approaching a majority with an anticipated 46\% of seats. This rise primarily comes at the CAQ's expense, which is estimated to drop to 18\% in seat share. The QLP, QS, and CPQ are also projected to see an increase in seats, though the PQ stands out as the major beneficiary of the CAQ's decline. These factors include controversial decisions such as the significant salary increase for members of the parliament, changes to the previously promised transport link between Quebec City and Lévis referred in Quebec as the "troisième lien" ("third link"), a major state employee strikes and a controversial subsidy for a hockey exhibition game featuring the NHL's Los Angeles Kings in Quebec City. Together, these issues, along with widespread dissatisfaction, mark a stark contrast to the CAQ's popularity during its second term and throughout the COVID-19 pandemic \autocite{robillard23}.
+
+
+\section{Data and Methods}
+This analysis draws on data from four primary sources: surveys, the survey aggregator Qc125.com, the 2022 electoral results and the 2021 Canadian Census. Between January and August 2022, eight monthly surveys were conducted by the Synopsis polling firm. These surveys encompass conventional socio-demographical variables along with various measures of political attitudes. Questions on party preferences are also included, allowing the calculation of the RCI for each respondent. Out of 9,858 surveyed individuals, 9,135 were analyzed after excluding 727 for missing key variable data. Further details on survey data are available in the \ref{appendix:surveydata}.
+
+\subsection{Measuring Potential for Growth Using the RCI}
+
+Election forecasts inherently carry a degree of uncertainty due to their dependence on stochastic models rather than deterministic ones. This uncertainty is twofold: first, it stems from the inherent randomness of the world, as captured by the error term in statistical models, and second, from the coarseness of measurement and the sparsity of data (for a full overview, see: \textcite{lewis-beck05}). Forecasting methods traditionally fall into four distinct categories: (1) those that rely solely on the vote intention question, (2) those that incorporate structural models considering factors theoretically influencing the choice of one party over another, (3) those that are based on the 'wisdom of crowds' concept, predicting winners based on collective expectations \parencite{bassamboo_etal15}, and (4) those that synthesize elements from the first three methods. However, the binary nature of both vote intention and vote expectation questions limits their effectiveness. Specifically, they fail to account for the nuances of electoral dynamics, such as the closeness of a race or the potential for shifts in voter sentiment over time—critical factors that binary measures overlook \autocite{dufresne_etal22, murr_etal21}. Consequently, this limitation diminishes the questions' utility in guiding parties and candidates on where and when to allocate campaign resources most effectively.
+
+The RCI, developed specifically for the Quebec political context \autocite{dufresne_etal22a}, aims to provide a more nuanced method which adresses these limitations of the traditional methods. Indeed, this tool emerged from the recognition that traditional vote intention questions, which typically demand a mutually exclusive choice, fail to capture the full spectrum of voter sentiment and electoral dynamics. By focusing on capturing shifts in voter sentiment and the nuances of race closeness, the RCI offers a more nuanced and effective tool for electorates, providing insights that can benefit legislators and political campaigns. It has been theorized as a valid measure of political parties' potential for growth \autocite{dufresne_etal22a, dery_etal22}.
+
+The RCI is calculated by modifying the conventional vote expectation question. Instead of a binary choice, respondents rate their likelihood of voting for each party on a scale from 0 (very unlikely) to 10 (very likely). These scores are then adjusted relative to the scores for other parties. For example, if a respondent rates Party A with an 8, Party B with a 4, and Party C with a 2, the RCI scores would be calculated as follows: : +4 for party A (8-4), -4 for party B (4-8) and -6 for party C (2-8). In this paper, we apply this approach to analyse the PQ's rise, using the following question format:
+
+\begin{quote}
+    \textit{Regardless of the party you intend to vote for in the next Quebec provincial election, in general how likely are you to vote for [party] (On a scale from 0 to 10 where 0 means very unlikely and 10 means very likely)}
+\end{quote}
+
+We generate an aggregated estimate of the negative RCI for parties in each electoral ridings as a measure of their potential for growth. These estimates are subsequently compared to the electoral projections from  December 7th, 2023, provided by Qc125.com \autocite{Qc12523} to assess their effectiveness in enhancing our understanding of electoral dynamics compared to traditional methods, thereby confirming their utility for electoral forecasting.
+
+\subsection{Aggregating the RCI at the Riding Level}
+
+Using survey data, the RCI for each party is computed for each of the respondents. The primary methodological challenge lies in aggregating the potential for growth at the electoral riding level for each party. This is addressed through three steps: (1) by computing regional linear regression models, (2) by applying these models to predict outcomes based on by-riding population data and (3) by aggregating these predictions at the riding level using a weighted average.
+
+%\subsection{Estimating Regression Models}
+
+First, the survey data are used to construct regression models for each political party, with each party receiving a distinct linear model based on respondents whose RCI is below zero. Independent variables such as language, gender, age category, and region are consistently applied across all parties to predict the RCI\footnote{To overcome the issue of limited survey respondents per riding, each was classified into a broader regional category. These regions are generally aligned with Quebec's administrative divisions, though adjustments are necessary due to the electoral ridings not aligning perfectly with these divisions. Additionally, a specific distinction is made between ridings on Montreal's west and east sides to account for the distinct characteristics of each area.} and all integrated as an interaction term (language * age * gender * region) in order to capture more complex interdependencies among variables\footnote{Different modeling types were tested. The linear models with interaction were the ones with the better diagnostics.}. The choice to use a limited number of independent variables is strategically made for the subsequent phase: applying the models to population data, specifically a synthetic post-stratification table at the riding level. Considering the size of the survey sample, opting for fewer independent variables helps prevent an overabundance of degrees of freedom, thus ensuring the models' application remains robust and reliable. This approach facilitates more accurate predictions while navigating the constraints of the available data. 
+
+%\subsection{Predicting the Models On Populational Data}
+
+The second step is to predict the models on by-riding populational data. This is done by estimating the weight of each combination of independent variables (language, gender, age) within each riding. Subsequently, the potential for growth estimates are predicted for each stratification group (each combination of independent variables).
+
+%\subsection{Aggregating Models to Riding-Level}
+
+Finally, the predictions for each stratification group are aggregated into riding-level estimates through a weighted average method, where the contribution of each group to the overall estimate is determined by its proportional weight within the electoral riding.
+
+\section{Results}
+
+The next section outlines how potential for growth estimates fare as indicators that could have foreseen the rise of the PQ in the 14 months following the election compared to traditional methods. First, the analysis involves examining the univariate distributions of these estimates.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=10cm]{graphs/3_pot_growth_distribution.png}
+    \caption{Distribution of Potential for Growth Estimates by Electoral Riding, January-August 2022}
+    \label{fig:potgrowthdist}
+\end{figure}
+
+Figure \ref{fig:potgrowthdist} presents several relevant observations. First, the CAQ's distribution is predominantly on the right, indicating the highest estimated potential for growth across the ridings. This finding is intriguing, especially since the estimates in Figure \ref{fig:potgrowthdist} are based solely on respondents who did not intend to vote for the CAQ. It raises a relevant question: did the CAQ genuinely have the potential to gain more ridings? The subsequent observation worth noting is the PQ's ranking, which consistently places second in terms of the 25th, 50th, and 75th percentiles of the distributions, closely followed by QS. However, it is important to highlight that the QLP also shows a notable presence in these distributions, with a significant portion exhibiting a relatively high potential for growth. The main highlight is however that there is a clear indication that the PQ had more potential for growth than other challenging parties and that the party was more prone to a sudden rise than what the traditional methods suggested, as is also shown in \textit{Figure \ref{fig:caqvotesol}}.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=15.25cm]{graphs/5_caq_votesol.png}
+    \caption{Potential for Growth of Challenger Parties in Ridings Won by the CAQ in 2022}
+    \label{fig:caqvotesol}
+\end{figure}
+
+\textit{Figure \ref{fig:caqvotesol}} contrasts the potential for growth estimates of challenger parties in ridings won by the CAQ in 2022 with their vote shares in these same ridings in the 2022 election. This comparison aids in assessing the effectiveness of two methods for predicting the benefit to the PQ from the CAQ's decline. The findings suggest that the PQ had the highest potential for growth in the CAQ-won districts in 2022. While this potential can be somewhat identified through vote shares, it becomes significantly clearer when analyzed with the RCI. It's also important to note that determining whether a party has significant potential for growth is difficult if its 2022 vote shares were below 20-30\%. In the 89 districts analyzed -excluding the Ungava district due to the unreliability of its estimates- the PQ is identified as the primary challenger party with potential for growth in 76 districts (85\%). However, when using vote shares as the measure, the PQ is the leading challenger in only 41 districts (46\%). The potential for growth estimates strongly indicate that, should the CAQ experience a decline, the PQ would be the primary beneficiary in the vast majority of these districts. This nuanced understanding is not immediately evident when relying solely on the vote share methodology.
+
+\section{Discussion}
+
+This research note leverages survey data from before the 2022 Quebec provincial election to illuminate the unexpected rise of the PQ in the 14 months following the election. Traditional binary and mutually exclusive measures of vote intention would not have allowed for this analysis. To bridge this gap, we utilize an innovative, continuous measure of vote intention based on theoretical and logical considerations known as the RCI. When this measure is aggregated to the electoral riding level, it distinctly highlights the PQ as the party with the greatest potential for growth among challenger parties before the 2022 election, particularly in ridings won by the CAQ. \\
+
+Another relevant methodological observation made in this article is that, while the RCI already assesses the relative distance between parties at the \textit{individual level}, its utility is enhanced by further relativizing it at the aggregated level by comparing it to the performances of competitors within the same geographical unit. That is, our understanding of electoral dynamics is refined by examining, for example, not only the aggregated potential for growth estimate of the PQ in a riding but also by contextualizing it with the estimates of the other parties. While this strategy was adopted in this article at the electoral riding level, further research could explore it at other, more granular levels. \\
+
+Although this research note adopts an approach that considers only socio-demographic independent variables, future studies could enhance our understanding of the RCI's underlying mechanisms by including context-specific events and issue attitudes. This socio-demographic approach, which is rationalized by the exploratory nature of this research note and the methodological constraints related to predicting the RCI using variables that are available as census data, is a clear limit to the accuracy and certainty of the estimations made in this article. \\
+
+A crucial distinction that must be made is the one between using the RCI to improve our understanding of electoral dynamics and using it to do electoral forecasting. This research note concentrates on the former. Indeed, results presented in the present work demonstrate that the RCI facilitates a deeper understanding of underlying mechanisms that are overlooked by the standard binary vote intent question. However, this research note does not engage in electoral forecasting, i.e., attempting to predict election outcomes. Future research could explore the improvement of traditional electoral forecasting methods \autocite{lewis-beck05} using this relative and continuous measure of vote intent. To this end, it would be logical to anticipate the forecasting utility of the RCI to lie when it is combined with variables associated with news flow, issue attitudes, etc. The RCI provides insights into potential voting behaviours, which are likely to manifest under the influence of relevant events. For instance, the rise of the PQ, though possibly identifiable as "potential" through the RCI, would likely not have occurred in the absence of catalysts, such as the CAQ's decline due to a series of missteps. \\
+
+Hopefully, this paper can lay a robust foundation for more thinking in order to develop more nuanced operationalizations of vote intentions, enabling more detailed analyses and a better understanding of partisan dynamics in multiparty systems.
+
+\printbibliography
+
+\appendix
+
+\newpage
+\section{Survey Data Description}
+\label{appendix:surveydata}
+
+Eight monthly surveys were conducted throughout the year, with those from January to June forming a cohesive series, and the July and August surveys comprising a separate, linked pair.
+
+\subsection{January to June 2022}
+From January to June 2022, our research was incorporated as part of a project conducted by the polling firm Synopsis. Our research group included approximately 20 questions within larger surveys of around 90 questions each. The data collected, considered secondary in nature, were obtained through the Léger Marketing panel, LEO, via their online platform. Given the econdary %status of the data, there were no additional ethical constraints beyond those dhered to by the %polling firm.
+
+\subsection{July and August 2022}
+In July and August 2022, we conducted two pilot surveys for the Datagotchi project, again utilizing Synopsis for execution and the LEO panel for data collection. These surveys followed the same pre-stratification methods as the earlier omnibus surveys and included a similar number of questions. Ethical clearance was obtained from the Université Laval's ethics committee, and data confidentiality was assured through non-disclosure agreements signed by he %researchers who did analyses in the article (Hubert Cadieux, Sarah-Jane Vincent and Jérémy Gilbert).
+
+
+\subsection{Sampling and Demographics}
+Each survey was pre-stratified according to Quebec's population demographics, including age, gender, housing type, language, income, and education level. The sample sizes for the surveys were as follows:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Month} & \textbf{Number of Respondents} \\
+\hline
+January & 1012 \\
+February & 1214 \\
+March & 1012 \\
+April & 1314 \\
+May & 1008 \\
+June & 1010 \\
+July & 1318 \\
+August & 1970 \\
+\hline
+\end{tabular}
+\caption{Sample sizes for monthly surveys conducted in 2022.}
+\label{table:survey_samples}
+\end{table}
+
+Respondents were also asked to give the first three-digits of their postal code. This variable could be associated from 1 to 8 ridings. Then, using the socio-demographic variables of the respondents and 2021 Canadian census data, the riding of each respondent was inferred using a multinomial logistic model. 49\% of the sample (n = 4476) were associated with a single riding and were thus not a problem. 30\% of the sample (n = 2741) were associated with two ridings, 13\% (n = 1188) were associated with three ridings, 3\% (n = 274) were associated with four, 4\% (n = 365) were associated with five and 1\% (n = 91) were associated with eight ridings.
+
+\subsection{Limitations}
+Access to more granular data about the weighting beyond the provided demographical variables was not feasible. The data presented herein represent the extent of information available for analysis, with the acknowledgment that some respondent data was incomplete.
+
+
+
+
+\end{document}

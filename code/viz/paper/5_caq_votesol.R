@@ -83,7 +83,7 @@ Data %>%
         axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 6),
         axis.text.y = element_text(size = 11))
 
-ggsave("_SharedFolder_article_pot-growth/graphs/paper/5_caq_votesol.png", width = 15.5, height = 12.5)
+ggsave("_SharedFolder_article_pot-growth/graphs/paper/5_caq_votesol.png", width = 14, height = 9)
 
 Rankings <- Data %>% 
   group_by(riding_id, method) %>% 
@@ -151,7 +151,7 @@ Data %>%
         axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 6),
         axis.text.y = element_text(size = 11))
 
-ggsave("_SharedFolder_article_pot-growth/graphs/paper/5_caq_votesol2.png", width = 15.5, height = 12.5)
+ggsave("_SharedFolder_article_pot-growth/graphs/paper/5_caq_votesol2.png", width = 13, height = 8)
 
 orders <- Data %>% 
   filter(method == "Potential for Growth Estimate") %>%
@@ -197,9 +197,11 @@ Data %>%
   xlab("\nRidings won by the CAQ") +
   clessnverse::theme_clean_light() +
   labs(caption = "Dashed lines represent the mean of the measure.\nColored bars represent the gap between the first and second party in the riding.\nUngava riding was removed due to the uncertainty of its estimate.") +
-  theme(axis.title.x = element_text(hjust = 0.5, size = 15),
+  theme(axis.title.x = element_text(hjust = 0.5, size = 14),
         axis.title.y = element_text(hjust = 0.5),
-        legend.title = element_text(),
+        legend.title = element_text(size = 13),
+        legend.text = element_text(size = 11.5),
+        plot.caption = element_text(size = 12),
         strip.placement = "outside",
         strip.text.y = element_text(size = 15),
         panel.grid.major.x = element_line(color = "grey85", linewidth = 0.15),
@@ -207,7 +209,7 @@ Data %>%
         axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 6),
         axis.text.y = element_text(size = 11))
 
-ggsave("_SharedFolder_article_pot-growth/graphs/paper/5_caq_votesol.png", width = 15.5, height = 12.5)
+ggsave("_SharedFolder_article_pot-growth/graphs/paper/5_caq_votesol.png", width = 14, height = 9)
 
 
 #Data %>% 
