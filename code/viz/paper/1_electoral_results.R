@@ -45,7 +45,7 @@ saveRDS(df_graph, "_SharedFolder_article_pot-growth/data/marts/electoral_swings/
 
 colors <- c("CAQ" = "#00cccc", "QLP" = "#ED1A2D", "PQ" = "#004C9D", "QS" = "#FF5605", "CPQ" = "purple")
 
-ggplot(df_graph, aes(x = reorder(party, +share), y = share, fill = party, color = party)) +
+ggplot(df_graph, aes(x = reorder(party, share), y = share, fill = party, color = party)) +
   geom_col(width = 0.8, alpha = 0.4, color = NA) +
   geom_text(aes(label = paste0(round(share), "%")), hjust = -0.2, position = position_dodge(0.9), size = 8) +
   scale_fill_manual(values = colors) +

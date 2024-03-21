@@ -67,5 +67,39 @@ ggplot(df_graph2, aes(x = party, y = share, fill = party, color = party)) +
 ggsave("_SharedFolder_article_pot-growth/graphs/paper/2_projections_QC125.png", height = 7, width = 12)
 
 
+# Memoire -----------------------------------------------------------------
+
+df_graph2 %>%
+  mutate(facet = case_when(
+    facet == "Votes share" ~ "Intentions de vote",
+    facet == "Seats share" ~ "Sièges"
+  )) %>% 
+  ggplot(aes(x = party, y = share, fill = party, color = party)) +
+  facet_grid(cols = vars(facet), switch = "x") + 
+  geom_col(alpha = 0.4, color = NA, width = barwidth) +
+  geom_linerange(aes(xmin = as.numeric(factor(party)) - barwidth / 2,
+                     xmax = as.numeric(factor(party)) + barwidth / 2,
+                     y = share_elxn),
+                 linetype = "dashed", linewidth = 0.9) +
+  geom_text(aes(label = paste0(round(share), "%")), hjust = -0.3, position = position_dodge(0.9), size = 8) +
+  scale_fill_manual(values = colors) +
+  scale_color_manual(values = colors) +
+  scale_y_continuous(limits = c(0, 80)) +
+  scale_x_discrete(labels = rev(c("CAQ", "PLQ", "QS", "PQ", "PCQ"))) +
+  labs(title = "", x = "", y = "Pourcentage (%)",
+       caption = "Les barres et pourcentages représentent les projections actuelles.\nLes lignes pointillées représentent la part du parti dans les élections provinciales québécoises de 2022.") +
+  coord_flip() +
+  clessnverse::theme_clean_light() +
+  theme(legend.position = "none",
+        axis.title.x = element_text(hjust = 0.5, size = 20),
+        axis.text.x = element_text(size = 20),
+        axis.text.y = element_text(size = 20),
+        strip.text.x = element_text(size = 20),
+        strip.placement = "outside",
+        plot.caption = element_text(size = 12))
+
+
+ggsave("_SharedFolder_article_pot-growth/graphs/paper/2_projections_QC125_fr.png", height = 7, width = 12)
+
 
 

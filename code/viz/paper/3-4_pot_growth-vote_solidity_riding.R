@@ -57,3 +57,26 @@ ggplot(df_vs, aes(x = weighted_mean_estimate, y = party, fill = party, color = p
         plot.caption = element_text(size = 12)) 
 
 ggsave("_SharedFolder_article_pot-growth/graphs/paper/4_vote_solidity_distribution.png", height = 7, width = 10)
+
+
+
+### memoire
+ggplot(df_pg, aes(x = weighted_mean_estimate * 10, y = party, fill = party, color = party)) +
+  geom_density_ridges(alpha = 0.4, color = "white", quantile_lines = TRUE) +
+  scale_fill_manual(values = colors) +
+  scale_color_manual(values = colors) +
+  labs(title = "", x = "\nPotentiel de croissance estimé avec l'IRC\n", y = "",
+       caption = "Les lignes de quantile représentent les 25e, 50e et 75e centiles de la distribution.") +
+  clessnverse::theme_clean_light() +
+  scale_y_discrete(labels = c("CAQ" = "CAQ",
+                              "QLP" = "PLQ",
+                              "PQ" = "PQ",
+                              "QS" = "QS",
+                              "CPQ" = "PCQ")) +
+  theme(legend.position = "none",
+        axis.title.x = element_text(hjust = 0.5, size = 20),
+        axis.text.x = element_text(size = 20),
+        axis.text.y = element_text(size = 20),
+        plot.caption = element_text(size = 12)) 
+
+ggsave("_SharedFolder_article_pot-growth/graphs/paper/3_pot_growth_distribution_fr.png", height = 7, width = 10)
