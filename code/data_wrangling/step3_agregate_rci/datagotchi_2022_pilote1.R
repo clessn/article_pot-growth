@@ -62,6 +62,19 @@ table(Clean$langue)
 # factorize (mais sans ordonner la variable cette fois)
 Clean$langue <- factor(Clean$langue)
 
+## educ ------------------------------------------------------------------
+table(Raw$Q113)
+attributes(Raw$Q113)
+
+Clean$educ <- case_when(
+  Raw$Q113 %in% c(1, 2, 3) ~ "bhs",
+  Raw$Q113 %in% c(4) ~ "college",
+  Raw$Q113 %in% c(5, 6, 7) ~ "univ"
+)
+
+Clean$educ <- factor(Clean$educ, levels = c("bhs", "college", "univ"))
+
+
 ## riding ------------------------------------------------------------------
 
 #### Load data from article_riding_volatility to get riding

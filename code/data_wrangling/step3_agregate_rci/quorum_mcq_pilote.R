@@ -24,6 +24,8 @@ Clean$male[Raw$EN_ses_gender == "Man" |
                        Raw$ses_gender == "Homme"] <- 1
 table(Clean$male)
 
+Clean$female <- NA
+
 ## age ------------------------------------------------------------------
 table(Raw$EN_ses_age)
 table(Raw$ses_age)
@@ -58,6 +60,27 @@ table(Clean$langue)
 
 # factorize (mais sans ordonner la variable cette fois)
 Clean$langue <- factor(Clean$langue)
+
+
+## education -------------------------------------------------------------
+table(Raw$ses_education)
+Raw$ses_education[Raw$ses_education == ""] <- NA
+table(Raw$EN_ses_education)
+Raw$EN_ses_education[Raw$EN_ses_education == ""] <- NA
+
+Raw$educ <- coalesce(Raw$EN_ses_education, Raw$ses_education)
+table(Raw$educ)
+
+Clean$educ <- case_when(
+  Raw$educ %in% c("Aucune scolarité", "École primaire", "École secondaire",
+                  "High school") ~ "bhs",
+  Raw$educ %in% c("Collège, Cégep ou Collège classique",
+                  "Technical, community college, CEGEP, or college classique") ~ "college",
+  Raw$educ %in% c("Baccalauréat", "Bachelor's degree", "Doctorat", "Doctorate",
+                  "Maîtrise", "Master's degree") ~ "univ"
+)
+
+Clean$educ <- factor(Clean$educ, levels = c("bhs", "college", "univ"))
 
 ## riding ------------------------------------------------------------------
 
@@ -227,3 +250,4 @@ Clean <- cbind(Clean, rcis)
 # Save Clean to a rds dataset ---------------------------------------------
 
 saveRDS(Clean, "_SharedFolder_article_pot-growth/data/warehouse/step3_agregate_rci/prov_2023/quorum_mcq_pilote.rds")
+saveRDS(Clean, "_SharedFolder_article_pot-growth/data/warehouse/step3_agregate_rci/separated_prov/quorum_mcq_pilote.rds")

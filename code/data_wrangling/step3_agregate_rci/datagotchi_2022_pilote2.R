@@ -83,6 +83,23 @@ table(Clean$langue)
 Clean$langue <- factor(Clean$langue)
 
 
+## education -------------------------------------------------------------
+table(Raw$educ)
+table(Raw$educ.1)
+
+Raw$educ <- coalesce(Raw$educ, Raw$educ.1)
+table(Raw$educ)
+
+Clean$educ <- case_when(
+  Raw$educ %in% c(1, 2, 3) ~ "bhs",
+  Raw$educ %in% c(4) ~ "college",
+  Raw$educ %in% c(5, 6, 7) ~ "univ"
+)
+
+Clean$educ <- factor(Clean$educ, levels = c("bhs", "college", "univ"))
+table(Clean$educ)
+
+
 ## riding ------------------------------------------------------------------
 
 #### Load data from article_riding_volatility to get riding
