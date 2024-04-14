@@ -8,7 +8,7 @@ ridings_df <- read.csv("_SharedFolder_article_pot-growth/data/warehouse/dimensio
   select(riding_id, granular)
 
 data <- rbind(readRDS("_SharedFolder_article_pot-growth/data/warehouse/step3_agregate_rci/prov_2023/quorum_mcq_pilote.rds"),
-              readRDS("_SharedFolder_article_pot-growth/data/warehouse/step3_agregate_rci/rcis_prov.rds") %>% select(-female)) %>% 
+              readRDS("_SharedFolder_article_pot-growth/data/warehouse/step3_agregate_rci/rcis_prov.rds")) %>% 
   left_join(., ridings_df, by = "riding_id") %>% 
   filter(rci_CAQ >= 0) %>% 
   ## we want to test the rci as a numeric variable and as an unordered factor 
@@ -96,5 +96,33 @@ preds_df %>%
   
 ggsave("_SharedFolder_article_pot-growth/graphs/paper/7_potgrowth_estimate_individual_by_survey.png",
        width = 12, height = 4.5)
+
+
+preds_df %>% 
+  mutate(party = ifelse(party == "PLQ", "QLP", party),
+         party = ifelse(party == "PCQ", "CPQ", party),
+         party = factor(party, levels = c("QLP", "QS", "PQ", "CPQ"))) %>% 
+  ggplot(aes(x = xtime, y = estimate)) +
+  facet_wrap(~party, nrow = 1) +
+  geom_line(aes(group = rci_CAQ, color = party, alpha = rci_CAQ),
+            show.legend = FALSE) +
+  scale_alpha_continuous(range = c(0.4, 1))
+  #geom_linerange(aes(group = party, color = party,
+  #                   ymin = conf.low, ymax = conf.high,
+  #                   alpha = xtime),
+  #               linewidth = 1.25) +
+  geom_point(aes(color = party, alpha = xtime),
+             size = 2, stroke = NA,
+             shape = 19) +
+  scale_y_continuous(breaks = c(-10:0)/10,
+                     labels = -10:0) +
+  scale_color_manual(values = colors) +
+  ylab("RCI Prediction\n") +
+  xlab("") +
+  clessnverse::theme_clean_light() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+        axis.title.y = element_text(hjust = 0.5),
+        panel.grid.major.x = element_line(color = "grey90",
+                                          linewidth = 0.2))
 
 

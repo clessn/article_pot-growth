@@ -48,43 +48,6 @@ means <- Data %>%
   group_by(party, method) %>% 
   summarise(mean = mean(value))
 
-Data %>% 
-  mutate(delta = delta*100) %>% 
-  ggplot(aes(x = reorder(riding_name, votesolCAQ), y = value)) +
-  facet_wrap(~ method,
-             scales = "free_y",
-             strip.position = "left") +
-  geom_hline(data = means, aes(yintercept = mean,
-                               color = party),
-             show.legend = F, linetype = "dashed",
-             linewidth = 0.5, alpha = 0.4) +
-  geom_point(aes(color = party,
-                 size = delta),
-             alpha = 0.4,
-             shape = 19,
-             stroke = NA) +
-  guides(color = "none",
-         size = guide_legend(title = "Gains by the challenger since\n2022 (vote shares %)",
-                             title.position = "top")) +
-  scale_color_manual(values = colors) +
-  scale_size_continuous(range = c(0.05, 6)) +
-  scale_x_discrete(expand = c(0.015, 0.015)) +
-  ylab("") +
-  xlab("\nRidings won by the CAQ\n(ordered from least to most solid)") +
-  clessnverse::theme_clean_light() +
-  labs(caption = "Dashed lines represent the mean of the measure.\nUngava riding was removed due to the uncertainty of its estimate.") +
-  theme(axis.title.x = element_text(hjust = 0.5, size = 15),
-        axis.title.y = element_text(hjust = 0.5),
-        legend.title = element_text(),
-        strip.placement = "outside",
-        strip.text.y = element_text(size = 15),
-        panel.grid.major.x = element_line(color = "grey85", linewidth = 0.15),
-        panel.grid.minor.x = element_blank(),
-        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 6),
-        axis.text.y = element_text(size = 11))
-
-ggsave("_SharedFolder_article_pot-growth/graphs/paper/5_caq_votesol.png", width = 14, height = 9)
-
 Rankings <- Data %>% 
   group_by(riding_id, method) %>% 
   mutate(rank = rank(desc(value)))
@@ -101,57 +64,6 @@ DiffFirst <- Data %>%
   tidyr::pivot_wider(., id_cols = c("riding_id", "riding_name", "method"),
                      names_from = "rank",
                      values_from = c("party", "value"))
-
-### different orders
-Data %>% 
-  #filter(method == "Potential for Growth Estimate") %>% 
-  left_join(., DiffFirst, by = c("riding_id", "riding_name", "method")) %>% 
-  group_by(method) %>% 
-  mutate(delta = delta*100,
-         delta_value = value_1 - value_2,
-         rank_xaxis = rank(-value_1)) %>% 
-  ggplot(aes(x = tidytext::reorder_within(x = riding_name, by = rank_xaxis,
-                                          within = method),
-             #reorder(riding_name, -value_1),
-             y = value)) +
-  facet_wrap(~ method,
-             scales = "free",
-             strip.position = "left") +
-  geom_hline(data = means,
-             aes(yintercept = mean,
-                 color = party),
-             show.legend = F, linetype = "dashed",
-             linewidth = 0.5, alpha = 0.4) +
-  geom_linerange(aes(ymin = value_2 + 0.001, ymax = value_1 - 0.001,
-                     color = party_1),
-                 alpha = 0.035, linewidth = 2.25) +
-  geom_point(aes(color = party,
-                 size = delta),
-             alpha = 0.4,
-             shape = 19,
-             stroke = NA) +
-  guides(color = "none",
-         size = guide_legend(title = "Gains by the challenger since\n2022 (vote shares %)",
-                             title.position = "top")) +
-  scale_color_manual(values = colors) +
-  scale_size_continuous(range = c(0.045, 4.5)) +
-  tidytext::scale_x_reordered(expand = c(0.015, 0.015)) +
-  #scale_x_discrete() +
-  ylab("") +
-  xlab("\nRidings won by the CAQ") +
-  clessnverse::theme_clean_light() +
-  labs(caption = "Dashed lines represent the mean of the measure.\nColored bars represent the gap between the first and second party in the riding.\nUngava riding was removed due to the uncertainty of its estimate.") +
-  theme(axis.title.x = element_text(hjust = 0.5, size = 15),
-        axis.title.y = element_text(hjust = 0.5),
-        legend.title = element_text(),
-        strip.placement = "outside",
-        strip.text.y = element_text(size = 15),
-        panel.grid.major.x = element_line(color = "grey85", linewidth = 0.15),
-        panel.grid.minor.x = element_blank(),
-        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 6),
-        axis.text.y = element_text(size = 11))
-
-ggsave("_SharedFolder_article_pot-growth/graphs/paper/5_caq_votesol2.png", width = 13, height = 8)
 
 orders <- Data %>% 
   filter(method == "Potential for Growth Estimate") %>%

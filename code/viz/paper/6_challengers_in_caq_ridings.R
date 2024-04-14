@@ -41,19 +41,32 @@ data <- readRDS("_SharedFolder_article_pot-growth/data/marts/rci_by_riding/provq
 
 colors <- c("QLP" = "#ED1A2D", "PQ" = "#004C9D", "QS" = "#FF5605", "CPQ" = "purple")
 
+labels <- data %>% 
+  group_by(party, type, rank) %>% 
+  summarise(n = n(), .groups = 'drop') %>%
+  tidyr::complete(party, type, rank, fill = list(n = 0)) %>% 
+  mutate(adjust = ifelse(n <= 5, 3, -3))
+
 data %>% 
   group_by(party, type, rank) %>% 
-  summarise(n = n()) %>% 
+  summarise(n = n(), .groups = 'drop') %>%
+  tidyr::complete(party, type, rank, fill = list(n = 0)) %>% 
   ggplot(aes(x = rank, y = n)) +
   facet_grid(cols = vars(party),
              rows = vars(type),
              switch = "y") +
   ylab("Number of ridings\n") +
   xlab("Rank among challengers in\nridings won by the CAQ") +
-  geom_col(color = NA, alpha = 0.7,
+  geom_col(color = NA, alpha = 0.5,
            aes(fill = party),
            show.legend = FALSE) +
+  geom_text(data = labels,
+            aes(color = party,
+                label = n,
+                y = n + adjust),
+            size = 3, show.legend = FALSE) +
   scale_fill_manual(values = colors) +
+  scale_color_manual(values = colors) +
   clessnverse::theme_clean_light() +
   theme(axis.title.x = element_text(hjust = 0.5),
         axis.title.y = element_text(hjust = 0.5))

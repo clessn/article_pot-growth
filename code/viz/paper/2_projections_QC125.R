@@ -5,6 +5,7 @@ library(ggplot2)
 # data loading ------------------------------------------------------------
 df <- readRDS("_SharedFolder_article_pot-growth/data/warehouse/step2_electoral_swings/qc125_provqc2022.rds")
 df_vote <- readxl::read_xlsx("_SharedFolder_article_pot-growth/data/warehouse/step2_electoral_swings/qc125_votes_share_provqc2022.xlsx")
+
 # data wrangling ----------------------------------------------------------
 
 df_seat <- df %>% 
@@ -62,7 +63,6 @@ ggplot(df_graph2, aes(x = party, y = share, fill = party, color = party)) +
         strip.text.x = element_text(size = 20),
         strip.placement = "outside",
         plot.caption = element_text(size = 12))
-
 
 ggsave("_SharedFolder_article_pot-growth/graphs/paper/2_projections_QC125.png", height = 7, width = 12)
 
