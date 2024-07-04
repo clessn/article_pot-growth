@@ -67,7 +67,7 @@ data %>%
             size = 3, show.legend = FALSE) +
   scale_fill_manual(values = colors) +
   scale_color_manual(values = colors) +
-  clessnverse::theme_clean_light() +
+  clessnize::theme_clean_light() +
   theme(axis.title.x = element_text(hjust = 0.5),
         axis.title.y = element_text(hjust = 0.5))
 

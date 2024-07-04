@@ -22,7 +22,7 @@ for (i in 1:125){
     rvest::html_nodes("svg text")
   riding_name <- text[[2]] %>% html_text()
   riding_id <- ridings$riding_id[stringdist::amatch(riding_name, ridings$riding_name, maxDist = 2)]
-  for (j in 3:7){
+  for (j in seq(from = 3, to = 11, by = 2)){
     party <- unname(party_qc125_colors[xml_attrs(text[[j]])["fill"]])
     text_proj_vote <- strsplit(text[[j]] %>% html_text(), split = " ")
     proj_vote <- as.numeric(gsub("[^0-9]", "", text_proj_vote[[1]][1]))/100
@@ -51,6 +51,6 @@ for (i in 1:125){
   message(paste0(i, " - ", riding_id, "-", riding_name))
 }
 
-clessnverse::count_na(qc125$riding_id)
+sum(is.na((qc125$riding_id)))
 
 saveRDS(qc125, "_SharedFolder_article_pot-growth/data/warehouse/step2_electoral_swings/qc125_provqc2022.rds")

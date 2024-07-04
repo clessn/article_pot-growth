@@ -47,7 +47,7 @@ ggplot(df_graph2, aes(x = party, y = share, fill = party, color = party)) +
   geom_linerange(aes(xmin = as.numeric(factor(party)) - barwidth / 2,
                    xmax = as.numeric(factor(party)) + barwidth / 2,
                    y = share_elxn),
-                 linetype = "dashed", linewidth = 0.9) +
+                 linetype = "dashed", linewidth = 1.3) +
   geom_text(aes(label = paste0(round(share), "%")), hjust = -0.3, position = position_dodge(0.9), size = 8) +
   scale_fill_manual(values = colors) +
   scale_color_manual(values = colors) +
@@ -55,7 +55,7 @@ ggplot(df_graph2, aes(x = party, y = share, fill = party, color = party)) +
   labs(title = "", x = "", y = "Share (%)",
        caption = "Bars and percentages represent current projections.\nDashed lines represent the party's share in the 2022 Quebec provincial election") +
   coord_flip() +
-  clessnverse::theme_clean_light() +
+  clessnize::theme_clean_light() +
   theme(legend.position = "none",
         axis.title.x = element_text(hjust = 0.5, size = 20),
         axis.text.x = element_text(size = 20),

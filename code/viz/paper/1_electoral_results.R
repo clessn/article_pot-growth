@@ -55,7 +55,7 @@ ggplot(df_graph, aes(x = reorder(party, share), y = share, fill = party, color =
        caption = " ") +
   coord_flip() +
   facet_grid(cols = vars(facet), switch = "x") + 
-  clessnverse::theme_clean_light() +
+  clessnize::theme_clean_light() +
   theme(legend.position = "none",
         axis.title.x = element_text(hjust = 0.5, size = 20),
         axis.text.x = element_text(size = 20),
