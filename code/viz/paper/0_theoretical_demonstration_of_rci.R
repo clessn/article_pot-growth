@@ -1,0 +1,73 @@
+# Packages ----------------------------------------------------------------
+library(dplyr)
+library(ggplot2)
+
+## i want a tibble with 3 columns: party, method, value
+data <- tibble::tibble(party = rep(c("A", "B", "C"), 3),
+                       method = c(rep("PTV", 3), rep("RCI", 3), rep("Traditional\nVote Intention", 3)),
+                       value = c(0.9, 0.54, -0.9, 0.3, -0.3, -0.9, 0.5, -0.5, -0.5)
+                      ) %>% 
+  mutate(
+    party = factor(party, levels = rev(c("A", "B", "C"))),
+    method = factor(method, levels = c("Traditional\nVote Intention", "PTV", "RCI"))
+)
+
+## Graph -------------------------------------------------------------------
+
+colors <- c("A" = "cyan", "B" = "magenta", "C" = "gold")
+
+axis <- data.frame(
+  label = c(
+    seq(from = -10, to = 10, by = 5),
+    "0 (Non-voter)", "1 (Voter)",
+    seq(from = 0, to = 10, by = 5)),
+  x = c(
+    seq(from = -0.9, to = 0.9, by = 0.45),
+    -0.5, 0.5,
+    -0.9, 0, 0.9
+  ),
+  method = c(rep("RCI", 5), rep("Traditional\nVote Intention", 2), rep("PTV", 3))
+) |> 
+  mutate(
+    method = factor(method, levels = c("Traditional\nVote Intention", "PTV", "RCI"))
+  )
+
+vline <- data.frame(
+  party = "A",
+  x = c(0, 0),
+  method = c("RCI", "Traditional\nVote Intention")
+) |> 
+  mutate(
+    method = factor(method, levels = c("Traditional\nVote Intention", "PTV", "RCI"))
+  )
+
+ggplot(data, aes(x = value, y = party)) +
+  geom_point(aes(color = party),
+             show.legend = FALSE,
+             size = 7, alpha = 0.75,
+             shape = 19, stroke = NA) +
+  facet_wrap(~method,
+             strip.position = "bottom") +
+  clessnize::theme_clean_light(base_size = 5) +
+  scale_color_manual(values = colors) +
+  scale_x_continuous(limits = c(-1, 1)) +
+  ylab("Hypotethical Party\n") +
+  scale_y_discrete(expand = expansion(mult = c(0.3, 0.2))) +
+  geom_linerange(
+    data = vline,
+    aes(ymin = 0.75, ymax = 3.25),
+        x = 0, linewidth = 1.5,
+        color = "grey60") +
+  geom_text(data = axis, size = 2.5,
+            aes(label = label, x = x),
+            y = 0.6, color = "grey30") +
+  theme(axis.text.x = element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_text(size = 15, color = "grey30"),
+        axis.text.y = element_text(size = 16, color = "grey30"),
+        panel.background = element_rect(color = "grey90"),
+        panel.grid.major.y = element_blank(),
+        strip.text.x = element_text(size = 13, color = "grey30"))
+
+ggsave("_SharedFolder_article_pot-growth/graphs/paper/0_theoretical_demonstration_of_rci.png",
+       width = 6, height = 3)
