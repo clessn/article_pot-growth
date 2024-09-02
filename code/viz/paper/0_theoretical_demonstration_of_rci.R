@@ -5,7 +5,8 @@ library(ggplot2)
 ## i want a tibble with 3 columns: party, method, value
 data <- tibble::tibble(party = rep(c("A", "B", "C"), 3),
                        method = c(rep("PTV", 3), rep("RCI", 3), rep("Traditional\nVote Intention", 3)),
-                       value = c(0.9, 0.54, -0.9, 0.3, -0.3, -0.9, 0.5, -0.5, -0.5)
+                       value = c(10, 6, -8, 2, -2, -9, 5, -5, -5),
+                       label = c(10, 8, 1, 2, -2, -9, 1, 0, 0)
                       ) %>% 
   mutate(
     party = factor(party, levels = rev(c("A", "B", "C"))),
@@ -18,15 +19,15 @@ colors <- c("A" = "cyan", "B" = "magenta", "C" = "gold")
 
 axis <- data.frame(
   label = c(
-    seq(from = -10, to = 10, by = 5),
+    seq(from = -10, to = 10, by = 1),
     "0 (Non-voter)", "1 (Voter)",
-    seq(from = 0, to = 10, by = 5)),
+    seq(from = 0, to = 10, by = 1)),
   x = c(
-    seq(from = -0.9, to = 0.9, by = 0.45),
-    -0.5, 0.5,
-    -0.9, 0, 0.9
+    seq(from = -10, to = 10, by = 1),
+    -5, 5,
+    seq(from = -10, to = 10, by = 2)
   ),
-  method = c(rep("RCI", 5), rep("Traditional\nVote Intention", 2), rep("PTV", 3))
+  method = c(rep("RCI", 21), rep("Traditional\nVote Intention", 2), rep("PTV", 11))
 ) |> 
   mutate(
     method = factor(method, levels = c("Traditional\nVote Intention", "PTV", "RCI"))
@@ -44,13 +45,20 @@ vline <- data.frame(
 ggplot(data, aes(x = value, y = party)) +
   geom_point(aes(color = party),
              show.legend = FALSE,
-             size = 7, alpha = 0.75,
+             size = 4, alpha = 0.75,
              shape = 19, stroke = NA) +
+  scale_color_manual(values = colors) +
+  ggnewscale::new_scale_color() +
+  geom_text(
+    aes(color = party, label = label),
+        show.legend = FALSE,
+        size = 1.5
+  ) +
+  scale_color_manual(values = colorspace::darken(colors, amount = 0.4)) +
   facet_wrap(~method,
              strip.position = "bottom") +
   clessnize::theme_clean_light(base_size = 5) +
-  scale_color_manual(values = colors) +
-  scale_x_continuous(limits = c(-1, 1)) +
+  scale_x_continuous(limits = c(-10, 10)) +
   ylab("Hypotethical Party\n") +
   scale_y_discrete(expand = expansion(mult = c(0.3, 0.2))) +
   geom_linerange(
@@ -58,7 +66,7 @@ ggplot(data, aes(x = value, y = party)) +
     aes(ymin = 0.75, ymax = 3.25),
         x = 0, linewidth = 1.5,
         color = "grey60") +
-  geom_text(data = axis, size = 2.5,
+  geom_text(data = axis, size = 1.5,
             aes(label = label, x = x),
             y = 0.6, color = "grey30") +
   theme(axis.text.x = element_blank(),
